@@ -1,0 +1,1098 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-xblue-50: #eef4fb;
+  --color-xblue-100: #d6e4f3;
+  --color-xblue-200: #aac6e3;
+  --color-xblue-300: #7aa6d2;
+  --color-xblue-400: #4a86c1;
+  --color-xblue-500: #2a68a8;
+  --color-xblue-600: #1a3c5e;
+  --color-xblue-700: #152f4a;
+  --color-xblue-800: #0f2236;
+  --color-xblue-900: #0a1623;
+
+  --color-xgold-400: #dbe1ff;
+  --color-xgold-500: #c9d3ff;
+  --color-xgold-600: #b5c4ff;
+  --color-xgold-700: #8fa1ff;
+
+  --color-xteal-500: #0a7e6a;
+  --color-xpurple-500: #5b2d8e;
+  --color-xred-500: #b22222;
+  --color-xgreen-500: #1a7d3c;
+
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-enterprise-bg: var(--ent-bg);
+  --color-enterprise-bg-lower: var(--ent-bg-lower);
+  --color-enterprise-bg-low: var(--ent-bg-low);
+  --color-enterprise-surface: var(--ent-surface);
+  --color-enterprise-surface-high: var(--ent-surface-high);
+  --color-enterprise-input: var(--ent-input);
+  --color-enterprise-primary: var(--ent-primary);
+  --color-enterprise-primary-hover: var(--ent-primary-hover);
+  --color-enterprise-on-primary: var(--ent-on-primary);
+  --color-enterprise-accent: var(--ent-accent);
+  --color-enterprise-fg: var(--ent-fg);
+  --color-enterprise-fg-muted: var(--ent-fg-muted);
+  --color-enterprise-fg-subtle: var(--ent-fg-subtle);
+  --color-enterprise-border: var(--ent-border);
+  --color-enterprise-border-strong: var(--ent-border-strong);
+
+  /* Both driven by --ent-primary/--ent-accent via color-mix() rather than a
+     fixed rgba — so they follow the brand palette automatically in both
+     light and dark mode instead of needing their own hardcoded copy. */
+  --shadow-glow: 0 0 60px color-mix(in srgb, var(--ent-primary) 35%, transparent);
+  --shadow-gold: 0 0 40px color-mix(in srgb, var(--ent-accent) 35%, transparent);
+
+  --font-display: var(--font-display-face), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ==========================================================================
+     2026 redesign palette — "x-" scale
+     --------------------------------------------------------------------------
+     A clean-sheet set, deliberately NOT wired to the old --ent-* variables or
+     to the per-pillar brand hues (xteal/xpurple/xblue/xgold/xred), which the
+     redesign drops: one accent now carries the whole site, with the hot red
+     reserved for emphasis.
+
+     Each one is a plain custom property (--x-bg etc., defined below in :root
+     and .dark) rather than a fixed value here, so it follows the site theme
+     the same way --bg/--ent-bg already do. HeroParticleScan follows this
+     same reactive scheme like everything else — an earlier version forced it
+     permanently dark via a local `dark` class on its own <section>, which was
+     an unrequested design call and has been reversed; see the comment at the
+     top of HeroParticleScan.tsx.
+     ========================================================================== */
+  --color-x-bg: var(--x-bg);
+  --color-x-raised: var(--x-raised);
+  --color-x-line: var(--x-line);
+  --color-x-line-strong: var(--x-line-strong);
+  --color-x-fg: var(--x-fg);
+  --color-x-muted: var(--x-muted);
+  --color-x-dim: var(--x-dim);
+  --color-x-accent: var(--x-accent);
+  --color-x-accent-bright: var(--x-accent-bright);
+  --color-x-hot: var(--x-hot);
+}
+
+/* LIGHT MODE (default) */
+:root {
+  /* Base radius every "rounded" utility class reads from (see the
+     "theme inline" block below, migrated with the KYC dashboard) — that
+     block redefines Tailwind's own radius scale globally, but only
+     .kyc-scope previously supplied the --radius they all derive from.
+     Outside .kyc-scope (the whole rest of the app, including the
+     console), every rounded utility class was silently resolving to
+     nothing. Defining it here once fixes it everywhere; .kyc-scope's
+     own --radius: 0.75rem below is now a redundant (same-value)
+     override, kept as-is rather than removed to avoid touching that
+     migrated block. */
+  --radius: 0.75rem;
+
+  --bg: #ffffff;
+  --bg-subtle: #f6f8fb;
+  --bg-elevated: #ffffff;
+  --fg: #0a1623;
+  --fg-muted: #475569;
+  --fg-subtle: #64748b;
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.16);
+
+  --ent-bg: #f6f8fc;
+  --ent-bg-lower: #ffffff;
+  --ent-bg-low: #eef2f8;
+  --ent-surface: #ffffff;
+  --ent-surface-high: #f1f5fa;
+  --ent-input: #ffffff;
+  --ent-fg: #0a1623;
+  --ent-fg-muted: #475569;
+  --ent-fg-subtle: #94a3b8;
+  --ent-border: rgba(15, 23, 42, 0.10);
+  --ent-border-strong: rgba(15, 23, 42, 0.18);
+
+  /* xobriq.com brand palette (teal primary / amber accent) — see
+     lib/session.ts-style rationale docs elsewhere; this is the same
+     rebrand applied at the token layer so every enterprise-primary/
+     enterprise-accent usage across the app follows automatically. */
+  --ent-primary: #0072c4;
+  --ent-primary-hover: #005ea2;
+  --ent-on-primary: #ffffff;
+  --ent-accent: #9a6d00;
+
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-shadow: 0 30px 80px -20px rgba(15, 23, 42, 0.18);
+
+  /* 2026 redesign "x-" scale — light mode. */
+  --x-bg: #ffffff;
+  --x-raised: #f5f6f8;
+  --x-line: rgba(15, 23, 42, 0.1);
+  --x-line-strong: rgba(15, 23, 42, 0.18);
+  --x-fg: #0a0a0d;
+  --x-muted: rgba(10, 10, 13, 0.62);
+  --x-dim: rgba(10, 10, 13, 0.42);
+  /* Darkened from the dark-mode accent (#3fa9ff): that value is tuned for
+     glow/text against near-black, and is too pale for AA contrast as text on
+     white. --x-accent-bright stays the same in both modes — it's only ever
+     used as a headline word colour on the always-dark hero. */
+  --x-accent: #0072c4;
+  --x-accent-bright: #5fc2ff;
+  --x-hot: #d81b3f;
+
+  /* shadcn/ui tokens the KYC dashboard's @theme inline block (below) reads
+     globally — these were only ever defined inside .kyc-scope, which works
+     for content rendered inside that div, but Radix's portal-based
+     components (Select, Dialog, Sheet, Popover, Tooltip) render into
+     document.body by default, escaping .kyc-scope's DOM subtree entirely.
+     CSS custom properties inherit down the DOM tree, not the React tree, so
+     any portaled content — and any components/ui/* usage on pages that
+     aren't wrapped in .kyc-scope at all (api-keys, the client dashboard) —
+     had these resolve to invalid/undefined, rendering with no background
+     (e.g. a dropdown you could see straight through). --border is
+     deliberately excluded: it already has a distinct, real global meaning
+     via border-border used throughout the console/marketing pages; kyc-scope's
+     own --border below still wins inside that div, same as before. */
+  --background: oklch(0.985 0.005 240);
+  --foreground: oklch(0.18 0.03 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 250);
+  --primary: oklch(0.55 0.18 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.25 0.03 250);
+  --muted: oklch(0.96 0.008 240);
+  --muted-foreground: oklch(0.5 0.02 250);
+  --accent: oklch(0.95 0.03 155);
+  --accent-foreground: oklch(0.3 0.1 155);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.65 0.17 150);
+  --success-foreground: oklch(0.99 0 0);
+  --warning: oklch(0.75 0.16 75);
+  --warning-foreground: oklch(0.25 0.05 75);
+  --info: oklch(0.6 0.18 255);
+  --info-foreground: oklch(0.99 0 0);
+  --input: oklch(0.92 0.01 240);
+  --ring: oklch(0.55 0.18 155);
+  --chart-1: oklch(0.62 0.19 150);
+  --chart-2: oklch(0.72 0.16 75);
+  --chart-3: oklch(0.62 0.22 25);
+  --chart-4: oklch(0.6 0.18 255);
+  --chart-5: oklch(0.55 0.2 300);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.25 0.03 250);
+  --sidebar-primary: oklch(0.55 0.18 155);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.96 0.02 155);
+  --sidebar-accent-foreground: oklch(0.3 0.1 155);
+  --sidebar-border: oklch(0.94 0.01 240);
+  --sidebar-ring: oklch(0.55 0.18 155);
+  --gradient-brand: linear-gradient(135deg, oklch(0.55 0.18 155), oklch(0.5 0.15 200));
+  --shadow-card: 0 1px 3px 0 oklch(0.2 0.03 250 / 0.06), 0 1px 2px -1px oklch(0.2 0.03 250 / 0.04);
+  --shadow-elev: 0 10px 30px -12px oklch(0.2 0.03 250 / 0.15);
+}
+
+/* DARK MODE */
+.dark {
+  --bg: #050a14;
+  --bg-subtle: #0a1322;
+  --bg-elevated: #0f1b2e;
+  --fg: #f8fafc;
+  --fg-muted: #94a3b8;
+  --fg-subtle: #64748b;
+  --border: rgba(148, 163, 184, 0.14);
+  --border-strong: rgba(148, 163, 184, 0.28);
+
+  --ent-bg: #091326;
+  --ent-bg-lower: #040e21;
+  --ent-bg-low: #121b2f;
+  --ent-surface: #161f33;
+  --ent-surface-high: #202a3e;
+  --ent-input: #071124;
+  --ent-fg: #d9e2fd;
+  --ent-fg-muted: #c4c5da;
+  --ent-fg-subtle: #8e8fa3;
+  --ent-border: rgba(255, 255, 255, 0.08);
+  --ent-border-strong: rgba(255, 255, 255, 0.18);
+
+  /* Darker/richer than .com's raw dark-mode --primary (#99deff) on purpose —
+     that value is tuned for text/icons/borders against a dark page (where a
+     light, bright color pops), not for a FILLED button background with text
+     sitting on top of it. Reusing one token for both roles is what produced
+     unreadable white-on-pale-cyan buttons. This shade keeps the same brand
+     hue but stays dark enough that on-primary can just always be white —
+     no more light/dark text flip to get wrong. */
+  --ent-primary: #0072c4;
+  --ent-primary-hover: #005ea2;
+  --ent-on-primary: #ffffff;
+  --ent-accent: #f3bf3a;
+
+  --glass: rgba(13, 26, 53, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
+
+  /* 2026 redesign "x-" scale — dark mode. */
+  --x-bg: #000000;
+  --x-raised: #0a0a0d;
+  --x-line: rgba(255, 255, 255, 0.09);
+  --x-line-strong: rgba(255, 255, 255, 0.18);
+  --x-fg: #ffffff;
+  --x-muted: rgba(255, 255, 255, 0.58);
+  --x-dim: rgba(255, 255, 255, 0.38);
+  --x-accent: #3fa9ff;
+  --x-accent-bright: #5fc2ff;
+  --x-hot: #ff3b5c;
+
+  /* Dark-mode counterpart of the shadcn token block added to :root above —
+     same reasoning, mirrors .dark .kyc-scope's values. --border excluded
+     for the same reason. */
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  /* The generic shadcn dark-mode swap (a near-white, near-neutral pale
+     blue-grey) reads as a washed-out "grey button" for every default-variant
+     Button (e.g. Billing's "Top up") — same problem already identified and
+     fixed for .kyc-scope's dark primary below; applying the identical brand
+     green here instead of the neutral swap for consistency. */
+  --primary: oklch(0.72 0.19 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  /* Same value as --warning itself (already proven legible as text-on-dark
+     via e.g. Billing's "text-warning" badges) — --warning-foreground is
+     meant for text on a SOLID warning-colored pill, but several KYC
+     dashboard components (Alerts, Verifications list, Support, Dashboard)
+     use it as the text color for a translucent bg-warning/15-style badge
+     instead — on those, the un-overridden light-mode value (near-black,
+     oklch(0.25 0.05 75)) rendered as invisible dark-on-dark text. */
+  --warning-foreground: oklch(0.75 0.16 75);
+  /* Bumped from 15% to 30% so outline-button borders actually read against
+     a dark card, now that the button's fill is transparent instead of a
+     solid, possibly-darker-than-card background. */
+  --input: oklch(1 0 0 / 30%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+* { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+body {
+  margin: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
+  background: var(--ent-bg);
+  color: var(--ent-fg);
+  font-family: var(--font-sans);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+/* NOTE: there is deliberately no `a { color: inherit; text-decoration: none }`
+   rule here any more.
+   As plain top-level CSS it was UNLAYERED, and unlayered rules outrank every
+   layered rule in the cascade — including Tailwind v4's @layer utilities, and
+   regardless of specificity. It therefore silently killed text-* on every <a>
+   in the app (a white button's text-[#07070a] became a no-op, so the label
+   inherited its section's colour and vanished). Wrapping it in @layer base
+   does not survive the build here, so it is simply removed: Tailwind's
+   preflight already emits `a { color: inherit; text-decoration: inherit }`
+   inside @layer base, which gives the same defaults while still letting
+   utility classes win. */
+
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.tech-grid {
+  background-image:
+    linear-gradient(to right, rgba(47, 107, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(47, 107, 255, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.tech-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(47, 107, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(47, 107, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.input-inset {
+  background: var(--ent-input);
+  border: 1px solid var(--ent-border);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.input-inset:focus-within {
+  border-color: var(--ent-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ent-primary) 20%, transparent);
+}
+
+/* Hover-only glow — matches xobriq.com's flat button treatment (solid color,
+   no shimmer sweep, glow only appears on hover) instead of the previous
+   always-on shimmer/inset-glow combo. Also used on feature cards. */
+.glow-hover:hover {
+  box-shadow: 0 0 30px color-mix(in srgb, var(--ent-primary) 40%, transparent);
+}
+
+.label-caps {
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.label-caps-thin {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ── Button05 (Arrow-Dots) ── */
+.button05 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.25rem;
+  padding: 0 2rem;
+  border-radius: 9999px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button05:hover {
+  transform: scale(1.02);
+}
+.button05:active {
+  transform: scale(0.98);
+}
+.button05_bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: var(--x-fg);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.button05:hover .button05_bg {
+  box-shadow: 0 0 30px color-mix(in srgb, var(--x-accent) 55%, transparent);
+}
+.button05_inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--x-bg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.button05_icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  overflow: hidden;
+}
+.button05_icon {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5px;
+  transform: translateX(calc((var(--index-parent) - 3) * 6px));
+  transition: transform 0.45s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.button05:hover .button05_icon {
+  transform: translateX(calc((var(--index-parent) - 1) * 6px));
+}
+.button05_dot {
+  display: block;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 9999px;
+  background-color: currentColor;
+  transform: translateX(calc((2 - var(--index)) * 2.2px));
+  opacity: calc(1 - var(--index) * 0.22);
+}
+
+/* ── 2026 redesign helpers ───────────────────────────────────────────────── */
+
+/* The hairline blueprint grid the hero established, as a reusable backdrop. */
+.x-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(120, 170, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(120, 170, 255, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Hero scan-ring rotation — a slow, smooth, clockwise loop. See the comment
+   on .hero-ring-spin's usage in HeroParticleScan.tsx for why the ring itself
+   needs a gradient (not a flat stroke) for this rotation to be visible at
+   all. 7s is deliberately unhurried — this is ambient/decorative, not a
+   loading spinner, so it should read as a slow radar sweep, not a spin. */
+@keyframes hero-ring-spin {
+  to { transform: rotate(360deg); }
+}
+.hero-ring-spin {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  animation: hero-ring-spin 7s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-ring-spin { animation: none; }
+}
+
+/* Hero biometric laser scan line — hardware-accelerated top-to-bottom sweep */
+@keyframes hero-scan-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  4% { opacity: 1; }
+  96% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.hero-scan-line-anim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-scan-line-anim > div {
+  width: 100%;
+  height: 100%;
+  animation: hero-scan-sweep 6s linear infinite;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scan-line-anim { display: none; }
+}
+
+/* Monospace micro-label — the recurring typographic tell of the new design. */
+.x-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* 21st.dev / @easemize glass-button 3D liquid bevel aesthetics */
+.x-glass-button {
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--x-bg) 35%, transparent);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--x-fg) 12%, transparent);
+  box-shadow:
+    inset 0 1.5px 3px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.06),
+    0 4px 20px 0 rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.dark .x-glass-button {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1.5px 3px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1.5px 3px 0 rgba(0, 0, 0, 0.4),
+    0 6px 20px 0 rgba(0, 0, 0, 0.35);
+}
+
+.brand-gradient {
+  background: linear-gradient(90deg, var(--ent-primary-hover), var(--ent-primary), var(--ent-accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #22c55e;
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: #22c55e;
+  opacity: 0.4;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* ───── Sleek custom scrollbar ───── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.25);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.45);
+}
+
+
+/* ── round 4 additions ── */
+
+/* softer scrollbar specifically inside docs sidebar */
+.docs-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.15) transparent;
+}
+.docs-scroll::-webkit-scrollbar { width: 4px; }
+.docs-scroll::-webkit-scrollbar-track { background: transparent; }
+.docs-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.15);
+  border-radius: 2px;
+}
+.docs-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.35);
+}
+
+/* fade + rise on scroll */
+@keyframes fade-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-rise { animation: fade-rise 0.5s ease-out both; }
+
+/* subtle border pulse for feature cards */
+@keyframes card-pulse {
+  0%, 100% { border-color: var(--ent-border); }
+  50%      { border-color: color-mix(in srgb, var(--ent-primary) 35%, transparent); }
+}
+.card-pulse { animation: card-pulse 4s ease-in-out infinite; }
+
+/* ============================================================================
+   ID document scan animation — components/kyc/id-scan-dialog.tsx
+   Kept in CSS rather than Framer Motion: these are looping, purely decorative
+   transforms with no layout impact, so the compositor can run them off the
+   main thread. Every one degrades to a static frame under
+   prefers-reduced-motion (see the block at the end).
+   ============================================================================ */
+
+/* The sweeping scanline. translateZ(0) forces GPU compositing so the sweep
+   stays smooth over a large base64 image. */
+@keyframes id-scan-sweep {
+  0%   { transform: translate3d(0, -8%, 0); opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translate3d(0, 108%, 0); opacity: 0; }
+}
+.id-scan-line {
+  /* Shorter loop than the original 2.1s: how long the whole scanning stage
+     actually lasts depends on real OCR time (variable, 1-4s+), which will
+     essentially never land on a whole multiple of any fixed loop length —
+     so the sweep always gets cut off mid-motion when the stage advances no
+     matter what this number is. A faster loop makes that inevitable cutoff
+     read as "an in-progress scanner interrupted", not "a broken one that
+     barely started" — and multiple visible passes feels more active besides.
+     The actual fix for the jarring *stop* is the opacity fade on the
+     container (see the `finishing` state in id-scan-dialog.tsx), which this
+     pairs with.
+
+     `alternate` plays the keyframe forward (top-to-bottom) then backward
+     (bottom-to-top) on each successive iteration, instead of the default
+     of always snapping back to 0% and replaying forward — a bounce, like a
+     real flatbed scanner head, rather than a sawtooth reset. The keyframe's
+     fade in/out (12%/88%) is symmetric enough that it reads correctly
+     played in either direction. */
+  animation: id-scan-sweep 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  will-change: transform;
+}
+
+/* Diagonal holographic shimmer, independent of the horizontal scan line —
+   different angle and period so it reads as a second light source giving
+   the capture a "being processed" sheen, not a duplicate scanner. */
+@keyframes id-scan-shimmer {
+  0%   { transform: translate3d(-70%, -70%, 0) rotate(20deg); opacity: 0; }
+  15%  { opacity: 0.5; }
+  50%  { opacity: 0.5; }
+  85%  { opacity: 0; }
+  100% { transform: translate3d(70%, 70%, 0) rotate(20deg); opacity: 0; }
+}
+.id-scan-shimmer {
+  animation: id-scan-shimmer 2.8s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Small motes drifting up off the document, as if data were being lifted
+   off it — purely atmospheric ("magic happening"), not tied to any real
+   per-field detection, which id-scan-dialog.tsx deliberately doesn't claim
+   to do. Each particle carries its own --x/--delay custom property so one
+   keyframe drives all of them. */
+@keyframes id-scan-particle-rise {
+  0%   { transform: translate3d(var(--x, 0), 0, 0) scale(0.6); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate3d(var(--x, 0), -70px, 0) scale(1); opacity: 0; }
+}
+.id-scan-particle {
+  animation: id-scan-particle-rise 2.3s ease-out var(--delay, 0s) infinite;
+  will-change: transform, opacity;
+}
+
+/* Corner brackets pulse in sympathy with the sweep, half a beat behind. */
+@keyframes id-scan-bracket {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1; }
+}
+.id-scan-bracket {
+  animation: id-scan-bracket 2.1s ease-in-out infinite;
+}
+
+/* Faint horizontal rules that read as "machine reading lines". */
+@keyframes id-scan-grid {
+  0%, 100% { opacity: 0.12; }
+  50%      { opacity: 0.28; }
+}
+.id-scan-grid {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--primary) 55%, transparent) 0px,
+    color-mix(in srgb, var(--primary) 55%, transparent) 1px,
+    transparent 1px,
+    transparent 11px
+  );
+  animation: id-scan-grid 2.1s ease-in-out infinite;
+}
+
+/* Field rows resolving one after another as they're "extracted". */
+@keyframes id-scan-field-in {
+  from { opacity: 0; transform: translateY(6px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+}
+.id-scan-field {
+  animation: id-scan-field-in 0.45s ease-out both;
+}
+
+/* ── Header scan badge (the icon beside "Upload ID") ─────────────────────
+   A miniature of the full-size scan animation, so the modal's icon and its
+   scanning stage speak the same visual language. Long cycle with the line
+   invisible at both ends, which reads as a scanner pausing between passes
+   rather than something strobing in the corner of your eye. */
+@keyframes id-badge-sweep {
+  0%   { transform: translateY(-4.5px); opacity: 0; }
+  18%  { opacity: 1; }
+  78%  { opacity: 1; }
+  100% { transform: translateY(4.5px); opacity: 0; }
+}
+.id-badge-sweep {
+  animation: id-badge-sweep 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes id-badge-corners {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+.id-badge-corners {
+  animation: id-badge-corners 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .id-badge-sweep { animation: none; opacity: 1; transform: none; }
+  .id-badge-corners { animation: none; opacity: 1; }
+}
+
+/* ── Capture-complete celebration ────────────────────────────────────────
+   The success beat after a capture passes its quality check. Deliberately
+   short: it confirms, it doesn't perform. */
+
+/* Ring expanding out from behind the tick. */
+@keyframes id-success-ring {
+  0%   { transform: scale(0.4); opacity: 0; }
+  35%  { opacity: 0.5; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.id-success-ring { animation: id-success-ring 1s ease-out forwards; }
+
+/* The badge itself lands with a slight overshoot. */
+@keyframes id-success-pop {
+  0%   { transform: scale(0.3); opacity: 0; }
+  55%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.id-success-pop { animation: id-success-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+/* Tick drawn on with a dash offset rather than faded in — reads as
+   "completed" instead of "appeared". stroke-dasharray is set on the path. */
+@keyframes id-success-draw {
+  to { stroke-dashoffset: 0; }
+}
+.id-success-draw {
+  stroke-dasharray: 32;
+  stroke-dashoffset: 32;
+  animation: id-success-draw 0.4s 0.22s ease-out forwards;
+}
+
+/* Confetti. Each particle carries its own --dx/--dy/--rot/--delay as inline
+   custom properties, so one keyframe drives every direction — no per-particle
+   stylesheet, and no confetti dependency added to the bundle. */
+@keyframes id-confetti-fly {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--dy), 0) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+.id-confetti-piece {
+  animation: id-confetti-fly 1.15s cubic-bezier(0.15, 0.6, 0.4, 1) var(--delay, 0s) both;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .id-scan-line,
+  .id-scan-bracket,
+  .id-scan-grid,
+  .id-scan-field,
+  .id-success-ring,
+  .id-success-pop,
+  .id-success-draw {
+    animation: none;
+  }
+  .id-scan-line { opacity: 1; transform: translate3d(0, 50%, 0); }
+  .id-scan-field { opacity: 1; transform: none; filter: none; }
+  .id-success-pop { opacity: 1; transform: none; }
+  .id-success-draw { stroke-dashoffset: 0; }
+  /* Confetti and the shimmer/particle "magic" layer are pure decoration
+     with no informational value — removed outright rather than shown
+     frozen mid-flight. */
+  .id-confetti-piece,
+  .id-scan-shimmer,
+  .id-scan-particle {
+    display: none;
+  }
+}
+
+/* responsive typography clamps */
+.text-hero {
+  font-size: clamp(2.25rem, 4.5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.text-h2 {
+  font-size: clamp(1.75rem, 2.6vw, 2.5rem);
+  line-height: 1.15;
+}
+
+/* container helper — comfortable across 13-27" screens */
+.container-narrow { max-width: min(1200px, 92vw); margin-inline: auto; }
+.container-medium { max-width: min(1320px, 94vw); margin-inline: auto; }
+.container-wide   { max-width: min(1440px, 96vw); margin-inline: auto; }
+
+/* ============================================================================
+   XOBRIQ KYC dashboard theme (migrated from apps/kyc/src/styles.css, the
+   former standalone TanStack Start app reverse-proxied at
+   /dashboard/xobriqKYC). Scoped under .kyc-scope instead of :root/.dark —
+   its shadcn/oklch token set uses names (--background, --primary, --border,
+   etc.) that would otherwise collide with this app's own --ent-* / --bg / --fg
+   system above. The @theme mapping below is global (harmless — it only
+   teaches Tailwind that utility classes like bg-background/text-primary
+   exist and which CSS var they read), but the actual color VALUES only
+   exist inside .kyc-scope, so nothing outside
+   app/(kyc)/dashboard/xobriqKYC/** is affected.
+   ============================================================================ */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  /* --color-border is already mapped above (this app's own --border) — kyc's
+     --border value below is scoped under .kyc-scope and cascades correctly
+     for anything rendered inside it. */
+}
+
+.kyc-scope {
+  --radius: 0.75rem;
+  --background: oklch(0.985 0.005 240);
+  --foreground: oklch(0.18 0.03 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.03 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 250);
+  --primary: oklch(0.55 0.18 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.25 0.03 250);
+  --muted: oklch(0.96 0.008 240);
+  --muted-foreground: oklch(0.5 0.02 250);
+  --accent: oklch(0.95 0.03 155);
+  --accent-foreground: oklch(0.3 0.1 155);
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.65 0.17 150);
+  --success-foreground: oklch(0.99 0 0);
+  --warning: oklch(0.75 0.16 75);
+  --warning-foreground: oklch(0.25 0.05 75);
+  --info: oklch(0.6 0.18 255);
+  --info-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.01 240);
+  --input: oklch(0.92 0.01 240);
+  --ring: oklch(0.55 0.18 155);
+  --chart-1: oklch(0.62 0.19 150);
+  --chart-2: oklch(0.72 0.16 75);
+  --chart-3: oklch(0.62 0.22 25);
+  --chart-4: oklch(0.6 0.18 255);
+  --chart-5: oklch(0.55 0.2 300);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.25 0.03 250);
+  --sidebar-primary: oklch(0.55 0.18 155);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.96 0.02 155);
+  --sidebar-accent-foreground: oklch(0.3 0.1 155);
+  --sidebar-border: oklch(0.94 0.01 240);
+  --sidebar-ring: oklch(0.55 0.18 155);
+  --gradient-brand: linear-gradient(135deg, oklch(0.55 0.18 155), oklch(0.5 0.15 200));
+  --shadow-card: 0 1px 3px 0 oklch(0.2 0.03 250 / 0.06), 0 1px 2px -1px oklch(0.2 0.03 250 / 0.04);
+  --shadow-elev: 0 10px 30px -12px oklch(0.2 0.03 250 / 0.15);
+
+  border-color: var(--border);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* .dark lives on <html> (this app's ThemeProvider target), not on
+   .kyc-scope itself, so this must be a descendant selector. */
+.dark .kyc-scope {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  /* Brand green, not the generic shadcn neutral gray/navy swap — that
+     neutral pair rendered the "New Verification" button's text with too
+     little contrast against its own pill background. The root .dark block
+     above now uses this same value, for the same reason. */
+  --primary: oklch(0.72 0.19 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  /* Same reasoning as the root .dark block's --warning-foreground override
+     — several KYC dashboard components (Alerts, Verifications list,
+     Support, Dashboard) use this as text on a translucent bg-warning/15
+     badge, not a solid pill, so the un-overridden light-mode value (near-
+     black) rendered as invisible dark-on-dark text. */
+  --warning-foreground: oklch(0.75 0.16 75);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  /* Bumped from 15% to 30% — same reasoning as the root .dark block's
+     --input above: outline buttons on this dashboard are the majority
+     button style, and their border is now the only thing distinguishing
+     them from the (transparent) fill. */
+  --input: oklch(1 0 0 / 30%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+/* GPU-accelerated smooth floating animations for hero callout cards */
+@keyframes hero-float-smooth {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+@keyframes hero-float-smooth-reverse {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0);
+  }
+  50% {
+    transform: translate3d(0, 7px, 0);
+  }
+}
+
+.animate-hero-float-1 {
+  will-change: transform;
+  transform: translateZ(0);
+  animation: hero-float-smooth 5.2s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.animate-hero-float-2 {
+  will-change: transform;
+  transform: translateZ(0);
+  animation: hero-float-smooth-reverse 5.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-float-1,
+  .animate-hero-float-2 {
+    animation: none !important;
+  }
+}
+
+/* Smooth hardware acceleration for interactive overlays */
+.gpu-accelerate {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Animated Moving Gradient Text Effect */
+@keyframes text-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-gradient {
+  background-size: 200% auto;
+  animation: text-gradient-flow 5s ease-in-out infinite;
+}
+
+/* Instant 0ms Zero-Lag Theme Switching (prevents style recalculation layout freezes) */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: none !important;
+}
+
