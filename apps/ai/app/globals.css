@@ -1085,7 +1085,7 @@ body {
 
 .animate-text-gradient {
   background-size: 200% auto;
-  animation: text-gradient-flow 5s ease-in-out infinite;
+  animation: text-gradient-flow 3s ease-in-out infinite;
 }
 
 /* Instant 0ms Zero-Lag Theme Switching (prevents style recalculation layout freezes) */
