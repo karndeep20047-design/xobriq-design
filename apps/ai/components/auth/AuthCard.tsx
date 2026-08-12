@@ -21,7 +21,7 @@ export function AuthCard(props: Props) {
             width={360}
             height={120}
             priority
-            className="h-20 w-auto object-contain"
+            className="h-16 w-auto object-contain"
           />
         </Link>
       </div>
