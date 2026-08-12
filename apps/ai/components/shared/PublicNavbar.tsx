@@ -74,8 +74,16 @@ function LiveBadge() {
 
 // ─── Accordion section ────────────────────────────────────────────────────────
 
-function AccordionSection({ label, children }: { label: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
+function AccordionSection({
+  label,
+  children,
+  defaultOpen = false,
+}: {
+  label: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <motion.div variants={itemFade}>
       <button
@@ -226,7 +234,7 @@ export function PublicNavbar() {
                 className="px-5 pb-6 pt-2 divide-y divide-slate-100 dark:divide-white/[0.07]"
               >
                 {/* Products accordion */}
-                <AccordionSection label="Products">
+                <AccordionSection label="Products" defaultOpen>
                   <div className="pb-3 space-y-0.5">
                     {PRODUCTS.map((p) => {
                       const Icon = p.Icon;
@@ -283,11 +291,11 @@ export function PublicNavbar() {
                 {/* CTA */}
                 <motion.div variants={itemFade} className="pt-5">
                   <Link
-                    href="/dashboard"
+                    href="/contact"
                     onClick={close}
-                    className="flex items-center justify-center gap-2 w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-zinc-200 transition-all"
+                    className="flex items-center justify-center gap-2 w-full rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-lg hover:bg-emerald-700 dark:bg-emerald-600 dark:text-white dark:hover:bg-emerald-700 transition-all"
                   >
-                    Go to Console
+                    Contact Us
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </motion.div>

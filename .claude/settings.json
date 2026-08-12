@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npx --version)",
+      "Bash(npx next *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(rm -f _shot_tmp.mjs)",
+      "Bash(npx --yes playwright screenshot --help)",
+      "Bash(npx --yes playwright screenshot --full-page --color-scheme=light --wait-for-timeout=1500 --viewport-size=1440,900 http://localhost:3001/ 'C:\\\\Users\\\\XOBRIQ\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-XOBRIQ-Documents-xobriq-design\\\\e0887a13-62cf-4d55-bd6e-0b13c9551a9d\\\\scratchpad/home-light.png')",
+      "Bash(export NODE_PATH=\"C:\\\\Users\\\\XOBRIQ\\\\AppData\\\\Local/npm-cache/_npx/e41f203b7505f1fb/node_modules\")",
+      "Bash(node 'C:\\\\Users\\\\XOBRIQ\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-XOBRIQ-Documents-xobriq-design\\\\e0887a13-62cf-4d55-bd6e-0b13c9551a9d\\\\scratchpad/shot.mjs' http://localhost:3001/ 'C:\\\\Users\\\\XOBRIQ\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-XOBRIQ-Documents-xobriq-design\\\\e0887a13-62cf-4d55-bd6e-0b13c9551a9d\\\\scratchpad/home')"
+    ]
+  }
+}
