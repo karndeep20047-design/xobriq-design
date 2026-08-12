@@ -20,7 +20,7 @@ export function AcceptInviteClient({
     <div className="flex min-h-screen items-center justify-center bg-bg px-5">
       <div className="w-full max-w-md">
         <div className="mb-6 flex justify-center">
-          <Image src="/xobriq-logo.png" alt="Xobriq" width={140} height={40} className="h-10 w-auto object-contain" />
+          <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={140} height={40} className="h-10 w-auto object-contain" />
         </div>
 
         <div className="rounded-2xl border border-border bg-bg-subtle p-8">

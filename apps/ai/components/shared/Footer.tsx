@@ -117,7 +117,7 @@ export function Footer() {
           {/* ---------- Brand block ---------- */}
           <div>
             <Image
-              src="/xobriq-logo.png"
+              src="/xobriq-logo-horizontal.png"
               alt="Xobriq"
               width={150}
               height={40}

@@ -16,7 +16,7 @@ export function AuthCard(props: Props) {
       <div className="mb-8 flex justify-center">
         <Link href="/" aria-label="Xobriq home" className="inline-flex">
           <Image
-            src="/xobriq-logo.png"
+            src="/xobriq-logo-horizontal.png"
             alt="Xobriq"
             width={280}
             height={72}

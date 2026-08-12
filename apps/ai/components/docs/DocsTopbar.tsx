@@ -25,7 +25,7 @@ export function DocsTopbar() {
       <div className="flex h-16 items-center gap-4 px-5 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
-            src="/xobriq-logo.png"
+            src="/xobriq-logo-horizontal.png"
             alt="Xobriq"
             width={180}
             height={45}

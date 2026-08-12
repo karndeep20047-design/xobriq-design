@@ -158,7 +158,7 @@ export function PublicNavbar() {
           {/* Logo */}
           <Link href="/" aria-label="Xobriq home" className="inline-flex shrink-0 items-center" onClick={close}>
             <Image
-              src="/xobriq-logo.png"
+              src="/xobriq-logo-horizontal.png"
               alt="Xobriq"
               width={220}
               height={60}
