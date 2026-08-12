@@ -144,7 +144,7 @@ export function DashboardShell({
 function BrandLogo() {
   return (
     <Link href="/dashboard" className="flex items-center gap-2 no-underline transition-opacity hover:opacity-80">
-      <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={180} height={60} className="h-8 w-auto object-contain" priority />
+      <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={180} height={60} className="h-7 w-auto object-contain" priority />
     </Link>
   );
 }
