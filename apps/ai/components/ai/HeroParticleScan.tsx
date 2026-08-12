@@ -107,10 +107,10 @@ export function HeroParticleScan() {
           <motion.div
             variants={rise}
             custom={0.7}
-            className="mt-7 sm:mt-11 flex flex-row items-center justify-center sm:justify-start gap-3 sm:gap-4 w-full sm:w-auto"
+            className="mt-6 sm:mt-11 flex flex-row items-center justify-center sm:justify-start gap-2.5 sm:gap-4 w-full sm:w-auto"
           >
-            <FlowButton href="/register" text="Get Started" className="w-[170px] xs:w-[190px] sm:w-auto" />
-            <Button6 href="/contact?type=demo_request" className="w-[170px] xs:w-[190px] sm:w-auto">
+            <FlowButton href="/register" text="Get Started" className="w-[142px] xs:w-[160px] sm:w-auto" />
+            <Button6 href="/contact?type=demo_request" className="w-[142px] xs:w-[160px] sm:w-auto">
               Book a Demo
             </Button6>
           </motion.div>
@@ -139,14 +139,13 @@ export function HeroParticleScan() {
             />
           </div>
 
-          {/* Decorative scan-target ring (Dual Orbital SVG Radar Ellipse Ring - Mathematically matched to portrait clip-path) */}
+          {/* Decorative scan-target ring — square container + circle so it renders identically in dev & prod */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-[-2.5%] z-0"
+            className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[108%] -translate-x-1/2 -translate-y-1/2 z-0"
           >
             <svg
               viewBox="0 0 100 100"
-              preserveAspectRatio="none"
               className="h-full w-full animate-[spin_10s_linear_infinite]"
             >
               <defs>
@@ -157,15 +156,14 @@ export function HeroParticleScan() {
                   <stop offset="100%" stopColor="#0072c4" stopOpacity="0.05" />
                 </linearGradient>
               </defs>
-              <ellipse
+              <circle
                 cx="50"
                 cy="50"
-                rx="48.8"
-                ry="44.6"
+                r="48"
                 fill="none"
                 stroke="url(#hero-radar-ring-grad)"
-                strokeWidth="0.6"
-                strokeDasharray="100 53.3"
+                strokeWidth="0.55"
+                strokeDasharray="100 53"
               />
             </svg>
           </div>
