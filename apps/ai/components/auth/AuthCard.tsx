@@ -18,10 +18,10 @@ export function AuthCard(props: Props) {
           <Image
             src="/xobriq-logo-horizontal.png"
             alt="Xobriq"
-            width={280}
-            height={72}
+            width={360}
+            height={120}
             priority
-            className="h-16 w-auto object-contain"
+            className="h-20 w-auto object-contain"
           />
         </Link>
       </div>

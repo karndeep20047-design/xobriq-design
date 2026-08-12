@@ -160,10 +160,10 @@ export function PublicNavbar() {
             <Image
               src="/xobriq-logo-horizontal.png"
               alt="Xobriq"
-              width={220}
-              height={60}
+              width={300}
+              height={100}
               priority
-              className="h-10 sm:h-14 w-auto object-contain transition-all duration-300"
+              className="h-12 sm:h-16 w-auto object-contain transition-all duration-300"
             />
           </Link>
 
