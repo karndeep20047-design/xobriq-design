@@ -159,7 +159,7 @@ export function ConsoleShell({
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
           <aside className="absolute inset-y-0 left-0 flex w-64 flex-col border-r border-border bg-bg-subtle">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={150} height={50} className="h-6 w-auto object-contain" />
+              <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={150} height={50} className="h-7 w-auto object-contain" />
               <button onClick={() => setMobileOpen(false)} className="grid h-8 w-8 place-items-center rounded-md">
                 <X className="h-4 w-4" />
               </button>
