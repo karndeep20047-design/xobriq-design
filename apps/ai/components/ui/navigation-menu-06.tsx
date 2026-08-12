@@ -297,7 +297,7 @@ const ProductListItem = ({ product }: { product: ProductItem }) => {
       <NavigationMenuLink asChild>
         <Link
           href={product.href}
-          className="group flex items-start gap-3 rounded-lg p-2.5 transition-all duration-200 hover:bg-slate-100/80 dark:hover:bg-white/[0.06] hover:translate-x-1.5 focus:bg-slate-100/80 dark:focus:bg-white/[0.06] outline-none"
+          className="group flex items-start gap-3 rounded-lg p-2.5 transition-colors duration-200 hover:bg-slate-100/80 dark:hover:bg-white/[0.06] focus:bg-slate-100/80 dark:focus:bg-white/[0.06] outline-none"
         >
           <Icon className={cn("h-5 w-5 shrink-0 mt-0.5 transition-transform duration-200 group-hover:scale-110 group-hover:translate-x-0.5", product.iconColor)} />
           <div className="flex-1 min-w-0">
@@ -328,7 +328,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           href={href}
           className={cn(
-            "group flex items-start gap-2.5 rounded-lg p-2.5 no-underline outline-none transition-all duration-200 hover:bg-slate-100/80 dark:hover:bg-white/[0.06] hover:translate-x-1.5 focus:bg-slate-100/80 dark:focus:bg-white/[0.06]",
+            "group flex items-start gap-2.5 rounded-lg p-2.5 no-underline outline-none transition-colors duration-200 hover:bg-slate-100/80 dark:hover:bg-white/[0.06] focus:bg-slate-100/80 dark:focus:bg-white/[0.06]",
             className
           )}
           {...props}

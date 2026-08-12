@@ -145,3 +145,59 @@ We conducted a thorough mobile performance audit and implemented high-efficiency
 ---
 
 *Document updated: August 12, 2026*
+
+---
+
+## 🔄 Session Updates — August 12, 2026 (Afternoon)
+
+### Mobile Navigation — Full Redesign
+
+| Feature | Before | Now |
+| --- | --- | --- |
+| **Mobile Menu Style** | Side drawer sliding in from the right, covering full screen with backdrop overlay. | **Slide-Down Panel**: Menu slides in directly below the navbar (nav stays fully visible at top). No backdrop, no full-screen takeover. |
+| **Toggle Button** | Hamburger opens drawer; separate `X` button inside drawer closes it. | **Same Hamburger Button**: Toggles between open/closed states — no separate close button needed. |
+| **Menu Structure** | Flat listed items for Products (×6), Resources (×4), Company (×4) all expanded simultaneously. | **Accordion Dropdowns**: Products, Resources, and Company are collapsible sections — tap to expand/collapse with smooth height animation. |
+| **Login Button** | Shown both in top-right and at the bottom of the mobile menu. | **Removed from mobile** — Console button covers the same function. Login kept on desktop only. |
+| **Route Close** | Menu stayed open on route navigation. | Auto-closes on route change. |
+| **iOS Scroll** | No momentum scrolling on menu overflow. | Added `-webkit-overflow-scrolling: touch` + `dvh` viewport fallback for Safari. |
+
+---
+
+### Navbar Desktop Dropdown — Jitter Fix
+
+| Issue | Root Cause | Fix |
+| --- | --- | --- |
+| **Dropdown jitter on hover** | `transition-all` on `NavigationMenuViewport` triggered simultaneous `height` + `width` layout reflows per frame on the main thread. | Replaced with GPU-only `animate-in/fade-in/zoom-in` Tailwind classes + `will-change: transform` on the Viewport element. |
+| **Item hover jitter** | `hover:translate-x-1.5` inside the dropdown triggered parent layer resize conflicts during Viewport open animation. | Removed translate from all dropdown list items — kept `hover:bg` only (pure paint, no layout trigger). |
+| **Navbar GPU layer** | `motion.header` had no GPU compositing hint during scroll transitions. | Added `will-change: transform` to the fixed header. |
+
+---
+
+### Theme Toggle — Instant 0ms Freeze Fix
+
+| Feature | Before | Now |
+| --- | --- | --- |
+| **Theme switch freeze** | Toggling `.dark` on `<html>` ran simultaneous `background-color` CSS transitions across hundreds of DOM nodes, freezing the main thread for ~300ms. | Added `html.theme-transitioning` CSS rule that suppresses all transitions for the 2 animation frames of the toggle. Implemented via double-`requestAnimationFrame` cleanup in `ThemeProvider.tsx`. |
+
+---
+
+### Mobile Canvas Render Loop — Reverted to 60fps
+
+- Previously throttled to 45fps on mobile (`< 640px`) to save battery; user confirmed this caused lag vs Vercel.
+- **Reverted to native 60fps** (and 120fps on ProMotion displays) — the canvas is GPU-accelerated so 60fps is smooth on modern mobiles.
+
+---
+
+### Performance & Compatibility Audit (No UI Changes)
+
+| Area | Finding | Fix Applied |
+| --- | --- | --- |
+| **`content-visibility: auto`** | Caused layout jumps during scroll on `PillarGrid` section. | Removed — browser handles section rendering natively. |
+| **`will-change` over-allocation** | Forcing `will-change: transform, opacity` on 20+ static containers thrashed mobile VRAM. | Removed inline `willChange` from static containers in `HeroParticleScan.tsx` and `PublicNavbar.tsx`. Framer Motion manages layer promotion internally. |
+| **Moving gradient text** | Continuous `background-position` keyframe on `bg-clip-text text-transparent` forced CPU rasterization every frame. | Replaced with static gradient text (`bg-gradient-to-r`) — zero per-frame CPU cost. |
+| **Mobile hero in-animation lag** | Conic-gradient mask on `.hero-ring-spin` re-rasterized on CPU per rotation frame. | Added `will-change: transform; transform: translateZ(0); -webkit-backface-visibility: hidden` to cache mask in GPU VRAM. |
+| **`.next` cache stale code** | Old compiled code served from dev server after multiple file reverts. | Cleared `.next` folder + full server restart. |
+
+---
+
+*Document updated: August 12, 2026 (afternoon session)*

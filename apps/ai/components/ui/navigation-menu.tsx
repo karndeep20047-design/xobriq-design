@@ -86,9 +86,10 @@ const NavigationMenuViewport = React.forwardRef<
   <div className={cn("absolute left-0 top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
-        "origin-top-center relative mt-2.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-lg border border-slate-200/80 bg-white/95 text-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-2xl transition-all duration-300 dark:border-white/10 dark:bg-[#09090b]/95 dark:text-zinc-100 dark:shadow-[0_20px_60px_rgba(0,0,0,0.9)] md:w-[var(--radix-navigation-menu-viewport-width)]",
+        "origin-top-center relative mt-2.5 h-[var(--radix-navigation-menu-viewport-height)] w-full overflow-hidden rounded-lg border border-slate-200/80 bg-white/95 text-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-2xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 dark:border-white/10 dark:bg-[#09090b]/95 dark:text-zinc-100 dark:shadow-[0_20px_60px_rgba(0,0,0,0.9)] md:w-[var(--radix-navigation-menu-viewport-width)]",
         className
       )}
+      style={{ willChange: "transform, opacity" }}
       ref={ref}
       {...props}
     />
