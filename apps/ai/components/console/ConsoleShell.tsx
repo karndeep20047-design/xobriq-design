@@ -115,7 +115,7 @@ export function ConsoleShell({
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-bg-subtle md:flex">
         <div className="border-b border-border px-5 py-5">
           <Link href="/console" className="flex items-center gap-2">
-            <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={140} height={36} className="h-9 w-auto object-contain" />
+            <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={140} height={36} className="h-10 w-auto object-contain" />
           </Link>
           <p className="mt-3 text-[10px] font-bold uppercase tracking-widest text-fg-subtle">Internal Console</p>
         </div>
@@ -159,7 +159,7 @@ export function ConsoleShell({
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
           <aside className="absolute inset-y-0 left-0 flex w-64 flex-col border-r border-border bg-bg-subtle">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={110} height={28} className="h-7 w-auto" />
+              <Image src="/xobriq-logo-horizontal.png" alt="Xobriq" width={110} height={28} className="h-8 w-auto object-contain" />
               <button onClick={() => setMobileOpen(false)} className="grid h-8 w-8 place-items-center rounded-md">
                 <X className="h-4 w-4" />
               </button>

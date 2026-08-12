@@ -163,7 +163,7 @@ export function PublicNavbar() {
               width={220}
               height={60}
               priority
-              className="h-9 sm:h-11 w-auto object-contain transition-all duration-300"
+              className="h-10 sm:h-14 w-auto object-contain transition-all duration-300"
             />
           </Link>
 
