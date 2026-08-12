@@ -87,7 +87,7 @@ export function HeroParticleScan() {
             <span className={`block ${lineWrap}`}>
               <motion.span variants={line} custom={0.28} className="block text-x-accent">
                 others{" "}
-                <span className="bg-[linear-gradient(to_right,#0ea5e9,#6366f1,#d946ef,#f97316)] dark:bg-[linear-gradient(to_right,#38bdf8,#818cf8,#e879f9,#fb923c)] bg-clip-text text-transparent inline animate-text-gradient">
+                <span className="bg-[linear-gradient(to_right,#0ea5e9,#7c3aed,#f97316)] dark:bg-[linear-gradient(to_right,#38bdf8,#8b5cf6,#fb923c)] bg-clip-text text-transparent inline animate-text-gradient">
                   miss.
                 </span>
               </motion.span>
