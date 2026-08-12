@@ -107,10 +107,10 @@ export function HeroParticleScan() {
           <motion.div
             variants={rise}
             custom={0.7}
-            className="mt-6 sm:mt-11 flex flex-row items-center justify-center sm:justify-start gap-2.5 sm:gap-4 w-full sm:w-auto"
+            className="mt-7 sm:mt-11 flex flex-row items-center justify-center sm:justify-start gap-3 sm:gap-4 w-full sm:w-auto"
           >
-            <FlowButton href="/register" text="Get Started" className="w-[142px] xs:w-[160px] sm:w-auto" />
-            <Button6 href="/contact?type=demo_request" className="w-[142px] xs:w-[160px] sm:w-auto">
+            <FlowButton href="/register" text="Get Started" className="w-[170px] xs:w-[190px] sm:w-auto" />
+            <Button6 href="/contact?type=demo_request" className="w-[170px] xs:w-[190px] sm:w-auto">
               Book a Demo
             </Button6>
           </motion.div>

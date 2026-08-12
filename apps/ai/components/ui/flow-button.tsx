@@ -33,7 +33,7 @@ export const FlowButton = React.forwardRef<HTMLAnchorElement, FlowButtonProps>(
       </>
     );
 
-    const buttonClasses = `group relative inline-flex h-11 sm:h-13 min-h-[44px] sm:min-h-[52px] items-center justify-center gap-1 overflow-hidden rounded-xl sm:rounded-full border border-x-fg/40 bg-x-fg px-4 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold cursor-pointer transition-[border-radius,box-shadow,border-color,background-color,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-x-fg/60 hover:rounded-xl sm:hover:rounded-full hover:shadow-[0_0_25px_rgba(63,169,255,0.35)] active:scale-[0.95] ${className}`;
+    const buttonClasses = `group relative inline-flex h-12 sm:h-13 min-h-[48px] sm:min-h-[52px] items-center justify-center gap-1 overflow-hidden rounded-xl sm:rounded-full border border-x-fg/40 bg-x-fg px-6 sm:px-8 py-3 text-sm font-semibold cursor-pointer transition-[border-radius,box-shadow,border-color,background-color,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-x-fg/60 hover:rounded-xl sm:hover:rounded-full hover:shadow-[0_0_25px_rgba(63,169,255,0.35)] active:scale-[0.95] ${className}`;
 
     if (href) {
       return (
