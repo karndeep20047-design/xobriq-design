@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 // Only start the reveal once the section is substantially on-screen (not the
 // moment its top edge peeks into the viewport) — feels intentional rather
 // than pre-emptive.
-const revealViewport = { once: true, amount: 0.45 } as const;
+const revealViewport = { once: true, amount: 0.15 } as const;
 
 /* "What We Provide" — full rebuild of the old bento PillarGrid.
    - Centered header, "What We Provide" is now the headline itself (not just
