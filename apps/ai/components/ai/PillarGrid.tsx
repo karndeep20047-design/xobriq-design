@@ -179,7 +179,7 @@ export function PillarGrid() {
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
       <ParallaxLines />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-[6%] sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-12 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -209,16 +209,24 @@ export function PillarGrid() {
           whileInView="visible"
           viewport={revealViewport}
           variants={staggerFast}
-          className="grid grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5"
+          className="grid grid-cols-1 gap-0 sm:gap-5 md:grid-cols-3 lg:grid-cols-5"
         >
           {PILLARS.map((p, i) => {
             const Icon = p.Icon;
-            // First and last cards ride a touch higher than the middle three
-            // on the single-row desktop layout, for a gentle wave instead of
-            // a dead-flat row. Plain (non-motion) wrapper so it doesn't
-            // fight Framer's own animated transform on the parent. Skipped
-            // below lg, where the grid wraps into multiple rows.
             const isEdge = i === 0 || i === PILLARS.length - 1;
+            const isFirst = i === 0;
+            const isLast = i === PILLARS.length - 1;
+            
+            const cardRoundedClass = isFirst
+              ? "rounded-t-lg rounded-b-none lg:rounded-lg"
+              : isLast
+              ? "rounded-b-lg rounded-t-none lg:rounded-lg"
+              : "rounded-none lg:rounded-lg";
+
+            const cardBorderClass = isFirst
+              ? "border"
+              : "border-t-0 lg:border";
+
             return (
               <motion.div key={p.href} variants={fadeInUp} className="h-full">
                 <div className={cn("h-full transition-transform duration-500 ease-out", isEdge && "lg:-translate-y-16")}>
@@ -226,7 +234,9 @@ export function PillarGrid() {
                   <Link
                     href={p.href}
                     className={cn(
-                      "group relative flex h-full flex-col overflow-hidden rounded-lg border p-6 transition-all duration-300 lg:hover:-translate-y-1",
+                      "group relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 lg:hover:-translate-y-1",
+                      cardRoundedClass,
+                      cardBorderClass,
                       p.hoverClass
                     )}
                   >
@@ -241,7 +251,7 @@ export function PillarGrid() {
                     <span
                       aria-hidden
                       className={cn(
-                        "pointer-events-none absolute right-1 top-1 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out lg:group-hover:-translate-y-1.5",
+                        "pointer-events-none absolute right-1 top-2.5 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out lg:group-hover:-translate-y-1.5",
                         p.numClass
                       )}
                     >
