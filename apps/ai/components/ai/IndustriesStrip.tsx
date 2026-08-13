@@ -60,7 +60,7 @@ export function IndustriesStrip() {
           return (
             <span
               key={ind.label}
-              className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-x-line bg-x-raised px-5 py-2.5 transition-colors duration-150"
+              className="inline-flex shrink-0 items-center gap-2.5 px-5 py-2.5"
             >
               <Icon className="h-4 w-4 shrink-0 text-x-accent" />
               <span className="text-sm font-medium text-x-fg">{ind.label}</span>

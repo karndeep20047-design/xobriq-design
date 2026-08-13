@@ -89,7 +89,7 @@ function JourneyCard({
       transition={{ duration: 0.5, delay }}
       whileHover={{ y: -4 }}
       className={
-        "flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-enterprise-primary/10 via-enterprise-primary/5 to-enterprise-accent/10 p-8 text-center transition " +
+        "flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-enterprise-primary/10 via-enterprise-primary/5 to-enterprise-accent/10 p-8 text-center transition-colors duration-300 " +
         (stacked ? "w-full" : "h-56 w-56 shrink-0 xl:h-64 xl:w-64")
       }
     >

@@ -103,7 +103,12 @@ export function ParticleScanReveal({
     let isVisible = true;
     const io = new IntersectionObserver(
       ([entry]) => {
+        const wasVisible = isVisible;
         isVisible = entry.isIntersecting;
+        if (isVisible && !wasVisible) {
+          lastTime = performance.now();
+          animationFrameId = requestAnimationFrame(render);
+        }
       },
       { threshold: 0.05 }
     );
@@ -159,7 +164,6 @@ export function ParticleScanReveal({
 
     const render = (now: number) => {
       if (!isVisible || !width || !height) {
-        animationFrameId = requestAnimationFrame(render);
         return;
       }
 

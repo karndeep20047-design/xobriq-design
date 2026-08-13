@@ -239,6 +239,8 @@ export function PillarGrid() {
   const cardsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
       // Only run on mobile/tablet viewports (< 1024px)
       if (window.innerWidth >= 1024) {
@@ -246,29 +248,38 @@ export function PillarGrid() {
         return;
       }
 
-      if (!cardsContainerRef.current) return;
-      const cardElements = cardsContainerRef.current.children;
-      const centerY = window.innerHeight / 2;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!cardsContainerRef.current) {
+            ticking = false;
+            return;
+          }
+          const cardElements = cardsContainerRef.current.children;
+          const centerY = window.innerHeight / 2;
 
-      let closestIndex = 0;
-      let closestDistance = Infinity;
+          let closestIndex = 0;
+          let closestDistance = Infinity;
 
-      for (let i = 0; i < cardElements.length; i++) {
-        const rect = cardElements[i].getBoundingClientRect();
-        const cardCenterY = rect.top + rect.height / 2;
-        const distance = Math.abs(cardCenterY - centerY);
+          for (let i = 0; i < cardElements.length; i++) {
+            const rect = cardElements[i].getBoundingClientRect();
+            const cardCenterY = rect.top + rect.height / 2;
+            const distance = Math.abs(cardCenterY - centerY);
 
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = i;
-        }
-      }
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = i;
+            }
+          }
 
-      // Check if the card center falls in the middle region of the screen (vertical center 220px boundary)
-      if (closestDistance < 220) {
-        setActiveMobileIndex(closestIndex);
-      } else {
-        setActiveMobileIndex(null);
+          // Check if the card center falls in the middle region of the screen (vertical center 220px boundary)
+          if (closestDistance < 220) {
+            setActiveMobileIndex(closestIndex);
+          } else {
+            setActiveMobileIndex(null);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
