@@ -179,7 +179,7 @@ export function PillarGrid() {
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
       <ParallaxLines />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-[6%] sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -241,7 +241,7 @@ export function PillarGrid() {
                     <span
                       aria-hidden
                       className={cn(
-                        "pointer-events-none absolute right-1 top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out -translate-y-1.5 lg:translate-y-0 lg:group-hover:-translate-y-1.5",
+                        "pointer-events-none absolute right-1 top-1 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out lg:group-hover:-translate-y-1.5",
                         p.numClass
                       )}
                     >
