@@ -51,9 +51,8 @@ type Pillar = {
   brandShadowOffHover: string;
   brandShadowOnHover: string;
   brandBarClass: string;
-  desktopHoverClass: string;
   numActiveMobileClass: string;
-  numDesktopClass: string;
+  numBrandClass: string;
 };
 
 const PILLARS: Pillar[] = [
@@ -70,9 +69,8 @@ const PILLARS: Pillar[] = [
     brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(20,184,166,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(20,184,166,0.25)]",
     brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(20,184,166,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(20,184,166,0.45)]",
     brandBarClass: "bg-teal-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(20,184,166,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(20,184,166,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(20,184,166,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(20,184,166,0.45)]",
     numActiveMobileClass: "text-teal-500/[0.28] dark:text-teal-400/[0.32]",
-    numDesktopClass: "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28] lg:group-hover:text-teal-500/[0.30] lg:dark:group-hover:text-teal-400/[0.35]",
+    numBrandClass: "text-teal-500/[0.30] dark:text-teal-400/[0.35]",
   },
   {
     index: "02",
@@ -87,9 +85,8 @@ const PILLARS: Pillar[] = [
     brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(168,85,247,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(168,85,247,0.25)]",
     brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(168,85,247,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(168,85,247,0.45)]",
     brandBarClass: "bg-purple-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(168,85,247,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(168,85,247,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(168,85,247,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(168,85,247,0.45)]",
     numActiveMobileClass: "text-purple-500/[0.28] dark:text-purple-400/[0.32]",
-    numDesktopClass: "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28] lg:group-hover:text-purple-500/[0.30] lg:dark:group-hover:text-purple-400/[0.35]",
+    numBrandClass: "text-purple-500/[0.30] dark:text-purple-400/[0.35]",
   },
   {
     index: "03",
@@ -104,9 +101,8 @@ const PILLARS: Pillar[] = [
     brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(59,130,246,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(59,130,246,0.25)]",
     brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(59,130,246,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(59,130,246,0.45)]",
     brandBarClass: "bg-blue-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(59,130,246,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(59,130,246,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(59,130,246,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(59,130,246,0.45)]",
     numActiveMobileClass: "text-blue-500/[0.28] dark:text-blue-400/[0.32]",
-    numDesktopClass: "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28] lg:group-hover:text-blue-500/[0.30] lg:dark:group-hover:text-blue-400/[0.35]",
+    numBrandClass: "text-blue-500/[0.30] dark:text-blue-400/[0.35]",
   },
   {
     index: "04",
@@ -121,9 +117,8 @@ const PILLARS: Pillar[] = [
     brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(245,158,11,0.25)]",
     brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(245,158,11,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(245,158,11,0.45)]",
     brandBarClass: "bg-amber-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(245,158,11,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(245,158,11,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(245,158,11,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(245,158,11,0.45)]",
     numActiveMobileClass: "text-amber-500/[0.28] dark:text-amber-400/[0.32]",
-    numDesktopClass: "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28] lg:group-hover:text-amber-500/[0.30] lg:dark:group-hover:text-amber-400/[0.35]",
+    numBrandClass: "text-amber-500/[0.30] dark:text-amber-400/[0.35]",
   },
   {
     index: "05",
@@ -138,9 +133,8 @@ const PILLARS: Pillar[] = [
     brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(239,68,68,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(239,68,68,0.25)]",
     brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(239,68,68,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(239,68,68,0.45)]",
     brandBarClass: "bg-red-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(239,68,68,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(239,68,68,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(239,68,68,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(239,68,68,0.45)]",
     numActiveMobileClass: "text-red-500/[0.28] dark:text-red-400/[0.32]",
-    numDesktopClass: "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28] lg:group-hover:text-red-500/[0.30] lg:dark:group-hover:text-red-400/[0.35]",
+    numBrandClass: "text-red-500/[0.30] dark:text-red-400/[0.35]",
   },
 ];
 
@@ -214,6 +208,8 @@ const iconAnimation: Variants = {
 
 export function PillarGrid() {
   const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
+  const [activeSweepIndex, setActiveSweepIndex] = useState<number | null>(null);
+  const [isHoveredContainer, setIsHoveredContainer] = useState(false);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -260,6 +256,22 @@ export function PillarGrid() {
     };
   }, []);
 
+  // Idle showcase sweep on desktop viewports (run only when the grid isn't manually hovered)
+  useEffect(() => {
+    if (typeof window === "undefined" || window.innerWidth < 1024 || isHoveredContainer) {
+      setActiveSweepIndex(null);
+      return;
+    }
+
+    let i = 0;
+    const interval = setInterval(() => {
+      setActiveSweepIndex(i);
+      i = (i + 1) % PILLARS.length;
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, [isHoveredContainer]);
+
   return (
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
       <ParallaxLines />
@@ -295,6 +307,8 @@ export function PillarGrid() {
           whileInView="visible"
           viewport={revealViewport}
           variants={staggerFast}
+          onMouseEnter={() => setIsHoveredContainer(true)}
+          onMouseLeave={() => setIsHoveredContainer(false)}
           className="grid grid-cols-1 gap-0 sm:gap-5 md:grid-cols-3 lg:grid-cols-5"
         >
           {PILLARS.map((p, i) => {
@@ -314,6 +328,7 @@ export function PillarGrid() {
               : "border border-t-0 lg:border-t";
 
             const isActiveOnMobile = activeMobileIndex === i;
+            const isSweptOnDesktop = activeSweepIndex === i;
 
             return (
               <motion.div key={p.href} variants={fadeInUp} className="h-full">
@@ -322,16 +337,27 @@ export function PillarGrid() {
                   <Link
                     href={p.href}
                     className={cn(
-                      "group relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 lg:hover:-translate-y-1",
+                      "group relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300",
                       cardRoundedClass,
                       cardBorderClass,
-                      // Mobile layout styling
+                      
+                      // ─── Mobile Viewport Styles ───
                       p.brandBorderClass,
                       isActiveOnMobile
                         ? cn(p.brandShadowOnHover, "bg-white dark:bg-x-raised")
                         : cn(p.brandShadowOffHover, "bg-white dark:bg-x-bg"),
-                      // Desktop layout hover overrides
-                      p.desktopHoverClass
+                      
+                      // ─── Desktop Viewport Styles (Default & Sweep) ───
+                      "lg:bg-x-bg",
+                      "lg:" + p.brandShadowOffHover.split(" ")[0] + " lg:dark:" + p.brandShadowOffHover.split(" ")[1],
+                      isSweptOnDesktop
+                        ? cn("lg:" + p.brandBorderClass.split(" ")[0], "lg:dark:" + p.brandBorderClass.split(" ")[1])
+                        : "lg:border-x-line lg:dark:border-white/20",
+
+                      // ─── Desktop Hover Styles ───
+                      "lg:hover:-translate-y-1 lg:hover:bg-white lg:dark:hover:bg-x-raised",
+                      "lg:hover:" + p.brandBorderClass.split(" ")[0] + " lg:dark:hover:" + p.brandBorderClass.split(" ")[1],
+                      "lg:hover:" + p.brandShadowOnHover.split(" ")[0] + " lg:dark:hover:" + p.brandShadowOnHover.split(" ")[1]
                     )}
                   >
                     {/* Accent hairline that draws itself across the top on hover. */}
@@ -352,7 +378,10 @@ export function PillarGrid() {
                         isActiveOnMobile
                           ? p.numActiveMobileClass
                           : "text-x-fg/[0.20] dark:text-white/[0.28]",
-                        p.numDesktopClass
+                        isSweptOnDesktop
+                          ? cn("lg:" + p.numBrandClass.split(" ")[0], "lg:dark:" + p.numBrandClass.split(" ")[1])
+                          : "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28]",
+                        "lg:group-hover:" + p.numBrandClass.split(" ")[0] + " lg:dark:group-hover:" + p.numBrandClass.split(" ")[1]
                       )}
                     >
                       {p.index}
