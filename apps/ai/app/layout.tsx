@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
+
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import "./globals.css";
 
@@ -57,11 +57,9 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={display.variable + " " + body.variable + " " + mono.variable}
     >
-      <head />
-      <body className="bg-bg text-fg antialiased">
-        <Script
-          id="theme-initializer"
-          strategy="beforeInteractive"
+      <head>
+        <script
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: `
               try {
@@ -76,6 +74,8 @@ export default function RootLayout({
             `,
           }}
         />
+      </head>
+      <body className="bg-bg text-fg antialiased">
         {/* Meta Pixel moved out of the root layout — it now only renders
             from (public)/(auth)/(docs)'s own layouts (components/shared/
             MetaPixel.tsx), the actual visitor-facing marketing surfaces.
