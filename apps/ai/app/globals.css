@@ -481,6 +481,47 @@ body {
   background-size: 48px 48px;
 }
 
+/* Continuous marquee loop — pure CSS (compositor-driven transform), not a
+   framer-motion `animate` keyframe. The latter re-computes and writes the
+   transform from JS on every frame for as long as the marquee is mounted,
+   which is what made it visibly jitter on pages already running other
+   motion — a plain CSS animation runs on the compositor thread once
+   started and doesn't compete with the rest of the page's JS. Reverse
+   direction ("Marquee" with direction="right") is handled by
+   `animation-direction: reverse` rather than a second keyframe. */
+@keyframes marquee-scroll {
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-scroll linear infinite;
+  animation-duration: var(--marquee-duration, 30s);
+  will-change: transform;
+}
+.marquee-track.marquee-pause-on-hover:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ROICalculator's decorative corner glow — was a framer-motion `animate`
+   (JS-driven, runs from the moment the component mounts, i.e. from initial
+   page load, forever — not gated by scroll visibility at all, since it sits
+   below the fold but the animation itself doesn't). Same fix as the
+   marquee: plain CSS runs on the compositor and doesn't tie up the main
+   thread for the entire time the page is open. */
+@keyframes roi-blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+}
+.roi-blob-float {
+  animation: roi-blob-float 12s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .roi-blob-float { animation: none; }
+}
+
 /* Hero scan-ring rotation — a slow, smooth, clockwise loop. See the comment
    on .hero-ring-spin's usage in HeroParticleScan.tsx for why the ring itself
    needs a gradient (not a flat stroke) for this rotation to be visible at

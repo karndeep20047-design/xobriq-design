@@ -1,17 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Banknote,
-  Wallet,
-  Umbrella,
-  Signal,
-  Landmark,
-  HeartPulse,
-  ShoppingBag,
-  Factory,
-  type LucideIcon,
-} from "lucide-react";
 import { Marquee } from "./Marquee";
 import { fadeInUp, viewportOnce } from "./animations";
 
@@ -22,20 +11,15 @@ import { fadeInUp, viewportOnce } from "./animations";
    reads as the "belt of proof" motion pattern visitors expect right after
    the pillars, just honest about what's actually being claimed. */
 
-type Industry = {
-  label: string;
-  Icon: LucideIcon;
-};
-
-const INDUSTRIES: Industry[] = [
-  { label: "Banking & Capital Markets", Icon: Banknote },
-  { label: "Fintech & Mobile Money", Icon: Wallet },
-  { label: "Insurance", Icon: Umbrella },
-  { label: "Telco", Icon: Signal },
-  { label: "Government & Public Sector", Icon: Landmark },
-  { label: "Healthcare", Icon: HeartPulse },
-  { label: "Retail & E-commerce", Icon: ShoppingBag },
-  { label: "Manufacturing", Icon: Factory },
+const INDUSTRIES: string[] = [
+  "Banking & Capital Markets",
+  "Fintech & Mobile Money",
+  "Insurance",
+  "Telco",
+  "Government & Public Sector",
+  "Healthcare",
+  "Retail & E-commerce",
+  "Manufacturing",
 ];
 
 export function IndustriesStrip() {
@@ -48,25 +32,20 @@ export function IndustriesStrip() {
         variants={fadeInUp}
         className="mx-auto mb-8 max-w-7xl px-5 text-center sm:px-6 lg:px-8"
       >
-        <p className="x-label text-x-accent">Industries We Serve</p>
-        <h2 className="mt-3 font-display text-2xl font-semibold tracking-[-0.02em] text-x-fg sm:text-3xl">
-          Built for regulated, high-stakes industries.
+        <h2 className="font-mono text-sm font-semibold uppercase tracking-[0.22em] text-x-accent sm:text-base">
+          Industries We Serve
         </h2>
+        <p className="mt-4 text-base sm:text-lg text-x-muted">
+          Built for regulated, high-stakes industries.
+        </p>
       </motion.div>
 
       <Marquee speed={34}>
-        {INDUSTRIES.map((ind) => {
-          const Icon = ind.Icon;
-          return (
-            <span
-              key={ind.label}
-              className="inline-flex shrink-0 items-center gap-2.5 px-5 py-2.5"
-            >
-              <Icon className="h-4 w-4 shrink-0 text-x-accent" />
-              <span className="text-sm font-medium text-x-fg">{ind.label}</span>
-            </span>
-          );
-        })}
+        {INDUSTRIES.map((label) => (
+          <span key={label} className="inline-flex shrink-0 items-center px-5 py-2.5">
+            <span className="text-sm font-medium text-x-fg">{label}</span>
+          </span>
+        ))}
       </Marquee>
     </section>
   );

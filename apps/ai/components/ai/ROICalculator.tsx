@@ -103,10 +103,9 @@ export function ROICalculator() {
             transition={{ duration: 0.6 }}
             className="glass-panel rounded-2xl overflow-hidden border-2 border-enterprise-primary/30 relative"
           >
-            <motion.div
-              animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.1, 1] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-              className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-enterprise-primary/20 blur-3xl"
+            <div
+              aria-hidden
+              className="roi-blob-float pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-enterprise-primary/20 blur-3xl"
             />
 
             <div className="relative p-8">
@@ -241,13 +240,7 @@ function ResultCard({
           {value.replace("$", "")}
         </p>
         {showAnimation && (
-          <motion.span
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-xs font-mono text-enterprise-primary"
-          >
-            ●
-          </motion.span>
+          <span className="animate-pulse text-xs font-mono text-enterprise-primary">●</span>
         )}
       </div>
       <p className="text-xs text-enterprise-fg-muted">{detail}</p>
