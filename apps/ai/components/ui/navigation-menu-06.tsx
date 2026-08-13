@@ -158,7 +158,7 @@ interface RichNavigationMenuProps {
 export default function RichNavigationMenu({ overHero = false }: RichNavigationMenuProps) {
   const triggerStyle = cn(
     navigationMenuTriggerStyle(),
-    "transition-colors duration-200 font-medium text-sm rounded-md bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 focus:bg-slate-100 dark:focus:bg-white/10 data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-white/10",
+    "transition-colors duration-200 font-medium text-sm rounded-md bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 focus:bg-transparent dark:focus:bg-transparent focus-visible:bg-slate-100 dark:focus-visible:bg-white/10 focus-visible:outline-none data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-white/10",
     overHero
       ? "text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white"
       : "text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white"
