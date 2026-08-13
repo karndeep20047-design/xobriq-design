@@ -179,7 +179,7 @@ export function PillarGrid() {
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
       <ParallaxLines />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-8 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -225,7 +225,7 @@ export function PillarGrid() {
 
             const cardBorderClass = isFirst
               ? "border"
-              : "border-t-0 lg:border";
+              : "border border-t-0 lg:border-t";
 
             return (
               <motion.div key={p.href} variants={fadeInUp} className="h-full">

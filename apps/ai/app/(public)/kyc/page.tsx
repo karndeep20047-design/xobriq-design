@@ -1,15 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { KycProcessVisual } from "@/components/ai/KycProcessVisual";
 import { KycDashboardDemo } from "@/components/ai/KycDashboardDemo";
+import { docMeta, DOC_TYPE_ORDER } from "@/lib/kyc/document-types";
 import {
   IdCard, Phone, Building2, FileText, Database, ShieldCheck,
-  CheckCircle2, Code2, Gauge, ScanFace, ArrowUpRight,
+  CheckCircle2, Code2, Gauge, UserCheck, ScanFace,
 } from "lucide-react";
-import { fadeInUp, staggerFast } from "@/components/ai/animations";
 
 export default function KycPage() {
   return (
@@ -97,174 +96,47 @@ function LiveDemo() {
   );
 }
 
-type VerificationCategory = {
+type VerificationType = {
   Icon: React.ComponentType<{ className?: string }>;
   title: string;
   body: string;
-  chips: string[];
-  span: string;
-  iconClass: string;
 };
 
-// Mirrors the real picker in the verify dashboard (VerifyClient.tsx —
-// kindMeta for the three categories, docMeta/DOC_TYPE_ORDER for the six
-// identity-document types it accepts). Passport is deliberately left off:
-// docMeta marks it unsupported, so it isn't claimed here either.
-const VERIFICATION_CATEGORIES: VerificationCategory[] = [
-  {
-    Icon: IdCard,
-    title: "Identity Documents",
-    body: "OCR-scanned or manually entered, matched directly against Kenya's IPRS registry — name, number, and status confirmed live.",
-    chips: ["National ID", "Alien ID", "KRA PIN", "Bank Account", "Driving License", "Vehicle Plate"],
-    span: "lg:col-span-2",
-    iconClass: "text-xgreen-500",
-  },
-  {
-    Icon: Phone,
-    title: "Phone Number",
-    body: "Subscriber verification and ownership matching to cut down on account-takeover and mule-account fraud.",
-    chips: ["Mobile subscriber lookup"],
-    span: "lg:col-span-1",
-    iconClass: "text-enterprise-primary",
-  },
-  {
-    Icon: Building2,
-    title: "Business (KYB)",
-    body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients.",
-    chips: ["Registration lookup", "Beneficial owners"],
-    span: "lg:col-span-1",
-    iconClass: "text-amber-500",
-  },
+const VERIFICATION_TYPES: VerificationType[] = [
+  { Icon: IdCard, title: "National ID", body: "OCR-scanned document matched directly against the IPRS registry — name, ID number, and status confirmed live." },
+  { Icon: FileText, title: "KRA PIN", body: "Instant PIN validity and taxpayer name-match checks for onboarding and compliance workflows." },
+  { Icon: Phone, title: "Phone Number", body: "Subscriber verification and ownership matching to cut down on account-takeover and mule-account fraud." },
+  { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients." },
 ];
-
-const revealViewport = { once: true, amount: 0.35 } as const;
-
-const iconAnimation: Variants = {
-  initial: { scale: 1, rotate: 0 },
-  hover: { scale: 1.08, rotate: -4, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
-};
-
-/* Faint dot-grid backdrop, feathered at the edges — same visual language as
-   the x-system landing sections (PillarGrid), scoped locally here since the
-   rest of this page still runs the older enterprise-*/glass-panel styling. */
-function SectionBackdrop() {
-  const ref = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
-  const amp = prefersReducedMotion ? 0 : 1;
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [-40 * amp, 40 * amp]);
-
-  return (
-    <div
-      ref={ref}
-      aria-hidden
-      className="pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]"
-    >
-      <div className="x-grid-bg absolute inset-0 opacity-90" />
-      <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(80%_60%_at_50%_0%,color-mix(in_srgb,var(--x-accent)_18%,transparent),transparent_70%)]" />
-      <motion.div
-        style={{ y }}
-        className="absolute left-1/2 top-0 h-[140%] w-px -translate-x-1/2 bg-x-accent/20"
-      />
-    </div>
-  );
-}
 
 function VerificationTypes() {
   return (
-    <section className="relative overflow-hidden bg-x-bg px-5 py-20 transition-colors duration-150 sm:px-6 lg:py-28">
-      <SectionBackdrop />
-
-      <div className="container-medium relative z-10">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={revealViewport}
-          variants={staggerFast}
-          className="mx-auto flex max-w-2xl flex-col items-center text-center"
-        >
-          <motion.p
-            variants={fadeInUp}
-            className="font-mono text-sm font-semibold uppercase tracking-[0.22em] text-x-accent"
-          >
-            What We Verify
-          </motion.p>
-          <motion.h2
-            variants={fadeInUp}
-            className="mt-4 font-display text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-x-fg sm:text-5xl"
-          >
-            One API, every verification type.
-          </motion.h2>
-          <motion.p variants={fadeInUp} className="mt-4 text-base text-x-muted sm:text-lg">
-            A single integration covers the identity, phone, and business checks East African
-            businesses actually need — six document types under one identity endpoint, no
-            separate vendor per document.
-          </motion.p>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={revealViewport}
-          variants={staggerFast}
-          className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3"
-        >
-          {VERIFICATION_CATEGORIES.map((v) => (
-            <motion.div key={v.title} variants={fadeInUp} whileHover="hover" className={v.span}>
-              <div className="group relative flex h-full flex-col rounded-lg border border-x-line bg-x-bg p-7 transition-all duration-300 hover:-translate-y-1 hover:border-x-line-strong hover:bg-x-raised hover:shadow-[0_20px_44px_-22px_rgba(0,0,0,0.35)] dark:hover:shadow-[0_20px_44px_-18px_rgba(0,0,0,0.7)]">
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 rounded-t-lg bg-x-accent transition-transform duration-500 group-hover:scale-x-100"
-                />
-                <motion.div variants={iconAnimation}>
-                  <v.Icon className={"h-7 w-7 " + v.iconClass} />
-                </motion.div>
-                <h3 className="mt-5 font-display text-xl font-semibold tracking-[-0.02em] text-x-fg">
-                  {v.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-x-muted">{v.body}</p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {v.chips.map((c) => (
-                    <span
-                      key={c}
-                      className="rounded-md border border-x-line bg-x-raised px-2.5 py-1 font-mono text-[11px] text-x-muted transition-colors group-hover:border-x-line-strong group-hover:text-x-fg"
-                    >
-                      {c}
-                    </span>
-                  ))}
-                </div>
+    <section className="px-5 py-20 sm:px-6 lg:py-24">
+      <div className="container-medium">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">One API, Every Verification Type</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-enterprise-fg-muted">
+            A single integration covers the identity checks East African businesses actually need — no separate vendor per document type.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          {VERIFICATION_TYPES.map((v) => (
+            <motion.div
+              key={v.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+              className="glass-panel rounded-2xl p-7"
+            >
+              <div className="grid h-11 w-11 place-items-center rounded-lg bg-xgreen-500/10">
+                <v.Icon className="h-5 w-5 text-xgreen-500" />
               </div>
+              <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
             </motion.div>
           ))}
-
-          {/* Cross-sell: liveness/deepfake screening is a Xobriq Guard
-              capability, not part of this KYC endpoint's IPRS-backed
-              checks — called out separately rather than folded in, so the
-              page doesn't overclaim what this API does on its own. */}
-          <motion.div variants={fadeInUp} className="lg:col-span-3">
-            <Link
-              href="/guard"
-              className="group flex flex-col items-start gap-4 rounded-lg border border-dashed border-x-line bg-x-raised/40 p-6 transition-all duration-300 hover:border-x-accent/40 hover:bg-x-raised sm:flex-row sm:items-center sm:justify-between"
-            >
-              <div className="flex items-center gap-4">
-                <ScanFace className="h-7 w-7 shrink-0 text-purple-500" />
-                <div>
-                  <h3 className="font-display text-base font-semibold tracking-[-0.02em] text-x-fg">
-                    Need liveness or deepfake screening too?
-                  </h3>
-                  <p className="mt-1 text-sm text-x-muted">
-                    Face-match, liveness, and deepfake detection run through Xobriq Guard — pair
-                    it with KYC for a complete identity and fraud stack.
-                  </p>
-                </div>
-              </div>
-              <span className="x-label inline-flex shrink-0 items-center gap-1.5 text-x-accent">
-                Explore Xobriq Guard
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
