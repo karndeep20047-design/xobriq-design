@@ -232,7 +232,7 @@ function DocumentTypeChips() {
       else if (i === 0) direction = 1;
       i += direction;
       setActiveIndex(i);
-    }, 450);
+    }, 600);
 
     return () => clearInterval(id);
   }, [docs.length]);
@@ -248,8 +248,8 @@ function DocumentTypeChips() {
             key={key}
             title={d.label}
             className={
-              "group flex items-center gap-3 rounded-xl border border-enterprise-border bg-enterprise-bg-low p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.05] " +
-              (isActive ? "-translate-y-0.5 border-xgreen-500/35 bg-xgreen-500/[0.05]" : "")
+              "group flex items-center gap-3 rounded-xl border border-enterprise-border bg-enterprise-bg-low p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.05] hover:shadow-[0_14px_30px_-16px_rgba(26,125,60,0.45)] " +
+              (isActive ? "-translate-y-0.5 border-xgreen-500/35 bg-xgreen-500/[0.05] shadow-[0_14px_30px_-16px_rgba(26,125,60,0.45)]" : "")
             }
           >
             <DocIcon className="h-5 w-5 shrink-0 text-xgreen-500" />

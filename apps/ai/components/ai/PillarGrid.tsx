@@ -48,7 +48,8 @@ type Pillar = {
   Icon: LucideIcon;
   iconClass: string;
   brandBorderClass: string;
-  brandShadowClass: string;
+  brandShadowOffHover: string;
+  brandShadowOnHover: string;
   brandBarClass: string;
   desktopHoverClass: string;
   numActiveMobileClass: string;
@@ -66,9 +67,10 @@ const PILLARS: Pillar[] = [
     Icon: ShieldCheck,
     iconClass: "text-teal-600 dark:text-teal-400",
     brandBorderClass: "border-teal-500/30 dark:border-teal-400/30",
-    brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(20,184,166,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(20,184,166,0.25)]",
+    brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(20,184,166,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(20,184,166,0.45)]",
     brandBarClass: "bg-teal-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(20,184,166,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(20,184,166,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(20,184,166,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(20,184,166,0.45)]",
     numActiveMobileClass: "text-teal-500/[0.22] dark:text-teal-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-teal-500/[0.22] lg:dark:group-hover:text-teal-400/[0.25]",
   },
@@ -82,9 +84,10 @@ const PILLARS: Pillar[] = [
     Icon: Bot,
     iconClass: "text-purple-600 dark:text-purple-400",
     brandBorderClass: "border-purple-500/30 dark:border-purple-400/30",
-    brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(168,85,247,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(168,85,247,0.25)]",
+    brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(168,85,247,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(168,85,247,0.45)]",
     brandBarClass: "bg-purple-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(168,85,247,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(168,85,247,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(168,85,247,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(168,85,247,0.45)]",
     numActiveMobileClass: "text-purple-500/[0.22] dark:text-purple-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-purple-500/[0.22] lg:dark:group-hover:text-purple-400/[0.25]",
   },
@@ -98,9 +101,10 @@ const PILLARS: Pillar[] = [
     Icon: Cpu,
     iconClass: "text-blue-600 dark:text-blue-400",
     brandBorderClass: "border-blue-500/30 dark:border-blue-400/30",
-    brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(59,130,246,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(59,130,246,0.25)]",
+    brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(59,130,246,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(59,130,246,0.45)]",
     brandBarClass: "bg-blue-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(59,130,246,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(59,130,246,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(59,130,246,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(59,130,246,0.45)]",
     numActiveMobileClass: "text-blue-500/[0.22] dark:text-blue-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-blue-500/[0.22] lg:dark:group-hover:text-blue-400/[0.25]",
   },
@@ -114,9 +118,10 @@ const PILLARS: Pillar[] = [
     Icon: GitBranch,
     iconClass: "text-amber-600 dark:text-amber-400",
     brandBorderClass: "border-amber-500/30 dark:border-amber-400/30",
-    brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(245,158,11,0.25)]",
+    brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(245,158,11,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(245,158,11,0.45)]",
     brandBarClass: "bg-amber-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(245,158,11,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(245,158,11,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(245,158,11,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(245,158,11,0.45)]",
     numActiveMobileClass: "text-amber-500/[0.22] dark:text-amber-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-amber-500/[0.22] lg:dark:group-hover:text-amber-400/[0.25]",
   },
@@ -130,9 +135,10 @@ const PILLARS: Pillar[] = [
     Icon: Lock,
     iconClass: "text-red-600 dark:text-red-400",
     brandBorderClass: "border-red-500/30 dark:border-red-400/30",
-    brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    brandShadowOffHover: "shadow-[0_12px_30px_-10px_rgba(239,68,68,0.12)] dark:shadow-[0_15px_35px_-12px_rgba(239,68,68,0.25)]",
+    brandShadowOnHover: "shadow-[0_25px_50px_-12px_rgba(239,68,68,0.22)] dark:shadow-[0_30px_60px_-12px_rgba(239,68,68,0.45)]",
     brandBarClass: "bg-red-500",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:bg-x-bg lg:shadow-[0_12px_30px_-10px_rgba(239,68,68,0.12)] lg:dark:shadow-[0_15px_35px_-12px_rgba(239,68,68,0.25)] lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_25px_50px_-12px_rgba(239,68,68,0.22)] lg:dark:hover:shadow-[0_30px_60px_-12px_rgba(239,68,68,0.45)]",
     numActiveMobileClass: "text-red-500/[0.22] dark:text-red-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-red-500/[0.22] lg:dark:group-hover:text-red-400/[0.25]",
   },
@@ -317,8 +323,8 @@ export function PillarGrid() {
                       // Mobile layout styling
                       p.brandBorderClass,
                       isActiveOnMobile
-                        ? cn(p.brandShadowClass, "bg-white dark:bg-x-raised")
-                        : "bg-white dark:bg-x-bg shadow-sm dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)]",
+                        ? cn(p.brandShadowOnHover, "bg-white dark:bg-x-raised")
+                        : cn(p.brandShadowOffHover, "bg-white dark:bg-x-bg"),
                       // Desktop layout hover overrides
                       p.desktopHoverClass
                     )}
