@@ -102,12 +102,20 @@ type VerificationType = {
   body: string;
 };
 
+// The four checks Xobriq KYC actually runs. Document-level detail (National
+// ID, Alien ID, KRA PIN, etc.) lives one tier down, under "Identity" — see
+// DOCUMENT_TYPES below, sourced from the same docMeta the verify form and ID
+// scan dialog use, so this marketing page can never quietly drift out of
+// sync with what the API actually accepts.
 const VERIFICATION_TYPES: VerificationType[] = [
-  { Icon: IdCard, title: "National ID", body: "OCR-scanned document matched directly against the IPRS registry — name, ID number, and status confirmed live." },
-  { Icon: FileText, title: "KRA PIN", body: "Instant PIN validity and taxpayer name-match checks for onboarding and compliance workflows." },
+  { Icon: UserCheck, title: "Identity", body: "OCR + live registry match across six Kenyan document types — from National ID to vehicle plate — verified against IPRS in real time." },
+  { Icon: ScanFace, title: "Deepfake & Liveness", body: "AI-powered liveness and deepfake detection catches synthetic faces and spoofed selfies before they reach onboarding." },
   { Icon: Phone, title: "Phone Number", body: "Subscriber verification and ownership matching to cut down on account-takeover and mule-account fraud." },
   { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients." },
 ];
+
+const SUPPORTED_DOC_COUNT = DOC_TYPE_ORDER.filter((k) => docMeta[k].supported).length;
+const COMING_SOON_DOC_COUNT = DOC_TYPE_ORDER.length - SUPPORTED_DOC_COUNT;
 
 function VerificationTypes() {
   return (
@@ -116,17 +124,19 @@ function VerificationTypes() {
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">One API, Every Verification Type</h2>
           <p className="mx-auto mt-3 max-w-2xl text-enterprise-fg-muted">
-            A single integration covers the identity checks East African businesses actually need — no separate vendor per document type.
+            A single integration covers the identity checks East African businesses actually need — deepfake detection, document verification across six ID types, phone and business checks — no separate vendor per document.
           </p>
         </div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
-          {VERIFICATION_TYPES.map((v) => (
+
+        {/* Tier 1 — the four checks Xobriq KYC runs. */}
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {VERIFICATION_TYPES.map((v, i) => (
             <motion.div
               key={v.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
               className="glass-panel rounded-2xl p-7"
             >
               <div className="grid h-11 w-11 place-items-center rounded-lg bg-xgreen-500/10">
@@ -137,6 +147,51 @@ function VerificationTypes() {
             </motion.div>
           ))}
         </div>
+
+        {/* Tier 2 — every document type Identity verification accepts, laid
+            out as a labeled chip row instead of another bank of cards, since
+            these are variants of one check (Identity), not peers of it. */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.24 }}
+          className="glass-panel mt-5 rounded-2xl p-7 sm:p-8"
+        >
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <p className="label-caps text-enterprise-fg-subtle">Identity verification covers</p>
+            <p className="text-xs text-enterprise-fg-muted">
+              {SUPPORTED_DOC_COUNT} document types live
+              {COMING_SOON_DOC_COUNT > 0 ? `, ${COMING_SOON_DOC_COUNT} more in progress` : ""}
+            </p>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-2.5">
+            {DOC_TYPE_ORDER.map((key) => {
+              const d = docMeta[key];
+              const DocIcon = d.icon;
+              return (
+                <span
+                  key={key}
+                  className={
+                    "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors " +
+                    (d.supported
+                      ? "border-xgreen-500/25 bg-xgreen-500/[0.06] text-enterprise-fg"
+                      : "border-enterprise-border bg-enterprise-bg-low text-enterprise-fg-subtle")
+                  }
+                  title={d.supported ? d.label : `${d.label} — coming soon`}
+                >
+                  <DocIcon className={"h-4 w-4 " + (d.supported ? "text-xgreen-500" : "text-enterprise-fg-subtle")} />
+                  {d.shortLabel}
+                  {!d.supported && (
+                    <span className="text-[10px] font-semibold uppercase tracking-wide text-enterprise-fg-subtle/70">
+                      Soon
+                    </span>
+                  )}
+                </span>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

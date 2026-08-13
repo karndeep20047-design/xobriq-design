@@ -47,8 +47,10 @@ type Pillar = {
   stat: string;
   Icon: LucideIcon;
   iconClass: string;
-  hoverClass: string;
-  numClass: string;
+  activeMobileClass: string;
+  desktopHoverClass: string;
+  numActiveMobileClass: string;
+  numDesktopClass: string;
 };
 
 const PILLARS: Pillar[] = [
@@ -61,8 +63,10 @@ const PILLARS: Pillar[] = [
     stat: "120+ signals",
     Icon: ShieldCheck,
     iconClass: "text-teal-600 dark:text-teal-400",
-    hoverClass: "border-teal-500/30 dark:border-teal-400/30 shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
-    numClass: "text-teal-500/[0.22] dark:text-teal-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-teal-500/[0.22] lg:dark:group-hover:text-teal-400/[0.25]",
+    activeMobileClass: "bg-white dark:bg-x-raised border-teal-500/30 dark:border-teal-400/30 shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    numActiveMobileClass: "text-teal-500/[0.22] dark:text-teal-400/[0.25]",
+    numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-teal-500/[0.22] lg:dark:group-hover:text-teal-400/[0.25]",
   },
   {
     index: "02",
@@ -73,8 +77,10 @@ const PILLARS: Pillar[] = [
     stat: "24/7 autonomous",
     Icon: Bot,
     iconClass: "text-purple-600 dark:text-purple-400",
-    hoverClass: "border-purple-500/30 dark:border-purple-400/30 shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
-    numClass: "text-purple-500/[0.22] dark:text-purple-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-purple-500/[0.22] lg:dark:group-hover:text-purple-400/[0.25]",
+    activeMobileClass: "bg-white dark:bg-x-raised border-purple-500/30 dark:border-purple-400/30 shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    numActiveMobileClass: "text-purple-500/[0.22] dark:text-purple-400/[0.25]",
+    numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-purple-500/[0.22] lg:dark:group-hover:text-purple-400/[0.25]",
   },
   {
     index: "03",
@@ -85,8 +91,10 @@ const PILLARS: Pillar[] = [
     stat: "H200 cluster",
     Icon: Cpu,
     iconClass: "text-blue-600 dark:text-blue-400",
-    hoverClass: "border-blue-500/30 dark:border-blue-400/30 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
-    numClass: "text-blue-500/[0.22] dark:text-blue-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-blue-500/[0.22] lg:dark:group-hover:text-blue-400/[0.25]",
+    activeMobileClass: "bg-white dark:bg-x-raised border-blue-500/30 dark:border-blue-400/30 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    numActiveMobileClass: "text-blue-500/[0.22] dark:text-blue-400/[0.25]",
+    numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-blue-500/[0.22] lg:dark:group-hover:text-blue-400/[0.25]",
   },
   {
     index: "04",
@@ -97,8 +105,10 @@ const PILLARS: Pillar[] = [
     stat: "Ex-Google AI",
     Icon: GitBranch,
     iconClass: "text-amber-600 dark:text-amber-400",
-    hoverClass: "border-amber-500/30 dark:border-amber-400/30 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
-    numClass: "text-amber-500/[0.22] dark:text-amber-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-amber-500/[0.22] lg:dark:group-hover:text-amber-400/[0.25]",
+    activeMobileClass: "bg-white dark:bg-x-raised border-amber-500/30 dark:border-amber-400/30 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    numActiveMobileClass: "text-amber-500/[0.22] dark:text-amber-400/[0.25]",
+    numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-amber-500/[0.22] lg:dark:group-hover:text-amber-400/[0.25]",
   },
   {
     index: "05",
@@ -109,8 +119,10 @@ const PILLARS: Pillar[] = [
     stat: "ISO 27001",
     Icon: Lock,
     iconClass: "text-red-600 dark:text-red-400",
-    hoverClass: "border-red-500/30 dark:border-red-400/30 shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
-    numClass: "text-red-500/[0.22] dark:text-red-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-red-500/[0.22] lg:dark:group-hover:text-red-400/[0.25]",
+    activeMobileClass: "bg-white dark:bg-x-raised border-red-500/30 dark:border-red-400/30 shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    numActiveMobileClass: "text-red-500/[0.22] dark:text-red-400/[0.25]",
+    numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-red-500/[0.22] lg:dark:group-hover:text-red-400/[0.25]",
   },
 ];
 
@@ -172,9 +184,61 @@ const iconAnimation: Variants = {
     rotate: -4,
     transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   },
+  mobileActive: {
+    scale: 1.12,
+    rotate: 0,
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export function PillarGrid() {
+  const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Only run on mobile/tablet viewports (< 1024px)
+      if (window.innerWidth >= 1024) {
+        setActiveMobileIndex(null);
+        return;
+      }
+
+      if (!cardsContainerRef.current) return;
+      const cardElements = cardsContainerRef.current.children;
+      const centerY = window.innerHeight / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      for (let i = 0; i < cardElements.length; i++) {
+        const rect = cardElements[i].getBoundingClientRect();
+        const cardCenterY = rect.top + rect.height / 2;
+        const distance = Math.abs(cardCenterY - centerY);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
+        }
+      }
+
+      // Check if the card center falls in the middle region of the screen (vertical center 220px boundary)
+      if (closestDistance < 220) {
+        setActiveMobileIndex(closestIndex);
+      } else {
+        setActiveMobileIndex(null);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
       <ParallaxLines />
@@ -205,6 +269,7 @@ export function PillarGrid() {
         </motion.div>
 
         <motion.div
+          ref={cardsContainerRef}
           initial="hidden"
           whileInView="visible"
           viewport={revealViewport}
@@ -227,6 +292,8 @@ export function PillarGrid() {
               ? "border"
               : "border border-t-0 lg:border-t";
 
+            const isActiveOnMobile = activeMobileIndex === i;
+
             return (
               <motion.div key={p.href} variants={fadeInUp} className="h-full">
                 <div className={cn("h-full transition-transform duration-500 ease-out", isEdge && "lg:-translate-y-16")}>
@@ -237,7 +304,10 @@ export function PillarGrid() {
                       "group relative flex h-full flex-col overflow-hidden p-6 transition-all duration-300 lg:hover:-translate-y-1",
                       cardRoundedClass,
                       cardBorderClass,
-                      p.hoverClass
+                      isActiveOnMobile
+                        ? p.activeMobileClass
+                        : "bg-white dark:bg-x-bg border-x-line dark:border-white/20 shadow-none",
+                      p.desktopHoverClass
                     )}
                   >
                     {/* Accent hairline that draws itself across the top on hover. */}
@@ -252,13 +322,20 @@ export function PillarGrid() {
                       aria-hidden
                       className={cn(
                         "pointer-events-none absolute right-1 top-2.5 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out lg:group-hover:-translate-y-1.5",
-                        p.numClass
+                        isActiveOnMobile
+                          ? p.numActiveMobileClass
+                          : "text-x-fg/[0.12] dark:text-white/20",
+                        p.numDesktopClass
                       )}
                     >
                       {p.index}
                     </span>
 
-                    <motion.div variants={iconAnimation} className="relative z-10">
+                    <motion.div
+                      variants={iconAnimation}
+                      animate={isActiveOnMobile ? "mobileActive" : "initial"}
+                      className="relative z-10"
+                    >
                       <Icon className={"h-7 w-7 stroke-[1.5] " + p.iconClass} />
                     </motion.div>
 
@@ -271,10 +348,20 @@ export function PillarGrid() {
                     </div>
 
                     <div className="relative z-10 mt-auto flex items-center justify-between border-t border-x-line dark:border-white/10 pt-4">
-                      <p className="x-label text-x-fg lg:text-x-dim lg:transition-colors lg:group-hover:text-x-fg">
+                      <p
+                        className={cn(
+                          "x-label lg:transition-colors lg:group-hover:text-x-fg",
+                          isActiveOnMobile ? "text-x-fg" : "text-x-dim"
+                        )}
+                      >
                         {p.stat}
                       </p>
-                      <ArrowUpRight className="h-4 w-4 text-x-accent lg:text-x-dim lg:transition-all lg:duration-300 lg:group-hover:-translate-y-0.5 lg:group-hover:translate-x-0.5 lg:group-hover:text-x-accent" />
+                      <ArrowUpRight
+                        className={cn(
+                          "h-4 w-4 transition-all duration-300 lg:group-hover:-translate-y-0.5 lg:group-hover:translate-x-0.5 lg:group-hover:text-x-accent",
+                          isActiveOnMobile ? "text-x-accent" : "text-x-dim"
+                        )}
+                      />
                     </div>
                   </Link>
                 </motion.div>
@@ -287,4 +374,3 @@ export function PillarGrid() {
     </section>
   );
 }
-
