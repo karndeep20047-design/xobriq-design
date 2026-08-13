@@ -156,6 +156,9 @@ interface RichNavigationMenuProps {
 }
 
 export default function RichNavigationMenu({ overHero = false }: RichNavigationMenuProps) {
+  const productsHoverRef = React.useRef<number>(0);
+  const resourcesHoverRef = React.useRef<number>(0);
+
   const triggerStyle = cn(
     navigationMenuTriggerStyle(),
     "transition-colors duration-200 font-medium text-sm rounded-md bg-transparent hover:bg-slate-100 dark:hover:bg-white/10 focus:bg-transparent dark:focus:bg-transparent focus-visible:bg-slate-100 dark:focus-visible:bg-white/10 focus-visible:outline-none data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-white/10",
@@ -169,7 +172,26 @@ export default function RichNavigationMenu({ overHero = false }: RichNavigationM
       <NavigationMenuList className="gap-1">
         {/* Products Mega Dropdown */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger className={triggerStyle}>
+          <NavigationMenuTrigger
+            className={triggerStyle}
+            onMouseEnter={() => {
+              productsHoverRef.current = Date.now();
+            }}
+            onMouseLeave={() => {
+              productsHoverRef.current = 0;
+            }}
+            onPointerDown={(e) => {
+              if (e.pointerType === "mouse" && productsHoverRef.current && Date.now() - productsHoverRef.current < 400) {
+                e.preventDefault();
+              }
+            }}
+            onClick={(e) => {
+              const isMouse = e.nativeEvent instanceof PointerEvent ? e.nativeEvent.pointerType === "mouse" : true;
+              if (isMouse && productsHoverRef.current && Date.now() - productsHoverRef.current < 400) {
+                e.preventDefault();
+              }
+            }}
+          >
             Products
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -237,7 +259,26 @@ export default function RichNavigationMenu({ overHero = false }: RichNavigationM
 
         {/* Resources Dropdown */}
         <NavigationMenuItem>
-          <NavigationMenuTrigger className={triggerStyle}>
+          <NavigationMenuTrigger
+            className={triggerStyle}
+            onMouseEnter={() => {
+              resourcesHoverRef.current = Date.now();
+            }}
+            onMouseLeave={() => {
+              resourcesHoverRef.current = 0;
+            }}
+            onPointerDown={(e) => {
+              if (e.pointerType === "mouse" && resourcesHoverRef.current && Date.now() - resourcesHoverRef.current < 400) {
+                e.preventDefault();
+              }
+            }}
+            onClick={(e) => {
+              const isMouse = e.nativeEvent instanceof PointerEvent ? e.nativeEvent.pointerType === "mouse" : true;
+              if (isMouse && resourcesHoverRef.current && Date.now() - resourcesHoverRef.current < 400) {
+                e.preventDefault();
+              }
+            }}
+          >
             Resources
           </NavigationMenuTrigger>
           <NavigationMenuContent>
