@@ -226,7 +226,7 @@ export function PillarGrid() {
                   <Link
                     href={p.href}
                     className={cn(
-                      "group relative flex h-full flex-col overflow-hidden rounded-lg border transition-all duration-300 lg:hover:-translate-y-1",
+                      "group relative flex h-full flex-col overflow-hidden rounded-lg border p-6 transition-all duration-300 lg:hover:-translate-y-1",
                       p.hoverClass
                     )}
                   >
