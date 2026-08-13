@@ -522,6 +522,98 @@ body {
   .roi-blob-float { animation: none; }
 }
 
+/* CustomerJourney's step rail — ONE dot making the whole Connect -> Detect
+   -> Respond journey, not three independent loops. It travels connector 1,
+   holds at step 2 (glowing that icon), travels connector 2, holds at step
+   3 (glowing that icon), then the cycle resets and step 1 lights up again.
+   Two dot elements (one per connector) with a scripted handoff around the
+   midpoint give the illusion of one continuous dot, since only one is ever
+   visible at a time — genuinely animating one element across two separate
+   DOM boxes with a dynamic in-between height isn't possible in CSS alone.
+   Every element below shares one 7s duration and starts at the same time
+   (page load, no per-element delay), so they stay in lockstep purely by
+   using the same timeline — no JS coordinating them.
+   `top`, not `transform`, for the same dynamic-height reason documented on
+   the (now superseded) .connector-pulse-dot this replaced.
+   The dot doesn't stop dead at 100% (the connector's own bottom edge,
+   flush with the top of the next icon) — it keeps travelling a little
+   further, past 100%, into the icon's own footprint, while fading out.
+   Stopping exactly at 100% read as the dot hitting a wall; continuing on
+   while disappearing reads as it sliding in behind the icon instead. */
+@keyframes journey-dot-1 {
+  0%   { top: 0%;   opacity: 0; }
+  4%   { opacity: 1; }
+  30%  { top: 90%;  opacity: 1; }
+  38%  { top: 118%; opacity: 0; }
+  100% { top: 0%;   opacity: 0; }
+}
+@keyframes journey-dot-2 {
+  0%, 53% { top: 0%; opacity: 0; }
+  57%  { opacity: 1; }
+  81%  { top: 90%;  opacity: 1; }
+  89%  { top: 118%; opacity: 0; }
+  100% { opacity: 0; }
+}
+/* Direct border/ring colour swap on the icon circle itself, not a blurred
+   halo sitting behind it — the box-shadow-blur version was too subtle to
+   read as "glowing" against this section's own gradient background. A
+   colour change on an element already sitting right there in high-contrast
+   line art is much harder to miss than a soft glow that has to compete
+   with the backdrop. Solid-spread box-shadow (no blur radius) doubles as a
+   crisp ring around the circle rather than a diffuse haze. */
+@keyframes journey-active-1 {
+  0%, 8%    { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+  14%, 96%  { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  100%      { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+}
+@keyframes journey-active-2 {
+  0%, 33%   { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  37%, 50%  { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+  56%, 100% { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes journey-active-3 {
+  0%, 86%   { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  90%, 100% { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+}
+.journey-active-1,
+.journey-active-2,
+.journey-active-3 {
+  animation-duration: 7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.journey-active-1 { animation-name: journey-active-1; }
+.journey-active-2 { animation-name: journey-active-2; }
+.journey-active-3 { animation-name: journey-active-3; }
+@media (prefers-reduced-motion: reduce) {
+  .journey-active-1, .journey-active-2, .journey-active-3 { animation: none; }
+}
+
+/* Each rule below is fully self-contained (position/size/animation all in
+   one place, nothing split across a shared base class + a modifier class)
+   — easier to verify at a glance than two classes whose declarations have
+   to be mentally merged. */
+.journey-dot-1,
+.journey-dot-2 {
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 9999px;
+  background: var(--x-accent);
+  box-shadow: 0 0 8px 2px color-mix(in srgb, var(--x-accent) 65%, transparent);
+  animation-duration: 7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.journey-dot-1 { animation-name: journey-dot-1; }
+.journey-dot-2 { animation-name: journey-dot-2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-dot-1, .journey-dot-2 { display: none; }
+}
+
 /* Hero scan-ring rotation — a slow, smooth, clockwise loop. See the comment
    on .hero-ring-spin's usage in HeroParticleScan.tsx for why the ring itself
    needs a gradient (not a flat stroke) for this rotation to be visible at

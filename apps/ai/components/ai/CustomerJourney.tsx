@@ -1,167 +1,148 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Database, Code2 } from "lucide-react";
+import { Plug2, ScanSearch, ShieldCheck, type LucideIcon } from "lucide-react";
+import { fadeInUp, staggerFast } from "./animations";
 
-const CONNECTOR_CAPTION = "Understanding Your Needs";
+/* "How It Works" — full rebuild of the old CustomerJourney (gradient-blob
+   cards, dashed-circle "spotlight", pulsing status dot — the generic-
+   template look the rest of this redesign has moved away from).
+   Split layout: a centered "How It Works" eyebrow spans the top, then the
+   headline/subhead sit left and the three steps run down the right as a
+   vertical rail — closer to how Linear/Stripe lay out an explainer than a
+   row of three identical cards. */
+
+const revealViewport = { once: true, amount: 0.4 } as const;
+
+type Step = {
+  index: string;
+  name: string;
+  title: string;
+  body: string;
+  Icon: LucideIcon;
+};
+
+const STEPS: Step[] = [
+  {
+    index: "01",
+    name: "Connect",
+    title: "Plug into your stack",
+    body: "Wire Xobriq into your onboarding, transaction or identity flows through one API. No infrastructure changes, live in an afternoon.",
+    Icon: Plug2,
+  },
+  {
+    index: "02",
+    name: "Detect & Analyze",
+    title: "AI reads every signal",
+    body: "Guard scores risk across 120+ signals in real time while agentic AI investigates flagged cases and reasons through the evidence.",
+    Icon: ScanSearch,
+  },
+  {
+    index: "03",
+    name: "Respond",
+    title: "Act before it's a loss",
+    body: "Approve, block or escalate automatically in sub-200ms, with a full audit trail on every decision.",
+    Icon: ShieldCheck,
+  },
+];
 
 export function CustomerJourney() {
   return (
-    <section className="bg-enterprise-bg py-24 sm:py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 max-w-3xl text-center mx-auto"
+    <section
+      className="relative overflow-hidden py-24 transition-colors duration-150 sm:py-32"
+      style={{
+        // An actual visible gradient rather than a flat colour. The first
+        // attempt (13%/11% accent mixed into x-bg) was mathematically a
+        // gradient but perceptually invisible — x-bg is pure black in dark
+        // mode, and a color-mix that faint barely nudges off black at all.
+        // Bumped hard enough to actually read as two-tone corners.
+        background:
+          "linear-gradient(135deg, color-mix(in srgb, var(--x-accent) 32%, var(--x-bg)) 0%, var(--x-bg) 50%, color-mix(in srgb, var(--x-accent-bright) 28%, var(--x-bg)) 100%)",
+      }}
+    >
+      {/* Feathered dot grid on top of the gradient for texture. */}
+      <div
+        aria-hidden
+        className="x-grid-bg pointer-events-none absolute inset-0 opacity-70 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          variants={fadeInUp}
+          className="text-center font-mono text-sm font-semibold uppercase tracking-[0.22em] text-x-accent sm:text-base"
         >
-          <p className="label-caps-thin inline-flex items-center gap-2 text-enterprise-accent">
-            <span className="status-dot" />
-            How It Works
-          </p>
-          <h2 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-            The AI Transformation Journey
-          </h2>
-          <p className="mt-4 text-enterprise-fg-muted">
-            We begin with a detailed consultation to learn about your business challenges, goals,
-            and opportunities for AI integration.
-          </p>
-        </motion.div>
+          How It Works
+        </motion.p>
 
-        {/* Desktop: card — connector — spotlight — connector — card */}
-        <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
-          <JourneyCard
-            icon={Search}
-            title="Discovery & Consultation"
-            delay={0}
-          />
-          <Connector delay={0.1} />
-          <JourneySpotlight
-            icon={Database}
-            title="Data & Feasibility"
-            description="Our experts analyze your data, workflows, and technology stack."
-            delay={0.2}
-          />
-          <Connector delay={0.3} />
-          <JourneyCard
-            icon={Code2}
-            title="Development & Integration"
-            delay={0.4}
-          />
-        </div>
+        <div className="mt-4 grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
+          {/* Left: headline + subhead */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={revealViewport}
+            variants={staggerFast}
+            className="text-center lg:text-left"
+          >
+            <motion.h2
+              variants={fadeInUp}
+              className="font-display text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-x-fg sm:text-5xl"
+            >
+              From signal to decision.
+            </motion.h2>
+            <motion.p variants={fadeInUp} className="mt-4 text-base sm:text-lg text-x-muted">
+              Three steps, sub-200ms, one platform.
+            </motion.p>
+          </motion.div>
 
-        {/* Mobile: vertical stack */}
-        <div className="lg:hidden space-y-6">
-          <JourneyCard icon={Search} title="Discovery & Consultation" delay={0} stacked />
-          <MobileConnector />
-          <JourneySpotlight
-            icon={Database}
-            title="Data & Feasibility"
-            description="Our experts analyze your data, workflows, and technology stack."
-            delay={0.1}
-            stacked
-          />
-          <MobileConnector />
-          <JourneyCard icon={Code2} title="Development & Integration" delay={0.2} stacked />
+          {/* Right: vertical step rail */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={revealViewport}
+            variants={staggerFast}
+          >
+            {STEPS.map((step, i) => {
+              const Icon = step.Icon;
+              const isLast = i === STEPS.length - 1;
+              return (
+                <motion.div key={step.index} variants={fadeInUp} className="flex gap-5">
+                  {/* Icon + the connector down to the next icon, in normal
+                      flow — no absolute-position math to line up, so it
+                      can't end up disconnected the way a separately-placed
+                      line could. The travelling dot/glow are one shared
+                      7s cycle across all three steps — see the
+                      journey-dot / journey-active comment in globals.css. */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-x-line bg-x-bg journey-active-${i + 1}`}
+                    >
+                      <Icon className="h-6 w-6 text-x-accent" strokeWidth={1.75} />
+                    </div>
+                    {!isLast && (
+                      <div className="relative mt-1 w-px flex-1 bg-x-line">
+                        <span aria-hidden className={`journey-dot-${i + 1}`} />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className={isLast ? "pb-0" : "pb-10"}>
+                    <p className="x-label text-x-dim">
+                      {step.index} &middot; {step.name}
+                    </p>
+                    <h3 className="mt-2 font-display text-xl font-semibold leading-[1.15] tracking-[-0.02em] text-x-fg">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 max-w-sm text-sm leading-6 text-x-muted">{step.body}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
     </section>
-  );
-}
-
-function JourneyCard({
-  icon: Icon,
-  title,
-  delay,
-  stacked,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  delay: number;
-  stacked?: boolean;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -4 }}
-      className={
-        "flex flex-col items-center justify-center rounded-2xl bg-gradient-to-br from-enterprise-primary/10 via-enterprise-primary/5 to-enterprise-accent/10 p-8 text-center transition-colors duration-300 " +
-        (stacked ? "w-full" : "h-56 w-56 shrink-0 xl:h-64 xl:w-64")
-      }
-    >
-      <div className="grid h-16 w-16 place-items-center rounded-full border border-enterprise-primary/20 bg-enterprise-bg">
-        <Icon className="h-7 w-7 text-enterprise-primary" />
-      </div>
-      <h3 className="mt-5 text-base font-semibold text-enterprise-fg">{title}</h3>
-    </motion.div>
-  );
-}
-
-function JourneySpotlight({
-  icon: Icon,
-  title,
-  description,
-  delay,
-  stacked,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  delay: number;
-  stacked?: boolean;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay }}
-      className={
-        "flex flex-col items-center rounded-2xl border-2 border-dashed border-enterprise-primary/30 p-6 " +
-        (stacked ? "w-full" : "w-64 shrink-0 xl:w-72")
-      }
-    >
-      <div className="grid h-32 w-32 place-items-center rounded-full bg-gradient-to-br from-enterprise-primary/15 to-enterprise-accent/25 xl:h-36 xl:w-36">
-        <Icon className="h-9 w-9 text-enterprise-primary" />
-      </div>
-
-      <h3 className="relative z-10 -mt-4 rounded-full bg-enterprise-bg px-3 py-1 text-center text-base font-semibold text-enterprise-fg">
-        {title}
-      </h3>
-
-      <div className="-mt-4 grid h-40 w-40 place-items-center rounded-full bg-gradient-to-br from-enterprise-primary to-enterprise-accent p-6 text-center xl:h-44 xl:w-44">
-        <p className="text-xs font-medium leading-relaxed text-white">{description}</p>
-      </div>
-    </motion.div>
-  );
-}
-
-function Connector({ delay }: { delay: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.4, delay }}
-      className="flex w-14 shrink-0 flex-col items-center gap-2 xl:w-20"
-    >
-      <div className="h-px w-full border-t-2 border-dotted border-enterprise-primary/40" />
-      <p className="text-center text-[10px] leading-tight text-enterprise-fg-subtle">
-        {CONNECTOR_CAPTION}
-      </p>
-    </motion.div>
-  );
-}
-
-function MobileConnector() {
-  return (
-    <div className="flex items-center gap-3 pl-8">
-      <div className="h-6 w-px border-l-2 border-dotted border-enterprise-primary/40" />
-      <p className="text-[10px] text-enterprise-fg-subtle">{CONNECTOR_CAPTION}</p>
-    </div>
   );
 }
