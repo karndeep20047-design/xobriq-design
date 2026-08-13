@@ -10,6 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        glow: "bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-500 hover:shadow-blue-500/50 hover:scale-[1.02]",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         // bg-transparent, not bg-background: --background is the page's own
         // bg, which in this app's dark theme is darker than --card (0.129 vs

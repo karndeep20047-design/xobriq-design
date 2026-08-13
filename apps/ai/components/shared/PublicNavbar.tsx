@@ -158,8 +158,10 @@ export function PublicNavbar() {
         <div
           className={
             "pointer-events-auto mx-auto flex items-center justify-between border-x border-b transition-[height,max-width,padding,border-radius,background-color,border-color,box-shadow] duration-300 ease-out " +
-            (scrolled || mobileOpen
-              ? "h-14 sm:h-16 w-full max-w-6xl rounded-b-2xl border-slate-200/80 bg-white/95 px-4 sm:px-7 text-slate-900 shadow-md backdrop-blur-lg dark:border-white/15 dark:bg-[#0c0d12]/97 dark:text-white"
+            (mobileOpen
+              ? "h-14 sm:h-16 w-full max-w-6xl rounded-b-none border-b-transparent border-slate-200/80 bg-white/75 px-4 sm:px-7 text-slate-900 shadow-lg backdrop-blur-2xl dark:border-white/20 dark:bg-[#080a10]/75 dark:text-white"
+              : scrolled
+              ? "h-14 sm:h-16 w-full max-w-6xl rounded-b-2xl border-slate-200/80 bg-white/70 px-4 sm:px-7 text-slate-900 shadow-xl backdrop-blur-2xl dark:border-white/20 dark:bg-[#080a10]/55 dark:text-white shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
               : "h-20 w-full max-w-full rounded-b-none border-transparent bg-transparent px-5 sm:px-10 lg:px-14 text-slate-900 shadow-none backdrop-blur-none dark:text-white")
           }
         >
@@ -225,7 +227,7 @@ export function PublicNavbar() {
               animate="visible"
               exit="exit"
               style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
-              className="pointer-events-auto md:hidden w-full border-b border-slate-200/80 bg-white/95 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#0c0d12]/97 overflow-y-auto max-h-[min(calc(100svh-56px),calc(100dvh-56px))]"
+              className="pointer-events-auto md:hidden w-full border-b border-slate-200/80 bg-white/80 shadow-2xl backdrop-blur-2xl dark:border-white/15 dark:bg-[#080a10]/75 overflow-y-auto max-h-[min(calc(100svh-56px),calc(100dvh-56px))]"
             >
               <motion.div
                 variants={stagger}

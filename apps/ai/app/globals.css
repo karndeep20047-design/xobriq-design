@@ -543,42 +543,37 @@ body {
 @keyframes journey-dot-1 {
   0%   { top: 0%;   opacity: 0; }
   4%   { opacity: 1; }
-  30%  { top: 90%;  opacity: 1; }
-  38%  { top: 118%; opacity: 0; }
+  29%  { top: 100%; opacity: 1; }
+  33%  { top: 100%; opacity: 0; }
   100% { top: 0%;   opacity: 0; }
 }
 @keyframes journey-dot-2 {
-  0%, 53% { top: 0%; opacity: 0; }
-  57%  { opacity: 1; }
-  81%  { top: 90%;  opacity: 1; }
-  89%  { top: 118%; opacity: 0; }
-  100% { opacity: 0; }
+  0%, 33% { top: 0%; opacity: 0; }
+  37%     { opacity: 1; }
+  62%     { top: 100%; opacity: 1; }
+  66%     { top: 100%; opacity: 0; }
+  100%    { top: 0%;   opacity: 0; }
 }
-/* Direct border/ring colour swap on the icon circle itself, not a blurred
-   halo sitting behind it — the box-shadow-blur version was too subtle to
-   read as "glowing" against this section's own gradient background. A
-   colour change on an element already sitting right there in high-contrast
-   line art is much harder to miss than a soft glow that has to compete
-   with the backdrop. Solid-spread box-shadow (no blur radius) doubles as a
-   crisp ring around the circle rather than a diffuse haze. */
+/* Direct border/ring colour swap on the icon circle itself */
 @keyframes journey-active-1 {
-  0%, 8%    { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
-  14%, 96%  { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  0%, 12%   { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+  18%, 94%  { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
   100%      { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
 }
 @keyframes journey-active-2 {
-  0%, 33%   { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
-  37%, 50%  { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
-  56%, 100% { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  0%, 27%   { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  33%, 45%  { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+  51%, 100% { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
 }
 @keyframes journey-active-3 {
-  0%, 86%   { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
-  90%, 100% { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+  0%, 60%   { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
+  66%, 78%  { border-color: var(--x-accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--x-accent) 25%, transparent); }
+  84%, 100% { border-color: var(--x-line); box-shadow: 0 0 0 0 transparent; }
 }
 .journey-active-1,
 .journey-active-2,
 .journey-active-3 {
-  animation-duration: 7s;
+  animation-duration: 6s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
@@ -603,7 +598,7 @@ body {
   border-radius: 9999px;
   background: var(--x-accent);
   box-shadow: 0 0 8px 2px color-mix(in srgb, var(--x-accent) 65%, transparent);
-  animation-duration: 7s;
+  animation-duration: 6s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
@@ -1227,5 +1222,48 @@ html.theme-transitioning *,
 html.theme-transitioning *::before,
 html.theme-transitioning *::after {
   transition: none !important;
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+  
+  .fade-top-lg {
+    mask-image: linear-gradient(to bottom, 
+      transparent, 
+      rgba(0, 0, 0, 1) 8rem
+    );
+  }
+
+  .animate-in {
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
+}
+
+@layer base {
+  :root {
+    --brand: 27 96% 61%;
+    --brand-foreground: 31 97% 72%;
+  }
+ 
+  .dark {
+    --brand: 31 97% 72%;
+    --brand-foreground: 27 96% 61%;
+  }
 }
 

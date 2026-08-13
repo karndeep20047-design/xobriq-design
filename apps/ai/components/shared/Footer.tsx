@@ -85,59 +85,55 @@ const socials = [
 
 export function Footer() {
   return (
-    // On mobile, this wrapper has h-auto and relative positioning. On desktop, it acts as a spacer.
-    <div className="h-auto lg:h-[450px] w-full lg:pointer-events-none relative lg:z-0">
-      
-      {/* On mobile, this is a standard relative footer. On desktop, it is fixed at the bottom. */}
-      <footer className="relative lg:fixed lg:bottom-0 lg:left-0 lg:right-0 lg:z-0 h-auto lg:h-[450px] w-full bg-slate-50 dark:bg-[#070708] border-t border-slate-200/80 dark:border-zinc-800/80 pointer-events-auto transition-colors duration-150">
-        <div className="mx-auto max-w-7xl px-6 pt-12 lg:pt-16 pb-8 h-full flex flex-col justify-between">
+    <footer className="relative w-full bg-slate-50 dark:bg-[#070708] border-t border-slate-200/80 dark:border-zinc-800/80 transition-colors duration-150">
+      <div className="mx-auto max-w-7xl px-6 pt-12 lg:pt-16 pb-8 flex flex-col justify-between">
+        
+        {/* Top Grid Area */}
+        <div className="grid gap-8 lg:grid-cols-12 pb-6 lg:pb-12 border-b border-slate-200/80 dark:border-zinc-800/60">
           
-          {/* Top Grid Area */}
-          <div className="grid gap-8 lg:grid-cols-12 pb-6 lg:pb-12 border-b border-slate-200/80 dark:border-zinc-800/60">
-            
-            {/* Brand & CTA Block */}
-            <div className="lg:col-span-4 flex flex-col justify-between space-y-4 lg:space-y-6">
-              <div>
-                <Image
-                  src="/xobriq-logo-horizontal.png"
-                  alt="Xobriq Logo"
-                  width={140}
-                  height={36}
-                  className="h-9 w-auto dark:brightness-110"
-                />
-                <h3 className="mt-4 lg:mt-6 text-lg lg:text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-snug">
-                  Build autonomous enterprise AI & cyber defense agents that understand, reason, and act.
-                </h3>
-              </div>
+          {/* Brand & CTA Block */}
+          <div className="lg:col-span-7 flex flex-col justify-between space-y-4 lg:space-y-6">
+            <div>
+              <Image
+                src="/xobriq-logo-horizontal.png"
+                alt="Xobriq Logo"
+                width={140}
+                height={36}
+                className="h-9 w-auto dark:brightness-110"
+              />
+              <h3 className="mt-4 lg:mt-6 text-lg lg:text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-snug">
+                Build autonomous enterprise AI & cyber defense agents that understand, reason, and act.
+              </h3>
+            </div>
 
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/contact"
-                  className="rounded-lg border border-slate-300 dark:border-zinc-700 hover:border-slate-400 dark:hover:border-zinc-500 bg-transparent px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-800 dark:text-zinc-200 transition-colors"
-                >
-                  Contact Sales
-                </Link>
-                <Link
-                  href="/register"
-                  className="rounded-lg bg-slate-900 dark:bg-zinc-100 hover:bg-slate-800 dark:hover:bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white dark:text-black transition-colors"
-                >
-                  Sign Up Free
-                </Link>
-              </div>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/contact"
+                className="rounded-lg border border-slate-300 dark:border-zinc-700 hover:border-slate-400 dark:hover:border-zinc-500 bg-transparent px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-800 dark:text-zinc-200 transition-colors"
+              >
+                Contact Sales
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-lg bg-slate-900 dark:bg-zinc-100 hover:bg-slate-800 dark:hover:bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white dark:text-black transition-colors"
+              >
+                Sign Up Free
+              </Link>
+            </div>
 
-              <div className="space-y-1.5 text-xs text-slate-500 dark:text-zinc-400">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-emerald-500 dark:text-xgreen-400 shrink-0" />
-                  <span>GTC Tower, 24th Floor, Westlands, Nairobi</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-emerald-500 dark:text-xgreen-400 shrink-0" />
-                  <a href="mailto:info@xobriq.com" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-                    info@xobriq.com
-                  </a>
-                </div>
+            <div className="space-y-1.5 text-xs text-slate-500 dark:text-zinc-400">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-emerald-500 dark:text-xgreen-400 shrink-0" />
+                <span>GTC Tower, 24th Floor, Westlands, Nairobi</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-emerald-500 dark:text-xgreen-400 shrink-0" />
+                <a href="mailto:info@xobriq.com" className="hover:text-slate-900 dark:hover:text-white transition-colors">
+                  info@xobriq.com
+                </a>
               </div>
             </div>
+          </div>
 
             {/* Links Columns */}
             <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-8">
@@ -285,6 +281,5 @@ export function Footer() {
 
         </div>
       </footer>
-    </div>
   );
 }

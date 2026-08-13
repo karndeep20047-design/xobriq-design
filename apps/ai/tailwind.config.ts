@@ -10,6 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: "hsl(var(--brand))",
+        "brand-foreground": "hsl(var(--brand-foreground))",
         // Brand from logo + portfolio doc
         xblue: {
           50: "#eef4fb",
@@ -48,9 +50,47 @@ const config: Config = {
           strong: "var(--border-strong)"
         }
       },
+      maxWidth: {
+        container: "80rem",
+      },
       boxShadow: {
-        glow: "0 0 60px rgba(26, 60, 94, 0.35)",
+        glow: "0 -16px 128px 0 hsla(var(--brand-foreground) / 0.5) inset, 0 -16px 32px 0 hsla(var(--brand) / 0.5) inset",
         gold: "0 0 40px rgba(196, 125, 14, 0.35)"
+      },
+      keyframes: {
+        "fade-in-up": {
+          "0%": { 
+            opacity: "0",
+            transform: "translateY(10px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)"
+          }
+        },
+        "fade-in": {
+          "0%": {
+            opacity: "0"
+          },
+          "100%": {
+            opacity: "1"
+          }
+        },
+        "scale-in": {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.95)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1)"
+          }
+        }
+      },
+      animation: {
+        "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+        "fade-in": "fade-in 0.5s ease-out forwards",
+        "scale-in": "scale-in 0.5s ease-out forwards"
       },
       fontFamily: {
         sans: ["ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "sans-serif"]

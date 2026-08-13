@@ -117,12 +117,12 @@ export function CustomerJourney() {
                       journey-dot / journey-active comment in globals.css. */}
                   <div className="flex flex-col items-center">
                     <div
-                      className={`grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-x-line bg-x-bg journey-active-${i + 1}`}
+                      className={`relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-x-line bg-x-bg journey-active-${i + 1}`}
                     >
                       <Icon className="h-6 w-6 text-x-accent" strokeWidth={1.75} />
                     </div>
                     {!isLast && (
-                      <div className="relative mt-1 w-px flex-1 bg-x-line">
+                      <div className="relative z-0 -mt-3 -mb-3 w-px flex-1 bg-x-line">
                         <span aria-hidden className={`journey-dot-${i + 1}`} />
                       </div>
                     )}
