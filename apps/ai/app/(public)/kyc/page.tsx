@@ -100,22 +100,50 @@ type VerificationType = {
   Icon: React.ComponentType<{ className?: string }>;
   title: string;
   body: string;
+  accent: "blue" | "red" | "teal" | "green";
 };
+
+// Tailwind can't see classes built from a runtime string (`text-${accent}-500`
+// gets purged), so each accent is spelled out in full ahead of time and
+// looked up by key instead.
+const ACCENTS = {
+  blue: {
+    chip: "border-xblue-500/25 bg-xblue-500/10",
+    icon: "text-xblue-400",
+    ring: "hover:border-xblue-500/40 hover:shadow-[0_20px_50px_-24px_rgba(42,104,168,0.55)]",
+    line: "bg-xblue-500",
+  },
+  red: {
+    chip: "border-xred-500/25 bg-xred-500/10",
+    icon: "text-xred-500",
+    ring: "hover:border-xred-500/40 hover:shadow-[0_20px_50px_-24px_rgba(178,34,34,0.5)]",
+    line: "bg-xred-500",
+  },
+  teal: {
+    chip: "border-xteal-500/25 bg-xteal-500/10",
+    icon: "text-xteal-500",
+    ring: "hover:border-xteal-500/40 hover:shadow-[0_20px_50px_-24px_rgba(10,126,106,0.5)]",
+    line: "bg-xteal-500",
+  },
+  green: {
+    chip: "border-xgreen-500/25 bg-xgreen-500/10",
+    icon: "text-xgreen-500",
+    ring: "hover:border-xgreen-500/40 hover:shadow-[0_20px_50px_-24px_rgba(26,125,60,0.5)]",
+    line: "bg-xgreen-500",
+  },
+} as const;
 
 // The four checks Xobriq KYC actually runs. Document-level detail (National
 // ID, Alien ID, KRA PIN, etc.) lives one tier down, under "Identity" — see
-// DOCUMENT_TYPES below, sourced from the same docMeta the verify form and ID
+// the chip row below, sourced from the same docMeta the verify form and ID
 // scan dialog use, so this marketing page can never quietly drift out of
 // sync with what the API actually accepts.
 const VERIFICATION_TYPES: VerificationType[] = [
-  { Icon: UserCheck, title: "Identity", body: "OCR + live registry match across six Kenyan document types — from National ID to vehicle plate — verified against IPRS in real time." },
-  { Icon: ScanFace, title: "Deepfake & Liveness", body: "AI-powered liveness and deepfake detection catches synthetic faces and spoofed selfies before they reach onboarding." },
-  { Icon: Phone, title: "Phone Number", body: "Subscriber verification and ownership matching to cut down on account-takeover and mule-account fraud." },
-  { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients." },
+  { Icon: UserCheck, title: "Identity", body: "OCR plus live registry match across six Kenyan document types, verified against IPRS in real time.", accent: "blue" },
+  { Icon: ScanFace, title: "Deepfake & Liveness", body: "AI-powered liveness and deepfake detection catches synthetic faces and spoofed selfies before they reach onboarding.", accent: "red" },
+  { Icon: Phone, title: "Phone Number", body: "Subscriber verification and ownership matching to cut down on account-takeover and mule-account fraud.", accent: "teal" },
+  { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients.", accent: "green" },
 ];
-
-const SUPPORTED_DOC_COUNT = DOC_TYPE_ORDER.filter((k) => docMeta[k].supported).length;
-const COMING_SOON_DOC_COUNT = DOC_TYPE_ORDER.length - SUPPORTED_DOC_COUNT;
 
 function VerificationTypes() {
   return (
@@ -123,71 +151,75 @@ function VerificationTypes() {
       <div className="container-medium">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">One API, Every Verification Type</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-enterprise-fg-muted">
-            A single integration covers the identity checks East African businesses actually need — deepfake detection, document verification across six ID types, phone and business checks — no separate vendor per document.
+          <p className="mx-auto mt-3 max-w-lg text-enterprise-fg-muted">
+            Deepfake, identity, phone and business checks. One API, zero extra vendors.
           </p>
         </div>
 
-        {/* Tier 1 — the four checks Xobriq KYC runs. */}
+        {/* Tier 1 — the four checks Xobriq KYC runs, each carrying its own
+            accent so they read as distinct categories rather than four
+            identical green cards. */}
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {VERIFICATION_TYPES.map((v, i) => (
-            <motion.div
-              key={v.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="glass-panel rounded-2xl p-7"
-            >
-              <div className="grid h-11 w-11 place-items-center rounded-lg bg-xgreen-500/10">
-                <v.Icon className="h-5 w-5 text-xgreen-500" />
-              </div>
-              <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
-            </motion.div>
-          ))}
+          {VERIFICATION_TYPES.map((v, i) => {
+            const a = ACCENTS[v.accent];
+            return (
+              <motion.div
+                key={v.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className={
+                  "group relative overflow-hidden rounded-2xl border border-enterprise-border bg-enterprise-surface p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 " +
+                  a.ring
+                }
+              >
+                <span
+                  aria-hidden
+                  className={
+                    "absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100 " +
+                    a.line
+                  }
+                />
+                <div className={"grid h-12 w-12 place-items-center rounded-xl border transition-transform duration-300 group-hover:scale-105 " + a.chip}>
+                  <v.Icon className={"h-6 w-6 " + a.icon} />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Tier 2 — every document type Identity verification accepts, laid
-            out as a labeled chip row instead of another bank of cards, since
-            these are variants of one check (Identity), not peers of it. */}
+        {/* Tier 2 — every live document type Identity verification accepts,
+            as a grid of icon tiles rather than a flat pill row, so each one
+            reads as its own item instead of blurring into a wrapped line of
+            text. Filtered to supported types only — docMeta still lists
+            Passport as unsupported, so it's excluded rather than shown as
+            a placeholder. */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.24 }}
-          className="glass-panel mt-5 rounded-2xl p-7 sm:p-8"
+          className="mt-5 rounded-2xl border border-enterprise-border bg-enterprise-surface p-7 shadow-sm sm:p-8"
         >
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <p className="label-caps text-enterprise-fg-subtle">Identity verification covers</p>
-            <p className="text-xs text-enterprise-fg-muted">
-              {SUPPORTED_DOC_COUNT} document types live
-              {COMING_SOON_DOC_COUNT > 0 ? `, ${COMING_SOON_DOC_COUNT} more in progress` : ""}
-            </p>
-          </div>
-          <div className="mt-5 flex flex-wrap gap-2.5">
-            {DOC_TYPE_ORDER.map((key) => {
+          <p className="label-caps text-enterprise-fg-subtle">Identity verification covers</p>
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {DOC_TYPE_ORDER.filter((key) => docMeta[key].supported).map((key) => {
               const d = docMeta[key];
               const DocIcon = d.icon;
               return (
-                <span
+                <div
                   key={key}
-                  className={
-                    "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors " +
-                    (d.supported
-                      ? "border-xgreen-500/25 bg-xgreen-500/[0.06] text-enterprise-fg"
-                      : "border-enterprise-border bg-enterprise-bg-low text-enterprise-fg-subtle")
-                  }
-                  title={d.supported ? d.label : `${d.label} — coming soon`}
+                  title={d.label}
+                  className="group flex items-center gap-3 rounded-xl border border-enterprise-border bg-enterprise-bg-low p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.05]"
                 >
-                  <DocIcon className={"h-4 w-4 " + (d.supported ? "text-xgreen-500" : "text-enterprise-fg-subtle")} />
-                  {d.shortLabel}
-                  {!d.supported && (
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-enterprise-fg-subtle/70">
-                      Soon
-                    </span>
-                  )}
-                </span>
+                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-xgreen-500/25 bg-xgreen-500/10">
+                    <DocIcon className="h-4 w-4 text-xgreen-500" />
+                  </div>
+                  <span className="text-sm font-semibold leading-tight text-enterprise-fg">{d.shortLabel}</span>
+                </div>
               );
             })}
           </div>
