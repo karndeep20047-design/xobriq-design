@@ -40,7 +40,7 @@ const INDUSTRIES: Industry[] = [
 
 export function IndustriesStrip() {
   return (
-    <section className="border-y border-x-line bg-x-raised py-12 transition-colors duration-150 sm:py-16">
+    <section className="bg-x-bg py-12 transition-colors duration-150 sm:py-16">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -60,7 +60,7 @@ export function IndustriesStrip() {
           return (
             <span
               key={ind.label}
-              className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-x-line bg-x-bg px-5 py-2.5 transition-colors duration-150"
+              className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-x-line bg-x-raised px-5 py-2.5 transition-colors duration-150"
             >
               <Icon className="h-4 w-4 shrink-0 text-x-accent" />
               <span className="text-sm font-medium text-x-fg">{ind.label}</span>
