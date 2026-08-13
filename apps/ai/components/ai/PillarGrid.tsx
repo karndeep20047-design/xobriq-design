@@ -61,8 +61,8 @@ const PILLARS: Pillar[] = [
     stat: "120+ signals",
     Icon: ShieldCheck,
     iconClass: "text-teal-600 dark:text-teal-400",
-    hoverClass: "hover:border-teal-500/30 hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
-    numClass: "group-hover:text-teal-500/[0.22] dark:group-hover:text-teal-400/[0.25]",
+    hoverClass: "border-teal-500/30 dark:border-teal-400/30 shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    numClass: "text-teal-500/[0.22] dark:text-teal-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-teal-500/[0.22] lg:dark:group-hover:text-teal-400/[0.25]",
   },
   {
     index: "02",
@@ -73,8 +73,8 @@ const PILLARS: Pillar[] = [
     stat: "24/7 autonomous",
     Icon: Bot,
     iconClass: "text-purple-600 dark:text-purple-400",
-    hoverClass: "hover:border-purple-500/30 hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
-    numClass: "group-hover:text-purple-500/[0.22] dark:group-hover:text-purple-400/[0.25]",
+    hoverClass: "border-purple-500/30 dark:border-purple-400/30 shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    numClass: "text-purple-500/[0.22] dark:text-purple-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-purple-500/[0.22] lg:dark:group-hover:text-purple-400/[0.25]",
   },
   {
     index: "03",
@@ -85,8 +85,8 @@ const PILLARS: Pillar[] = [
     stat: "H200 cluster",
     Icon: Cpu,
     iconClass: "text-blue-600 dark:text-blue-400",
-    hoverClass: "hover:border-blue-500/30 hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
-    numClass: "group-hover:text-blue-500/[0.22] dark:group-hover:text-blue-400/[0.25]",
+    hoverClass: "border-blue-500/30 dark:border-blue-400/30 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    numClass: "text-blue-500/[0.22] dark:text-blue-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-blue-500/[0.22] lg:dark:group-hover:text-blue-400/[0.25]",
   },
   {
     index: "04",
@@ -97,8 +97,8 @@ const PILLARS: Pillar[] = [
     stat: "Ex-Google AI",
     Icon: GitBranch,
     iconClass: "text-amber-600 dark:text-amber-400",
-    hoverClass: "hover:border-amber-500/30 hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
-    numClass: "group-hover:text-amber-500/[0.22] dark:group-hover:text-amber-400/[0.25]",
+    hoverClass: "border-amber-500/30 dark:border-amber-400/30 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    numClass: "text-amber-500/[0.22] dark:text-amber-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-amber-500/[0.22] lg:dark:group-hover:text-amber-400/[0.25]",
   },
   {
     index: "05",
@@ -109,8 +109,8 @@ const PILLARS: Pillar[] = [
     stat: "ISO 27001",
     Icon: Lock,
     iconClass: "text-red-600 dark:text-red-400",
-    hoverClass: "hover:border-red-500/30 hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
-    numClass: "group-hover:text-red-500/[0.22] dark:group-hover:text-red-400/[0.25]",
+    hoverClass: "border-red-500/30 dark:border-red-400/30 shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    numClass: "text-red-500/[0.22] dark:text-red-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-red-500/[0.22] lg:dark:group-hover:text-red-400/[0.25]",
   },
 ];
 
@@ -226,14 +226,14 @@ export function PillarGrid() {
                   <Link
                     href={p.href}
                     className={cn(
-                      "group relative flex h-full flex-col overflow-hidden rounded-lg border border-x-line dark:border-white/20 bg-x-bg p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-x-raised",
+                      "group relative flex h-full flex-col overflow-hidden rounded-lg border transition-all duration-300 lg:hover:-translate-y-1",
                       p.hoverClass
                     )}
                   >
                     {/* Accent hairline that draws itself across the top on hover. */}
                     <span
                       aria-hidden
-                      className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-x-accent transition-transform duration-500 group-hover:scale-x-100"
+                      className="absolute inset-x-0 top-0 h-px origin-left scale-x-100 lg:scale-x-0 lg:transition-transform lg:duration-500 lg:group-hover:scale-x-100 bg-x-accent"
                     />
 
                     {/* Large translucent index numeral watermark — pulled inward so
@@ -241,7 +241,7 @@ export function PillarGrid() {
                     <span
                       aria-hidden
                       className={cn(
-                        "pointer-events-none absolute right-1.5 top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none text-x-fg/[0.12] dark:text-white/20 transition-all duration-500 ease-out group-hover:-translate-y-1.5",
+                        "pointer-events-none absolute right-1 top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out -translate-y-1.5 lg:translate-y-0 lg:group-hover:-translate-y-1.5",
                         p.numClass
                       )}
                     >
@@ -260,11 +260,11 @@ export function PillarGrid() {
                       <p className="mt-2.5 text-sm leading-6 text-x-muted">{p.body}</p>
                     </div>
 
-                    <div className="relative z-10 mt-auto flex items-center justify-between border-t border-x-line pt-4">
-                      <p className="x-label text-x-dim transition-colors group-hover:text-x-fg">
+                    <div className="relative z-10 mt-auto flex items-center justify-between border-t border-x-line dark:border-white/10 pt-4">
+                      <p className="x-label text-x-fg lg:text-x-dim lg:transition-colors lg:group-hover:text-x-fg">
                         {p.stat}
                       </p>
-                      <ArrowUpRight className="h-4 w-4 text-x-dim transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-x-accent" />
+                      <ArrowUpRight className="h-4 w-4 text-x-accent lg:text-x-dim lg:transition-all lg:duration-300 lg:group-hover:-translate-y-0.5 lg:group-hover:translate-x-0.5 lg:group-hover:text-x-accent" />
                     </div>
                   </Link>
                 </motion.div>
@@ -277,3 +277,4 @@ export function PillarGrid() {
     </section>
   );
 }
+
