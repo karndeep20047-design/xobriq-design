@@ -110,9 +110,7 @@ export const ThemeToggleButton2 = ({
       aria-label="Toggle theme"
       className={cn(
         "rounded-full transition-all duration-300 active:scale-95 border border-white/20 shadow-md",
-        isDark
-          ? "bg-black text-white hover:bg-zinc-900 shadow-black/40 border-white/15"
-          : "bg-[#0072c4] text-white hover:bg-[#005ea2] shadow-[#0072c4]/25 border-white/20",
+        "bg-[#0072c4] text-white hover:bg-[#005ea2] shadow-[#0072c4]/25 border-white/20 dark:bg-black dark:text-white dark:hover:bg-zinc-900 dark:shadow-black/40 dark:border-white/15",
         className,
       )}
       onClick={handleClick}

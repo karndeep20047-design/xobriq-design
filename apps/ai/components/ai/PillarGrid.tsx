@@ -226,7 +226,7 @@ export function PillarGrid() {
                   <Link
                     href={p.href}
                     className={cn(
-                      "group relative flex h-full flex-col overflow-hidden rounded-lg border border-x-line bg-x-bg p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-x-raised",
+                      "group relative flex h-full flex-col overflow-hidden rounded-lg border border-x-line dark:border-white/20 bg-x-bg p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-x-raised",
                       p.hoverClass
                     )}
                   >
@@ -241,7 +241,7 @@ export function PillarGrid() {
                     <span
                       aria-hidden
                       className={cn(
-                        "pointer-events-none absolute right-3 top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none text-x-fg/[0.08] transition-all duration-500 ease-out group-hover:-translate-y-1.5",
+                        "pointer-events-none absolute right-1.5 top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none text-x-fg/[0.12] dark:text-white/20 transition-all duration-500 ease-out group-hover:-translate-y-1.5",
                         p.numClass
                       )}
                     >
