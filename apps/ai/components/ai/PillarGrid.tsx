@@ -209,7 +209,7 @@ export function PillarGrid() {
           whileInView="visible"
           viewport={revealViewport}
           variants={staggerFast}
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+          className="grid grid-cols-1 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-5"
         >
           {PILLARS.map((p, i) => {
             const Icon = p.Icon;
@@ -233,7 +233,7 @@ export function PillarGrid() {
                     {/* Accent hairline that draws itself across the top on hover. */}
                     <span
                       aria-hidden
-                      className="absolute inset-x-0 top-0 h-px origin-left scale-x-100 lg:scale-x-0 lg:transition-transform lg:duration-500 lg:group-hover:scale-x-100 bg-x-accent"
+                      className="hidden lg:block absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100 bg-x-accent"
                     />
 
                     {/* Large translucent index numeral watermark — pulled inward so
