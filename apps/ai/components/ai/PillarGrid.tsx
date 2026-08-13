@@ -18,7 +18,13 @@ import {
   Lock,
   type LucideIcon,
 } from "lucide-react";
-import { fadeInUp, staggerFast, viewportOnce } from "./animations";
+import { fadeInUp, staggerFast } from "./animations";
+import { cn } from "@/lib/utils";
+
+// Only start the reveal once the section is substantially on-screen (not the
+// moment its top edge peeks into the viewport) — feels intentional rather
+// than pre-emptive.
+const revealViewport = { once: true, amount: 0.45 } as const;
 
 /* "What We Provide" — full rebuild of the old bento PillarGrid.
    - Centered header, "What We Provide" is now the headline itself (not just
@@ -40,8 +46,9 @@ type Pillar = {
   href: string;
   stat: string;
   Icon: LucideIcon;
-  chipClass: string;
   iconClass: string;
+  hoverClass: string;
+  numClass: string;
 };
 
 const PILLARS: Pillar[] = [
@@ -49,56 +56,61 @@ const PILLARS: Pillar[] = [
     index: "01",
     name: "Xobriq Guard",
     title: "Fraud Intelligence",
-    body: "Real-time fraud scoring across 120+ signals, plus deepfake, liveness and behavioural detection — sub-200ms from Nairobi.",
+    body: "Real-time fraud scoring, deepfake and liveness detection — sub-200ms.",
     href: "/guard",
     stat: "120+ signals",
     Icon: ShieldCheck,
-    chipClass: "border-teal-500/25 bg-teal-500/10 dark:border-teal-400/20 dark:bg-teal-400/10",
     iconClass: "text-teal-600 dark:text-teal-400",
+    hoverClass: "hover:border-teal-500/30 hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    numClass: "group-hover:text-teal-500/[0.22] dark:group-hover:text-teal-400/[0.25]",
   },
   {
     index: "02",
     name: "Agentic AI",
     title: "Autonomous Agents",
-    body: "LLM-powered agents that execute fraud investigation, KYC and compliance workflows with audit-grade reasoning.",
+    body: "LLM agents that run fraud, KYC and compliance workflows with audit-grade reasoning.",
     href: "/agentic",
     stat: "24/7 autonomous",
     Icon: Bot,
-    chipClass: "border-purple-500/25 bg-purple-500/10 dark:border-purple-400/20 dark:bg-purple-400/10",
     iconClass: "text-purple-600 dark:text-purple-400",
+    hoverClass: "hover:border-purple-500/30 hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    numClass: "group-hover:text-purple-500/[0.22] dark:group-hover:text-purple-400/[0.25]",
   },
   {
     index: "03",
     name: "Xobriq Cloud",
     title: "Sovereign GPU Compute",
-    body: "East Africa's only DGX H200 cluster. Per-second billing, MIG isolation, 100% Kenya data residency.",
+    body: "East Africa's only DGX H200 cluster, with 100% Kenya data residency.",
     href: "/cloud",
     stat: "H200 cluster",
     Icon: Cpu,
-    chipClass: "border-blue-500/25 bg-blue-500/10 dark:border-blue-400/20 dark:bg-blue-400/10",
     iconClass: "text-blue-600 dark:text-blue-400",
+    hoverClass: "hover:border-blue-500/30 hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    numClass: "group-hover:text-blue-500/[0.22] dark:group-hover:text-blue-400/[0.25]",
   },
   {
     index: "04",
     name: "Xobriq Consult",
     title: "Strategy & MLOps",
-    body: "AI strategy and MLOps engagements led by a former Google AI researcher, starting with a maturity assessment.",
+    body: "AI strategy and MLOps engagements led by a former Google AI researcher.",
     href: "/consult",
     stat: "Ex-Google AI",
     Icon: GitBranch,
-    chipClass: "border-amber-500/25 bg-amber-500/10 dark:border-amber-400/20 dark:bg-amber-400/10",
     iconClass: "text-amber-600 dark:text-amber-400",
+    hoverClass: "hover:border-amber-500/30 hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    numClass: "group-hover:text-amber-500/[0.22] dark:group-hover:text-amber-400/[0.25]",
   },
   {
     index: "05",
     name: "Xobriq Cyber",
     title: "Managed Defense",
-    body: "Pentesting, managed SIEM, incident response, AI security audits and ISO 27001 readiness.",
+    body: "Pentesting, managed SIEM and incident response, built toward ISO 27001.",
     href: "/cyber",
     stat: "ISO 27001",
     Icon: Lock,
-    chipClass: "border-red-500/25 bg-red-500/10 dark:border-red-400/20 dark:bg-red-400/10",
     iconClass: "text-red-600 dark:text-red-400",
+    hoverClass: "hover:border-red-500/30 hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    numClass: "group-hover:text-red-500/[0.22] dark:group-hover:text-red-400/[0.25]",
   },
 ];
 
@@ -134,8 +146,11 @@ function ParallaxLines() {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]"
     >
-      {/* Ultra-faint static wash for depth — no motion, no blob shape. */}
-      <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(80%_60%_at_50%_0%,color-mix(in_srgb,var(--x-accent)_6%,transparent),transparent_70%)]" />
+      {/* Dot grid for texture, feathered at the same edges as the lines. */}
+      <div className="x-grid-bg absolute inset-0 opacity-90" />
+      {/* Two soft static washes for depth — no motion, no blob shape. */}
+      <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(80%_60%_at_50%_0%,color-mix(in_srgb,var(--x-accent)_22%,transparent),transparent_70%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-full bg-[radial-gradient(65%_50%_at_85%_100%,color-mix(in_srgb,var(--x-accent-bright)_18%,transparent),transparent_70%)]" />
       {lines.map((l, i) => (
         <motion.div
           key={i}
@@ -165,31 +180,59 @@ export function PillarGrid() {
       <ParallaxLines />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-16 flex max-w-2xl flex-col items-center text-center sm:mb-20">
-          <p className="x-label text-x-accent">What We Provide</p>
-          <h2 className="mt-4 font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-x-fg sm:text-5xl md:text-6xl">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={revealViewport}
+          variants={staggerFast}
+          className="mx-auto mb-16 flex max-w-2xl flex-col items-center text-center sm:mb-20"
+        >
+          <motion.p
+            variants={fadeInUp}
+            className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-[0.22em] text-x-accent sm:text-base"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-x-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-x-accent" />
+            </span>
+            What We Provide
+          </motion.p>
+          <motion.h2
+            variants={fadeInUp}
+            className="mt-4 font-display text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-x-fg sm:text-5xl"
+          >
             Five pillars, one platform.
-          </h2>
-          <p className="mt-5 text-base sm:text-lg text-x-muted">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="mt-4 text-base sm:text-lg text-x-muted">
             One console, one contract, one sovereign infrastructure.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={revealViewport}
           variants={staggerFast}
-          className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-x-line bg-x-line sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
         >
-          {PILLARS.map((p) => {
+          {PILLARS.map((p, i) => {
             const Icon = p.Icon;
+            // First and last cards ride a touch higher than the middle three
+            // on the single-row desktop layout, for a gentle wave instead of
+            // a dead-flat row. Plain (non-motion) wrapper so it doesn't
+            // fight Framer's own animated transform on the parent. Skipped
+            // below lg, where the grid wraps into multiple rows.
+            const isEdge = i === 0 || i === PILLARS.length - 1;
             return (
-              <motion.div key={p.href} variants={fadeInUp}>
+              <motion.div key={p.href} variants={fadeInUp} className="h-full">
+                <div className={cn("h-full transition-transform duration-500 ease-out", isEdge && "lg:-translate-y-16")}>
                 <motion.div whileHover="hover" className="h-full">
                   <Link
                     href={p.href}
-                    className="group relative flex h-full flex-col overflow-hidden bg-x-bg p-7 transition-colors duration-300 hover:bg-x-raised"
+                    className={cn(
+                      "group relative flex h-full flex-col overflow-hidden rounded-lg border border-x-line bg-x-bg p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-x-raised",
+                      p.hoverClass
+                    )}
                   >
                     {/* Accent hairline that draws itself across the top on hover. */}
                     <span
@@ -197,33 +240,31 @@ export function PillarGrid() {
                       className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-x-accent transition-transform duration-500 group-hover:scale-x-100"
                     />
 
-                    {/* Large translucent index numeral watermark. */}
+                    {/* Large translucent index numeral watermark — pulled inward so
+                        the card's own overflow-hidden/rounded corner doesn't clip it. */}
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute -right-1 -top-3 select-none font-display text-[6rem] font-bold leading-none text-x-fg/[0.045] transition-colors duration-300 group-hover:text-x-accent/[0.09]"
+                      className={cn(
+                        "pointer-events-none absolute right-3 top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none text-x-fg/[0.08] transition-all duration-500 ease-out group-hover:-translate-y-1.5",
+                        p.numClass
+                      )}
                     >
                       {p.index}
                     </span>
 
-                    <motion.div
-                      variants={iconAnimation}
-                      className={
-                        "relative z-10 grid h-11 w-11 place-items-center rounded-xl border transition-colors duration-300 " +
-                        p.chipClass
-                      }
-                    >
-                      <Icon className={"h-5 w-5 stroke-[1.75] " + p.iconClass} />
+                    <motion.div variants={iconAnimation} className="relative z-10">
+                      <Icon className={"h-7 w-7 stroke-[1.5] " + p.iconClass} />
                     </motion.div>
 
                     <div className="relative z-10">
-                      <p className="x-label mt-8 text-x-muted">{p.name}</p>
-                      <h3 className="mt-2 font-display text-xl font-semibold leading-[1.15] tracking-[-0.02em] text-x-fg">
+                      <p className="x-label mt-5 text-x-muted">{p.name}</p>
+                      <h3 className="mt-1.5 font-display text-lg font-semibold leading-[1.15] tracking-[-0.02em] text-x-fg">
                         {p.title}
                       </h3>
-                      <p className="mt-3 flex-1 text-sm leading-6 text-x-muted">{p.body}</p>
+                      <p className="mt-2.5 text-sm leading-6 text-x-muted">{p.body}</p>
                     </div>
 
-                    <div className="relative z-10 mt-8 flex items-center justify-between border-t border-x-line pt-5">
+                    <div className="relative z-10 mt-auto flex items-center justify-between border-t border-x-line pt-4">
                       <p className="x-label text-x-dim transition-colors group-hover:text-x-fg">
                         {p.stat}
                       </p>
@@ -231,6 +272,7 @@ export function PillarGrid() {
                     </div>
                   </Link>
                 </motion.div>
+                </div>
               </motion.div>
             );
           })}
