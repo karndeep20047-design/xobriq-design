@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { KycProcessVisual } from "@/components/ai/KycProcessVisual";
 import { KycDashboardDemo } from "@/components/ai/KycDashboardDemo";
@@ -100,7 +101,7 @@ type VerificationType = {
   Icon: React.ComponentType<{ className?: string }>;
   title: string;
   body: string;
-  accent: "blue" | "red" | "teal" | "green";
+  accent: "blue" | "red" | "teal" | "orange";
 };
 
 // Tailwind can't see classes built from a runtime string (`text-${accent}-500`
@@ -108,28 +109,27 @@ type VerificationType = {
 // looked up by key instead.
 const ACCENTS = {
   blue: {
-    chip: "border-xblue-500/25 bg-xblue-500/10",
     icon: "text-xblue-400",
     ring: "hover:border-xblue-500/40 hover:shadow-[0_20px_50px_-24px_rgba(42,104,168,0.55)]",
     line: "bg-xblue-500",
   },
   red: {
-    chip: "border-xred-500/25 bg-xred-500/10",
     icon: "text-xred-500",
     ring: "hover:border-xred-500/40 hover:shadow-[0_20px_50px_-24px_rgba(178,34,34,0.5)]",
     line: "bg-xred-500",
   },
   teal: {
-    chip: "border-xteal-500/25 bg-xteal-500/10",
     icon: "text-xteal-500",
     ring: "hover:border-xteal-500/40 hover:shadow-[0_20px_50px_-24px_rgba(10,126,106,0.5)]",
     line: "bg-xteal-500",
   },
-  green: {
-    chip: "border-xgreen-500/25 bg-xgreen-500/10",
-    icon: "text-xgreen-500",
-    ring: "hover:border-xgreen-500/40 hover:shadow-[0_20px_50px_-24px_rgba(26,125,60,0.5)]",
-    line: "bg-xgreen-500",
+  // Business (KYB) — was xgreen, which reads too close to the Phone card's
+  // teal at a glance. Orange isn't in the custom "x" palette, so this one
+  // uses Tailwind's stock scale directly.
+  orange: {
+    icon: "text-orange-500 dark:text-orange-400",
+    ring: "hover:border-orange-500/40 hover:shadow-[0_20px_50px_-24px_rgba(234,88,12,0.5)]",
+    line: "bg-orange-500",
   },
 } as const;
 
@@ -142,7 +142,7 @@ const VERIFICATION_TYPES: VerificationType[] = [
   { Icon: UserCheck, title: "Identity", body: "OCR plus live registry match across six Kenyan document types, verified against IPRS in real time.", accent: "blue" },
   { Icon: ScanFace, title: "Deepfake & Liveness", body: "AI-powered liveness and deepfake detection catches synthetic faces and spoofed selfies before they reach onboarding.", accent: "red" },
   { Icon: Phone, title: "Phone Number", body: "Subscriber verification and ownership matching to cut down on account-takeover and mule-account fraud.", accent: "teal" },
-  { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients.", accent: "green" },
+  { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients.", accent: "orange" },
 ];
 
 function VerificationTypes() {
@@ -181,8 +181,8 @@ function VerificationTypes() {
                     a.line
                   }
                 />
-                <div className={"grid h-12 w-12 place-items-center rounded-xl border transition-transform duration-300 group-hover:scale-105 " + a.chip}>
-                  <v.Icon className={"h-6 w-6 " + a.icon} />
+                <div className="transition-transform duration-300 group-hover:scale-105">
+                  <v.Icon className={"h-7 w-7 " + a.icon} />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
@@ -205,27 +205,59 @@ function VerificationTypes() {
           className="mt-5 rounded-2xl border border-enterprise-border bg-enterprise-surface p-7 shadow-sm sm:p-8"
         >
           <p className="label-caps text-enterprise-fg-subtle">Identity verification covers</p>
-          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-            {DOC_TYPE_ORDER.filter((key) => docMeta[key].supported).map((key) => {
-              const d = docMeta[key];
-              const DocIcon = d.icon;
-              return (
-                <div
-                  key={key}
-                  title={d.label}
-                  className="group flex items-center gap-3 rounded-xl border border-enterprise-border bg-enterprise-bg-low p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.05]"
-                >
-                  <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-xgreen-500/25 bg-xgreen-500/10">
-                    <DocIcon className="h-4 w-4 text-xgreen-500" />
-                  </div>
-                  <span className="text-sm font-semibold leading-tight text-enterprise-fg">{d.shortLabel}</span>
-                </div>
-              );
-            })}
-          </div>
+          <DocumentTypeChips />
         </motion.div>
       </div>
     </section>
+  );
+}
+
+// Idle "showcase" sweep — walks the active/hover look down the row one tile
+// at a time, then back, on a timer, so the row demonstrates its own
+// interaction instead of sitting static until someone happens to hover it.
+// A real :hover still applies independently on top of this. Skips the timer
+// entirely under prefers-reduced-motion — the tiles are still fully usable,
+// just static.
+function DocumentTypeChips() {
+  const docs = DOC_TYPE_ORDER.filter((key) => docMeta[key].supported);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let i = 0;
+    let direction = 1;
+    const id = setInterval(() => {
+      if (i === docs.length - 1) direction = -1;
+      else if (i === 0) direction = 1;
+      i += direction;
+      setActiveIndex(i);
+    }, 450);
+
+    return () => clearInterval(id);
+  }, [docs.length]);
+
+  return (
+    <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+      {docs.map((key, i) => {
+        const d = docMeta[key];
+        const DocIcon = d.icon;
+        const isActive = i === activeIndex;
+        return (
+          <div
+            key={key}
+            title={d.label}
+            className={
+              "group flex items-center gap-3 rounded-xl border border-enterprise-border bg-enterprise-bg-low p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.05] " +
+              (isActive ? "-translate-y-0.5 border-xgreen-500/35 bg-xgreen-500/[0.05]" : "")
+            }
+          >
+            <DocIcon className="h-5 w-5 shrink-0 text-xgreen-500" />
+            <span className="text-sm font-semibold leading-tight text-enterprise-fg">{d.shortLabel}</span>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 

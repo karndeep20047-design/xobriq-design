@@ -49,6 +49,7 @@ type Pillar = {
   iconClass: string;
   brandBorderClass: string;
   brandShadowClass: string;
+  brandBarClass: string;
   desktopHoverClass: string;
   numActiveMobileClass: string;
   numDesktopClass: string;
@@ -66,7 +67,8 @@ const PILLARS: Pillar[] = [
     iconClass: "text-teal-600 dark:text-teal-400",
     brandBorderClass: "border-teal-500/30 dark:border-teal-400/30",
     brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    brandBarClass: "bg-teal-500",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
     numActiveMobileClass: "text-teal-500/[0.22] dark:text-teal-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-teal-500/[0.22] lg:dark:group-hover:text-teal-400/[0.25]",
   },
@@ -81,7 +83,8 @@ const PILLARS: Pillar[] = [
     iconClass: "text-purple-600 dark:text-purple-400",
     brandBorderClass: "border-purple-500/30 dark:border-purple-400/30",
     brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    brandBarClass: "bg-purple-500",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
     numActiveMobileClass: "text-purple-500/[0.22] dark:text-purple-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-purple-500/[0.22] lg:dark:group-hover:text-purple-400/[0.25]",
   },
@@ -96,7 +99,8 @@ const PILLARS: Pillar[] = [
     iconClass: "text-blue-600 dark:text-blue-400",
     brandBorderClass: "border-blue-500/30 dark:border-blue-400/30",
     brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    brandBarClass: "bg-blue-500",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
     numActiveMobileClass: "text-blue-500/[0.22] dark:text-blue-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-blue-500/[0.22] lg:dark:group-hover:text-blue-400/[0.25]",
   },
@@ -111,7 +115,8 @@ const PILLARS: Pillar[] = [
     iconClass: "text-amber-600 dark:text-amber-400",
     brandBorderClass: "border-amber-500/30 dark:border-amber-400/30",
     brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    brandBarClass: "bg-amber-500",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
     numActiveMobileClass: "text-amber-500/[0.22] dark:text-amber-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-amber-500/[0.22] lg:dark:group-hover:text-amber-400/[0.25]",
   },
@@ -126,7 +131,8 @@ const PILLARS: Pillar[] = [
     iconClass: "text-red-600 dark:text-red-400",
     brandBorderClass: "border-red-500/30 dark:border-red-400/30",
     brandShadowClass: "shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
-    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    brandBarClass: "bg-red-500",
+    desktopHoverClass: "lg:border-x-line lg:dark:border-white/20 lg:shadow-[0_4px_20px_rgba(0,0,0,0.05)] lg:dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)] lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
     numActiveMobileClass: "text-red-500/[0.22] dark:text-red-400/[0.25]",
     numDesktopClass: "lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-red-500/[0.22] lg:dark:group-hover:text-red-400/[0.25]",
   },
@@ -312,7 +318,7 @@ export function PillarGrid() {
                       p.brandBorderClass,
                       isActiveOnMobile
                         ? cn(p.brandShadowClass, "bg-white dark:bg-x-raised")
-                        : "bg-white dark:bg-x-bg shadow-none",
+                        : "bg-white dark:bg-x-bg shadow-sm dark:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.5)]",
                       // Desktop layout hover overrides
                       p.desktopHoverClass
                     )}
@@ -320,7 +326,10 @@ export function PillarGrid() {
                     {/* Accent hairline that draws itself across the top on hover. */}
                     <span
                       aria-hidden
-                      className="hidden lg:block absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100 bg-x-accent"
+                      className={cn(
+                        "hidden lg:block absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100",
+                        p.brandBarClass
+                      )}
                     />
 
                     {/* Large translucent index numeral watermark — pulled inward so
@@ -340,7 +349,7 @@ export function PillarGrid() {
 
                     <motion.div
                       variants={iconAnimation}
-                      animate={isActiveOnMobile ? "mobileActive" : "initial"}
+                      animate={isActiveOnMobile ? "mobileActive" : undefined}
                       className="relative z-10 w-fit origin-left"
                     >
                       <Icon className={"h-7 w-7 stroke-[1.5] " + p.iconClass} />
