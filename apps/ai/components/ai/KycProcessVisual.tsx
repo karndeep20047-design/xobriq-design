@@ -20,7 +20,7 @@
 // already extracted, verified banner shown, no phone) instead of turning
 // animation off mid-sequence.
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   User,
@@ -101,6 +101,14 @@ export function KycProcessVisual() {
         <StaticResult />
       ) : (
         <div className="relative min-h-[360px]">
+          {/* mode="wait": popLayout was tried here to close the ~0.5s blank
+              gap between the shutter firing and the scan card entering, but
+              without a `layout` prop on these children it didn't cleanly
+              pop the exiting element out of flow — the outgoing and
+              incoming content stacked in normal flow instead, growing the
+              whole card taller every loop. "wait" is simple and correct:
+              the small blank gap is a better trade than a compounding
+              layout bug. */}
           <AnimatePresence mode="wait">
             {showPhone ? (
               <motion.div key={`phone-${round}`} className="flex justify-center py-4">
@@ -120,8 +128,56 @@ export function KycProcessVisual() {
   );
 }
 
+// Ported from components/kyc/id-scan-dialog.tsx's <PhoneMockup /> — the
+// device illustration the actual verify flow uses to show an operator how
+// to frame a card, so "what the hero shows" and "what the product shows"
+// are the same drawing instead of two unrelated mockups. Adapted for the
+// marketing loop: the card group is now a motion.g that slides in and
+// settles, the brackets brighten and the shutter fires on a phase prop, and
+// the screen background is dropped entirely (see DEVICE.screen below) so
+// the card appears to float directly on the section's own backdrop.
+//
+// Chassis colours (rail/bezel) are deliberately fixed hex, not theme
+// tokens — a phone is a physical object in the illustration, not a themed
+// surface, and shouldn't invert when the site switches theme. The card
+// face stays light for the same reason (ID cards are printed on white
+// stock). Only the alignment brackets/shutter ring use the site's own
+// --color-xgreen-500 token, since those are UI drawn *by* the product.
+const DEVICE = {
+  railLight: "#b6bdc9",
+  railDark: "#6f7787",
+  bezel: "#0a0e15",
+  card: "#eef1f6",
+  cardEdge: "#c9cfdb",
+  cardInk: "#1f2937",
+  island: "#05080d",
+} as const;
+
+// A dedicated, resized/compressed copy for this decorative hero use —
+// components/kyc/id-scan-dialog.tsx and lib/kyc/id-ocr.ts both still use the
+// original full-res /images/sample-id.png (the real dialog zooms up to 2.5x,
+// so it needs the detail). This SVG only ever renders the image at ~150
+// local units (well under 150px on screen even at 3x DPR), so the original
+// 729x481 PNG (513KB) was ~18x more data than the hero could ever show —
+// this WebP is resized to a still-generous 420px wide and re-encoded
+// (~29KB), same picture, previously an unnecessarily heavy image on an
+// above-the-fold, eagerly-loaded element.
+const SAMPLE_ID_SRC = "/images/sample-id-hero.webp";
+
 function PhoneMockup({ phase }: { phase: Phase }) {
+  const clipId = "kycHero" + useId().replace(/[^a-zA-Z0-9]/g, "");
   const aligned = phase === "capture";
+  const settled = phase === "align" || phase === "capture";
+
+  // Card geometry — brackets and the flash overlay are derived from this,
+  // not hand-positioned separately.
+  const card = { x: 26, y: 148, w: 148, h: 93 };
+  const pad = 7;
+  const arm = 15;
+  const l = card.x - pad;
+  const r = card.x + card.w + pad;
+  const t = card.y - pad;
+  const b = card.y + card.h + pad;
 
   return (
     <motion.div
@@ -129,84 +185,141 @@ function PhoneMockup({ phase }: { phase: Phase }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 1.04 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="relative w-[172px] sm:w-[188px]"
     >
-      <div className="relative aspect-[9/19] rounded-[2.1rem] border-[6px] border-enterprise-fg bg-enterprise-fg p-1 shadow-2xl">
-        <div className="absolute left-1/2 top-2 z-20 h-3.5 w-14 -translate-x-1/2 rounded-full bg-black" />
+      <svg
+        viewBox="0 0 200 400"
+        className="h-[260px] w-auto sm:h-[300px]"
+        role="img"
+        aria-label="Phone camera framing a sample ID card inside alignment brackets"
+      >
+        <defs>
+          <clipPath id={clipId}>
+            <rect x={card.x} y={card.y} width={card.w} height={card.h} rx="6" />
+          </clipPath>
+          <linearGradient id={`${clipId}-rail`} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor={DEVICE.railLight} />
+            <stop offset="45%" stopColor={DEVICE.railDark} />
+            <stop offset="100%" stopColor={DEVICE.railLight} />
+          </linearGradient>
+          {/* Subtle glass glare — reads as glass, not as a shape. */}
+          <linearGradient id={`${clipId}-glare`} x1="0" y1="0" x2="0.7" y2="1">
+            <stop offset="0%" stopColor="#fff" stopOpacity="0.08" />
+            <stop offset="45%" stopColor="#fff" stopOpacity="0.015" />
+            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+          </linearGradient>
+        </defs>
 
-        <div className="relative h-full w-full overflow-hidden rounded-[1.5rem] bg-[#0b1220]">
-          {/* Viewfinder guide + the ID sliding in and settling. */}
-          <div className="absolute inset-x-4 top-9 bottom-14">
-            <ViewfinderCorners aligned={aligned} />
-            <motion.div
-              className="absolute inset-x-1 top-2"
-              initial={{ y: 70, opacity: 0, rotate: -5 }}
-              animate={
-                phase === "align" || phase === "capture"
-                  ? { y: [70, 0, 0, -3, 2, 0], opacity: [0, 1, 1, 1, 1, 1], rotate: [-5, -2, -2, 1, -1, 0] }
-                  : { y: 70, opacity: 0, rotate: -5 }
-              }
-              transition={
-                phase === "align"
-                  ? { duration: 1.3, times: [0, 0.28, 0.55, 0.72, 0.86, 1], ease: "easeOut" }
-                  : { duration: 0.01 }
-              }
-            >
-              <MiniIdCard />
-            </motion.div>
-          </div>
+        {/* Side buttons */}
+        <g fill={DEVICE.railDark}>
+          <rect x="4" y="104" width="4" height="20" rx="2" />
+          <rect x="4" y="136" width="4" height="34" rx="2" />
+          <rect x="4" y="180" width="4" height="34" rx="2" />
+          <rect x="192" y="150" width="4" height="50" rx="2" />
+        </g>
 
-          {/* Shutter flash. */}
-          {phase === "capture" && (
-            <motion.div
-              className="absolute inset-0 bg-white"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 0.4, times: [0, 0.45, 1] }}
-            />
-          )}
+        {/* Titanium rail + bezel. No fill for the screen itself — the card
+            sits directly against the section's own backdrop showing through. */}
+        <rect x="8" y="4" width="184" height="392" rx="34" fill={`url(#${clipId}-rail)`} />
+        <rect x="12" y="8" width="176" height="384" rx="30" fill={DEVICE.bezel} />
+        <rect x="17" y="13" width="166" height="374" rx="26" fill="none" />
 
-          {/* Shutter button. */}
-          <div className="absolute inset-x-0 bottom-3 flex items-center justify-center">
-            <motion.div
-              animate={phase === "capture" ? { scale: [1, 0.78, 1.12, 1] } : { scale: 1 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="grid h-8 w-8 place-items-center rounded-full border-2 border-white/60"
-            >
-              <span className="h-5 w-5 rounded-full bg-white" />
-            </motion.div>
-          </div>
-        </div>
-      </div>
+        {/* The ID card: drawn fallback first, the specimen image layered over
+            it (specimen only — see id-scan-dialog.tsx's own note on this
+            asset). Slides in and settles once the phone reaches "align". */}
+        <motion.g
+          initial={{ y: 70, opacity: 0, rotate: -5 }}
+          animate={
+            settled
+              ? { y: [70, -4, 1.5, 0], opacity: [0, 1, 1, 1], rotate: [-5, 1.5, -0.8, 0] }
+              : { y: 70, opacity: 0, rotate: -5 }
+          }
+          transition={
+            phase === "align"
+              ? { duration: 1.1, times: [0, 0.62, 0.84, 1], ease: "easeOut" }
+              : { duration: 0.01 }
+          }
+          style={{ originX: `${card.x + card.w / 2}px`, originY: `${card.y + card.h}px` }}
+        >
+          <rect
+            x={card.x} y={card.y} width={card.w} height={card.h} rx="6"
+            fill={DEVICE.card} stroke={DEVICE.cardEdge} strokeWidth="1"
+          />
+          <rect x={card.x} y={card.y} width={card.w} height="15" rx="6" fill="var(--color-xgreen-500)" opacity="0.3" />
+          <rect x={card.x} y={card.y + 9} width={card.w} height="6" fill="var(--color-xgreen-500)" opacity="0.3" />
+          <rect x={card.x + 8} y={card.y + 24} width="32" height="40" rx="3" fill={DEVICE.cardInk} opacity="0.25" />
+          <rect x={card.x + 47} y={card.y + 26} width="62" height="6" rx="3" fill={DEVICE.cardInk} opacity="0.3" />
+          <rect x={card.x + 47} y={card.y + 38} width="48" height="5" rx="2.5" fill={DEVICE.cardInk} opacity="0.18" />
+          <rect x={card.x + 47} y={card.y + 49} width="56" height="5" rx="2.5" fill={DEVICE.cardInk} opacity="0.18" />
+          <rect x={card.x + 8} y={card.y + 72} width="120" height="6" rx="3" fill={DEVICE.cardInk} opacity="0.18" />
+
+          <image
+            href={SAMPLE_ID_SRC}
+            x={card.x}
+            y={card.y}
+            width={card.w}
+            height={card.h}
+            preserveAspectRatio="xMidYMid slice"
+            clipPath={`url(#${clipId})`}
+          />
+        </motion.g>
+
+        {/* Alignment brackets — dim while settling, bright green once
+            "captured". */}
+        <motion.g
+          strokeWidth="3.5"
+          fill="none"
+          strokeLinecap="round"
+          initial={{ stroke: "rgba(255,255,255,0.45)" }}
+          animate={{ stroke: aligned ? "var(--color-xgreen-500)" : "rgba(255,255,255,0.45)" }}
+          transition={{ duration: 0.25 }}
+        >
+          <path d={`M${l} ${t + arm} V${t} H${l + arm}`} />
+          <path d={`M${r - arm} ${t} H${r} V${t + arm}`} />
+          <path d={`M${l} ${b - arm} V${b} H${l + arm}`} />
+          <path d={`M${r - arm} ${b} H${r} V${b - arm}`} />
+        </motion.g>
+
+        {/* Caption strip, mirroring the live camera's hint text. */}
+        <rect x="38" y="292" width="124" height="5" rx="2.5" fill="#fff" opacity="0.35" />
+        <rect x="56" y="304" width="88" height="5" rx="2.5" fill="#fff" opacity="0.2" />
+
+        {/* Shutter — the filled dot rises into place first, then the
+            outline ring follows it in a beat later. Two independent
+            one-shot entrances, not a shared group. No press animation on
+            capture; the flash overlay below is the only capture feedback. */}
+        <motion.circle
+          cx="100" cy="342" r="11" fill="#fff" opacity="0.85"
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: 0.85 }}
+          transition={{ duration: 0.45, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        />
+        <motion.circle
+          cx="100" cy="342" r="15" fill="none" stroke="#fff" strokeOpacity="0.6" strokeWidth="2.5"
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.45, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
+        />
+
+        {/* Dynamic Island */}
+        <rect x="76" y="24" width="48" height="14" rx="7" fill={DEVICE.island} />
+        {/* Home indicator */}
+        <rect x="72" y="374" width="56" height="4" rx="2" fill="#fff" opacity="0.5" />
+
+        {/* Shutter flash. */}
+        {phase === "capture" && (
+          <motion.rect
+            x="17" y="13" width="166" height="374" rx="26"
+            fill="#fff"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.9, 0] }}
+            transition={{ duration: 0.4, times: [0, 0.45, 1] }}
+          />
+        )}
+
+        {/* Glass glare over everything */}
+        <rect x="17" y="13" width="166" height="374" rx="26" fill={`url(#${clipId}-glare)`} pointerEvents="none" />
+      </svg>
     </motion.div>
-  );
-}
-
-function ViewfinderCorners({ aligned }: { aligned: boolean }) {
-  const base = "absolute h-3.5 w-3.5 border-[1.5px] transition-colors duration-300";
-  const tone = aligned ? "border-xgreen-500" : "border-white/50";
-  return (
-    <>
-      <span className={base + " left-0 top-0 border-l border-t rounded-tl-sm " + tone} />
-      <span className={base + " right-0 top-0 border-r border-t rounded-tr-sm " + tone} />
-      <span className={base + " bottom-0 left-0 border-b border-l rounded-bl-sm " + tone} />
-      <span className={base + " bottom-0 right-0 border-b border-r rounded-br-sm " + tone} />
-    </>
-  );
-}
-
-// Small skeleton card standing in for a physical ID at phone-screen scale —
-// no real text at this size, just the shape of one.
-function MiniIdCard() {
-  return (
-    <div className="flex gap-1.5 rounded-md bg-white/95 p-1.5 shadow-lg">
-      <div className="h-8 w-6 shrink-0 rounded-sm bg-slate-300" />
-      <div className="flex flex-1 flex-col justify-center gap-1">
-        <span className="h-1 w-full rounded-full bg-slate-300" />
-        <span className="h-1 w-4/5 rounded-full bg-slate-200" />
-        <span className="h-1 w-3/5 rounded-full bg-slate-200" />
-      </div>
-    </div>
   );
 }
 
