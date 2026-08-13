@@ -212,6 +212,12 @@ const iconAnimation: Variants = {
   },
 };
 
+const lgPrefix = (classes: string) =>
+  classes
+    .split(" ")
+    .map((c) => `lg:${c}`)
+    .join(" ");
+
 export function PillarGrid() {
   const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
   const [activeShowcaseIndex, setActiveShowcaseIndex] = useState<number | null>(null);
@@ -357,8 +363,8 @@ export function PillarGrid() {
                       // Desktop layout programmatic showcase cycle overrides
                       isActiveOnDesktop && cn(
                         "lg:-translate-y-1 lg:bg-white lg:dark:bg-x-raised",
-                        p.brandBorderClass,
-                        p.brandShadowOnHover
+                        lgPrefix(p.brandBorderClass),
+                        lgPrefix(p.brandShadowOnHover)
                       )
                     )}
                   >
@@ -378,10 +384,11 @@ export function PillarGrid() {
                       aria-hidden
                       className={cn(
                         "pointer-events-none absolute right-1 top-2.5 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out",
-                        isActiveOnMobile || isActiveOnDesktop
+                        isActiveOnMobile
                           ? p.numActiveMobileClass
                           : "text-x-fg/[0.20] dark:text-white/[0.28]",
-                        p.numDesktopClass
+                        p.numDesktopClass,
+                        isActiveOnDesktop && lgPrefix(p.numActiveMobileClass)
                       )}
                     >
                       {p.index}
@@ -389,7 +396,13 @@ export function PillarGrid() {
 
                     <motion.div
                       variants={iconAnimation}
-                      animate={isActiveOnMobile || isActiveOnDesktop ? "mobileActive" : undefined}
+                      animate={
+                        isActiveOnMobile
+                          ? "mobileActive"
+                          : isActiveOnDesktop
+                          ? "hover"
+                          : undefined
+                      }
                       className="relative z-10 w-fit origin-left"
                     >
                       <Icon className={"h-7 w-7 stroke-[1.5] " + p.iconClass} />

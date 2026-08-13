@@ -23,9 +23,14 @@ export function Marquee({
       className={"overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] " + className}
     >
       <motion.div
-        className="flex gap-16 whitespace-nowrap"
+        className="flex w-max gap-16 whitespace-nowrap"
         animate={{
-          x: direction === "left" ? [0, -1000] : [-1000, 0],
+          // Percentage, not a fixed pixel distance: -50% always lands
+          // exactly at the start of the second copy below, regardless of
+          // how wide the actual content is — the old fixed [0, -1000]
+          // assumed the tripled content summed to ~1000px, which visibly
+          // snapped/jumped for anything shorter or longer than that.
+          x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"],
         }}
         transition={{
           duration: speed,
@@ -34,10 +39,10 @@ export function Marquee({
         }}
         {...(pauseOnHover ? { whileHover: { animationPlayState: "paused" } } : {})}
       >
-        {/* Duplicate content so marquee loops seamlessly */}
-        {children}
-        {children}
-        {children}
+        {/* Exactly two copies — -50% is only the seamless loop point when
+            the track is precisely double the single-copy width. */}
+        <div className="flex shrink-0 gap-16">{children}</div>
+        <div className="flex shrink-0 gap-16" aria-hidden>{children}</div>
       </motion.div>
     </div>
   );
