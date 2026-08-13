@@ -56,7 +56,25 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       className={display.variable + " " + body.variable + " " + mono.variable}
     >
-      <head />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('xobriq-theme');
+                  var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (stored === 'dark' || (!stored && supportDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="bg-bg text-fg antialiased">
         {/* Meta Pixel moved out of the root layout — it now only renders
             from (public)/(auth)/(docs)'s own layouts (components/shared/
