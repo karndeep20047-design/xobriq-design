@@ -16,7 +16,7 @@ export default async function PublicLayout({
     <div className="flex min-h-screen flex-col">
       <MetaPixel nonce={nonce} />
       <PublicNavbar />
-      <main className="flex-1 relative z-10 bg-white dark:bg-[#09090b]">{children}</main>
+      <main className="flex-1 relative z-10 bg-white dark:bg-[#030303] shadow-[0_20px_50px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.85)]">{children}</main>
       <Footer />
       <Chatbot />
       <CookieBanner />
