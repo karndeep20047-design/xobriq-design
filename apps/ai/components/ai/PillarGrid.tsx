@@ -61,7 +61,7 @@ const PILLARS: Pillar[] = [
     stat: "120+ signals",
     Icon: ShieldCheck,
     iconClass: "text-teal-600 dark:text-teal-400",
-    hoverClass: "border-teal-500/30 dark:border-teal-400/30 shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
+    hoverClass: "border-teal-500/30 dark:border-teal-400/30 shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-teal-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(20,184,166,0.35)]",
     numClass: "text-teal-500/[0.22] dark:text-teal-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-teal-500/[0.22] lg:dark:group-hover:text-teal-400/[0.25]",
   },
   {
@@ -73,7 +73,7 @@ const PILLARS: Pillar[] = [
     stat: "24/7 autonomous",
     Icon: Bot,
     iconClass: "text-purple-600 dark:text-purple-400",
-    hoverClass: "border-purple-500/30 dark:border-purple-400/30 shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
+    hoverClass: "border-purple-500/30 dark:border-purple-400/30 shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-purple-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(168,85,247,0.35)]",
     numClass: "text-purple-500/[0.22] dark:text-purple-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-purple-500/[0.22] lg:dark:group-hover:text-purple-400/[0.25]",
   },
   {
@@ -85,7 +85,7 @@ const PILLARS: Pillar[] = [
     stat: "H200 cluster",
     Icon: Cpu,
     iconClass: "text-blue-600 dark:text-blue-400",
-    hoverClass: "border-blue-500/30 dark:border-blue-400/30 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
+    hoverClass: "border-blue-500/30 dark:border-blue-400/30 shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-blue-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(59,130,246,0.35)]",
     numClass: "text-blue-500/[0.22] dark:text-blue-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-blue-500/[0.22] lg:dark:group-hover:text-blue-400/[0.25]",
   },
   {
@@ -97,7 +97,7 @@ const PILLARS: Pillar[] = [
     stat: "Ex-Google AI",
     Icon: GitBranch,
     iconClass: "text-amber-600 dark:text-amber-400",
-    hoverClass: "border-amber-500/30 dark:border-amber-400/30 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
+    hoverClass: "border-amber-500/30 dark:border-amber-400/30 shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-amber-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(245,158,11,0.35)]",
     numClass: "text-amber-500/[0.22] dark:text-amber-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-amber-500/[0.22] lg:dark:group-hover:text-amber-400/[0.25]",
   },
   {
@@ -109,7 +109,7 @@ const PILLARS: Pillar[] = [
     stat: "ISO 27001",
     Icon: Lock,
     iconClass: "text-red-600 dark:text-red-400",
-    hoverClass: "border-red-500/30 dark:border-red-400/30 shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)] bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
+    hoverClass: "border-red-500/30 dark:border-red-400/30 shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] dark:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)] bg-white dark:bg-x-raised lg:border-x-line lg:dark:border-white/20 lg:shadow-none lg:bg-x-bg lg:hover:bg-white lg:dark:hover:bg-x-raised lg:hover:border-red-500/30 lg:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.18)] lg:dark:hover:shadow-[0_20px_50px_-12px_rgba(239,68,68,0.35)]",
     numClass: "text-red-500/[0.22] dark:text-red-400/[0.25] lg:text-x-fg/[0.12] lg:dark:text-white/20 lg:group-hover:text-red-500/[0.22] lg:dark:group-hover:text-red-400/[0.25]",
   },
 ];
@@ -179,7 +179,7 @@ export function PillarGrid() {
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
       <ParallaxLines />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-12 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-8 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"
