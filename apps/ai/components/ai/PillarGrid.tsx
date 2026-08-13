@@ -348,7 +348,7 @@ export function PillarGrid() {
                     <span
                       aria-hidden
                       className={cn(
-                        "pointer-events-none absolute right-1 top-2.5 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out lg:group-hover:-translate-y-1.5",
+                        "pointer-events-none absolute right-1 top-2.5 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out",
                         isActiveOnMobile
                           ? p.numActiveMobileClass
                           : "text-x-fg/[0.20] dark:text-white/[0.28]",
