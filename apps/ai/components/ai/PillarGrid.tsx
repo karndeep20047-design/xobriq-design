@@ -189,13 +189,9 @@ export function PillarGrid() {
         >
           <motion.p
             variants={fadeInUp}
-            className="inline-flex items-center gap-2 font-mono text-sm font-semibold uppercase tracking-[0.22em] text-x-accent sm:text-base"
+            className="font-mono text-sm font-semibold uppercase tracking-[0.22em] text-x-accent sm:text-base"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-x-accent opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-x-accent" />
-            </span>
-            What We Provide
+            our ecosystem
           </motion.p>
           <motion.h2
             variants={fadeInUp}
