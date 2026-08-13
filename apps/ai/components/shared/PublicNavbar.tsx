@@ -159,7 +159,7 @@ export function PublicNavbar() {
           className={
             "pointer-events-auto mx-auto flex items-center justify-between border-x border-b transition-[height,max-width,padding,border-radius,background-color,border-color,box-shadow] duration-300 ease-out " +
             (scrolled || mobileOpen
-              ? "h-14 sm:h-16 w-full max-w-6xl rounded-b-none border-slate-200/80 bg-white/95 px-4 sm:px-7 text-slate-900 shadow-md backdrop-blur-lg dark:border-white/15 dark:bg-[#0c0d12]/97 dark:text-white"
+              ? "h-14 sm:h-16 w-full max-w-6xl rounded-b-2xl border-slate-200/80 bg-white/95 px-4 sm:px-7 text-slate-900 shadow-md backdrop-blur-lg dark:border-white/15 dark:bg-[#0c0d12]/97 dark:text-white"
               : "h-20 w-full max-w-full rounded-b-none border-transparent bg-transparent px-5 sm:px-10 lg:px-14 text-slate-900 shadow-none backdrop-blur-none dark:text-white")
           }
         >
