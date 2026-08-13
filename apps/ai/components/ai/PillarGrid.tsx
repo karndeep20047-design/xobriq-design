@@ -178,9 +178,14 @@ function ParallaxLines() {
     >
       {/* Dot grid for texture, feathered at the same edges as the lines. */}
       <div className="x-grid-bg absolute inset-0 opacity-90" />
-      {/* Two soft static washes for depth — no motion, no blob shape. */}
+      {/* Soft static washes for depth — top, bottom, and sides. */}
       <div className="absolute inset-x-0 top-0 h-full bg-[radial-gradient(80%_60%_at_50%_0%,color-mix(in_srgb,var(--x-accent)_22%,transparent),transparent_70%)]" />
       <div className="absolute inset-x-0 bottom-0 h-full bg-[radial-gradient(65%_50%_at_85%_100%,color-mix(in_srgb,var(--x-accent-bright)_18%,transparent),transparent_70%)]" />
+      
+      {/* Side washes for depth — web layout only */}
+      <div className="hidden lg:block absolute inset-y-0 left-0 w-full bg-[radial-gradient(35%_60%_at_0%_50%,color-mix(in_srgb,var(--x-accent)_16%,transparent),transparent_70%)]" />
+      <div className="hidden lg:block absolute inset-y-0 right-0 w-full bg-[radial-gradient(35%_60%_at_100%_50%,color-mix(in_srgb,var(--x-accent-bright)_16%,transparent),transparent_70%)]" />
+
       {lines.map((l, i) => (
         <motion.div
           key={i}

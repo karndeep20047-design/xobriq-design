@@ -29,42 +29,67 @@ function KycHero() {
     <section className="relative overflow-hidden px-5 py-20 sm:px-6 lg:py-28">
       <div className="tech-grid-light pointer-events-none absolute inset-0 opacity-40" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-xgreen-500/10 blur-[140px]" />
-      <div className="container-narrow relative text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          Xobriq KYC: <span className="brand-gradient">Identity Verified in Seconds</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-6 max-w-2xl text-base leading-7 text-enterprise-fg-muted sm:text-lg"
-        >
-          AI-powered identity verification backed by IPRS, Kenya&apos;s national identity registry. National ID, KRA PIN, phone, and business (KYB) checks — matched against a live government record, not a guess.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
-        >
-          <Link href="/register" className="glow-hover inline-flex items-center gap-2 rounded-lg bg-enterprise-primary px-6 py-3 text-sm font-semibold text-enterprise-on-primary transition hover:bg-enterprise-primary-hover">
-            <IdCard className="h-4 w-4" /> Get API Access
-          </Link>
-          <Link href="/docs" className="inline-flex items-center gap-2 rounded-lg border border-enterprise-border bg-enterprise-bg-low px-6 py-3 text-sm font-semibold hover:border-enterprise-border-strong">
-            <FileText className="h-4 w-4" /> Documentation
-          </Link>
-        </motion.div>
+      <div className="container-medium relative grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-8 xl:gap-14">
+        <div className="text-center lg:text-left">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="label-caps-thin inline-flex items-center gap-2 text-xgreen-500"
+          >
+            <span className="status-dot" />
+            OCR + Live Registry Match
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+          >
+            Xobriq KYC: <span className="brand-gradient">Identity Verified in Seconds</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mx-auto mt-6 max-w-xl text-base leading-7 text-enterprise-fg-muted sm:text-lg lg:mx-0"
+          >
+            AI-powered identity verification backed by IPRS, Kenya&apos;s national identity registry. National ID, KRA PIN, phone, and business (KYB) checks, matched against a live government record, not a guess.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
+          >
+            <Link href="/register" className="glow-hover inline-flex items-center gap-2 rounded-lg bg-enterprise-primary px-6 py-3 text-sm font-semibold text-enterprise-on-primary transition hover:bg-enterprise-primary-hover">
+              <IdCard className="h-4 w-4" /> Get API Access
+            </Link>
+            <Link href="/docs" className="inline-flex items-center gap-2 rounded-lg border border-enterprise-border bg-enterprise-bg-low px-6 py-3 text-sm font-semibold hover:border-enterprise-border-strong">
+              <FileText className="h-4 w-4" /> Documentation
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.28 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-enterprise-fg-subtle lg:justify-start"
+          >
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Live IPRS registry match</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Under 2s decisions</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Sandbox in minutes</span>
+          </motion.div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mx-auto mt-14 max-w-4xl text-left"
+          className="mx-auto w-full max-w-md text-left lg:max-w-none"
         >
           <KycProcessVisual />
         </motion.div>
