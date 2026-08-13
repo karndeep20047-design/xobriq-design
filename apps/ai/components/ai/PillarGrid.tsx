@@ -259,7 +259,6 @@ export function PillarGrid() {
   // Idle showcase sweep on desktop viewports (run only when the grid isn't manually hovered)
   useEffect(() => {
     if (typeof window === "undefined" || window.innerWidth < 1024 || isHoveredContainer) {
-      setActiveSweepIndex(null);
       return;
     }
 
@@ -271,6 +270,16 @@ export function PillarGrid() {
 
     return () => clearInterval(interval);
   }, [isHoveredContainer]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setActiveSweepIndex(null);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-x-bg py-24 sm:py-32 transition-colors duration-150">
@@ -307,7 +316,10 @@ export function PillarGrid() {
           whileInView="visible"
           viewport={revealViewport}
           variants={staggerFast}
-          onMouseEnter={() => setIsHoveredContainer(true)}
+          onMouseEnter={() => {
+            setIsHoveredContainer(true);
+            setActiveSweepIndex(null);
+          }}
           onMouseLeave={() => setIsHoveredContainer(false)}
           className="grid grid-cols-1 gap-0 sm:gap-5 md:grid-cols-3 lg:grid-cols-5"
         >
@@ -342,17 +354,31 @@ export function PillarGrid() {
                       cardBorderClass,
                       
                       // ─── Mobile Viewport Styles ───
-                      p.brandBorderClass,
+                      p.brandBorderClass.split(" ").map(cls => `max-lg:${cls}`).join(" "),
                       isActiveOnMobile
-                        ? cn(p.brandShadowOnHover, "bg-white dark:bg-x-raised")
-                        : cn(p.brandShadowOffHover, "bg-white dark:bg-x-bg"),
+                        ? cn(
+                            p.brandShadowOnHover.split(" ").map(cls => `max-lg:${cls}`).join(" "),
+                            "max-lg:bg-white max-lg:dark:bg-x-raised"
+                          )
+                        : cn(
+                            p.brandShadowOffHover.split(" ").map(cls => `max-lg:${cls}`).join(" "),
+                            "max-lg:bg-white max-lg:dark:bg-x-bg"
+                          ),
                       
                       // ─── Desktop Viewport Styles (Default & Sweep) ───
                       "lg:bg-x-bg",
-                      "lg:" + p.brandShadowOffHover.split(" ")[0] + " lg:dark:" + p.brandShadowOffHover.split(" ")[1],
                       isSweptOnDesktop
-                        ? cn("lg:" + p.brandBorderClass.split(" ")[0], "lg:dark:" + p.brandBorderClass.split(" ")[1])
-                        : "lg:border-x-line lg:dark:border-white/20",
+                        ? cn(
+                            "lg:" + p.brandBorderClass.split(" ")[0], 
+                            "lg:dark:" + p.brandBorderClass.split(" ")[1],
+                            "lg:" + p.brandShadowOnHover.split(" ")[0], 
+                            "lg:dark:" + p.brandShadowOnHover.split(" ")[1]
+                          )
+                        : cn(
+                            "lg:border-x-line lg:dark:border-white/20",
+                            "lg:" + p.brandShadowOffHover.split(" ")[0], 
+                            "lg:dark:" + p.brandShadowOffHover.split(" ")[1]
+                          ),
 
                       // ─── Desktop Hover Styles ───
                       "lg:hover:-translate-y-1 lg:hover:bg-white lg:dark:hover:bg-x-raised",
@@ -376,8 +402,8 @@ export function PillarGrid() {
                       className={cn(
                         "pointer-events-none absolute right-1 top-2.5 lg:top-[-6px] select-none font-display text-[4.75rem] font-bold leading-none transition-all duration-500 ease-out",
                         isActiveOnMobile
-                          ? p.numActiveMobileClass
-                          : "text-x-fg/[0.20] dark:text-white/[0.28]",
+                          ? p.numActiveMobileClass.split(" ").map(cls => `max-lg:${cls}`).join(" ")
+                          : "max-lg:text-x-fg/[0.20] max-lg:dark:text-white/[0.28]",
                         isSweptOnDesktop
                           ? cn("lg:" + p.numBrandClass.split(" ")[0], "lg:dark:" + p.numBrandClass.split(" ")[1])
                           : "lg:text-x-fg/[0.20] lg:dark:text-white/[0.28]",
