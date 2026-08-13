@@ -85,12 +85,11 @@ const socials = [
 
 export function Footer() {
   return (
-    // This wrapper acts as the spacer at the end of the document flow,
-    // matches the height of the fixed footer on each responsive breakpoint
-    <div className="h-[950px] sm:h-[620px] lg:h-[450px] w-full pointer-events-none relative z-0">
+    // On mobile, this wrapper has h-auto and relative positioning. On desktop, it acts as a spacer.
+    <div className="h-auto lg:h-[450px] w-full lg:pointer-events-none relative lg:z-0">
       
-      {/* The actual footer sits fixed at the bottom with z-0, revealed as you scroll */}
-      <footer className="fixed bottom-0 left-0 right-0 z-0 h-[950px] sm:h-[620px] lg:h-[450px] w-full bg-slate-50 dark:bg-[#070708] border-t border-slate-200/80 dark:border-zinc-800/80 pointer-events-auto transition-colors duration-150">
+      {/* On mobile, this is a standard relative footer. On desktop, it is fixed at the bottom. */}
+      <footer className="relative lg:fixed lg:bottom-0 lg:left-0 lg:right-0 lg:z-0 h-auto lg:h-[450px] w-full bg-slate-50 dark:bg-[#070708] border-t border-slate-200/80 dark:border-zinc-800/80 pointer-events-auto transition-colors duration-150">
         <div className="mx-auto max-w-7xl px-6 pt-12 lg:pt-16 pb-8 h-full flex flex-col justify-between">
           
           {/* Top Grid Area */}
