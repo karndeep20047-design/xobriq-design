@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import "./globals.css";
 
 // Self-hosted via next/font (built at compile time, served from our own
 // origin) rather than xobriq.com's Google Fonts <link>/@import approach —
-// same fonts, but no external request at runtime and no CSP font-src/
+// same fonts, but no CSP font-src/
 // style-src allowance needed for fonts.googleapis.com.
 // 2026 redesign type system — a three-part pairing:
 //   Space Grotesk  display/headings — a technical grotesque with real
@@ -57,20 +58,20 @@ export default function RootLayout({
       className={display.variable + " " + body.variable + " " + mono.variable}
     >
       <head>
-        <script
+        <Script
+          id="theme-initializer"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              (function() {
-                try {
-                  var stored = localStorage.getItem('xobriq-theme');
-                  var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (stored === 'dark' || (!stored && supportDark)) {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })();
+              try {
+                var stored = localStorage.getItem('xobriq-theme');
+                var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (stored === 'dark' || (!stored && supportDark)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
             `,
           }}
         />
