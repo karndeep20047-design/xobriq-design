@@ -7,7 +7,7 @@ import { KycProcessVisual } from "@/components/ai/KycProcessVisual";
 import { KycDashboardDemo } from "@/components/ai/KycDashboardDemo";
 import { docMeta, DOC_TYPE_ORDER } from "@/lib/kyc/document-types";
 import {
-  IdCard, Phone, Building2, FileText, Database, ShieldCheck,
+  Phone, Building2, Database, ShieldCheck,
   CheckCircle2, Code2, Gauge, UserCheck, ScanFace,
 } from "lucide-react";
 
@@ -24,64 +24,36 @@ export default function KycPage() {
   );
 }
 
-function KycHeroBackground() {
-  return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Radial Emerald aura */}
-      <div className="absolute top-12 left-1/4 w-[600px] h-[600px] rounded-full bg-emerald-500/[0.08] dark:bg-emerald-500/[0.12] blur-[150px] pointer-events-none" />
-      <div className="absolute top-36 right-1/4 w-[500px] h-[500px] rounded-full bg-teal-500/[0.06] dark:bg-teal-500/[0.08] blur-[120px] pointer-events-none" />
-      
-      {/* Cyber Circuit grid line pattern */}
-      <svg
-        className="absolute inset-0 w-full h-full opacity-[0.03] dark:opacity-[0.07] stroke-emerald-500"
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-      >
-        <defs>
-          <pattern id="kyc-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#kyc-grid)" />
-      </svg>
-      
-      {/* Soft abstract diagonal beams */}
-      <div className="absolute -left-1/4 top-0 w-1/2 h-full bg-gradient-to-tr from-emerald-500/0 via-emerald-500/[0.02] to-emerald-500/0 transform rotate-12" />
-    </div>
-  );
-}
-
 function KycHero() {
   return (
-    <section className="relative overflow-hidden px-5 py-20 sm:px-6 lg:py-28 border-b border-enterprise-border/10">
-      <KycHeroBackground />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 z-10">
-        <div className="text-center lg:text-left">
+    <section className="relative overflow-hidden bg-[#040B1D] text-white border-b border-blue-500/10">
+      <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 min-h-[600px] lg:min-h-[685px]">
+        
+        {/* Left Column: Text Content with darker tone overlay */}
+        <div className="flex flex-col justify-center px-6 py-16 lg:py-24 lg:pr-16 lg:pl-8 lg:border-r lg:border-blue-500/10 bg-[#030918]/60 text-center lg:text-left z-10">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="label-caps-thin inline-flex items-center gap-2 text-xgreen-500"
+            className="text-emerald-500 font-mono text-xs font-semibold uppercase tracking-widest"
           >
-            <span className="status-dot" />
-            OCR + Live Registry Match
+            KYC Solution
           </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+            className="mt-4 text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] text-white"
           >
-            Xobriq KYC: <span className="brand-gradient">Identity Verified in Seconds</span>
+            Xobriq KYC: <span className="underline decoration-emerald-500 decoration-3 underline-offset-8">Identity Verified</span> in Seconds
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mx-auto mt-6 max-w-xl text-base leading-7 text-enterprise-fg-muted sm:text-lg lg:mx-0"
+            className="mt-8 text-base leading-relaxed text-slate-300 max-w-xl mx-auto lg:mx-0"
           >
             AI-powered identity verification backed by IPRS, Kenya&apos;s national identity registry. National ID, KRA PIN, phone, and business (KYB) checks, matched against a live government record, not a guess.
           </motion.p>
@@ -90,13 +62,19 @@ function KycHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto"
           >
-            <Link href="/register" className="glow-hover inline-flex items-center gap-2 rounded-lg bg-enterprise-primary px-6 py-3 text-sm font-semibold text-enterprise-on-primary transition hover:bg-enterprise-primary-hover">
-              <IdCard className="h-4 w-4" /> Get API Access
+            <Link
+              href="/register"
+              className="w-full sm:w-auto text-center rounded-lg bg-emerald-600 hover:bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.02]"
+            >
+              Get API Access
             </Link>
-            <Link href="/docs" className="inline-flex items-center gap-2 rounded-lg border border-enterprise-border bg-enterprise-bg-low px-6 py-3 text-sm font-semibold hover:border-enterprise-border-strong">
-              <FileText className="h-4 w-4" /> Documentation
+            <Link
+              href="/docs"
+              className="w-full sm:w-auto text-center rounded-lg border border-slate-700 bg-slate-900/60 hover:bg-slate-800 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:text-white"
+            >
+              Documentation
             </Link>
           </motion.div>
 
@@ -104,22 +82,26 @@ function KycHero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.28 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-enterprise-fg-subtle lg:justify-start"
+            className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs text-slate-400"
           >
-            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Live IPRS registry match</span>
-            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Under 2s decisions</span>
-            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Sandbox in minutes</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Live IPRS registry match</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Under 2s decisions</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Sandbox in minutes</span>
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mx-auto w-full max-w-md text-left lg:max-w-none"
-        >
-          <KycProcessVisual />
-        </motion.div>
+        {/* Right Column: Floating Animation Panel */}
+        <div className="flex items-center justify-center p-8 lg:p-16 bg-transparent z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="w-full max-w-md lg:max-w-none"
+          >
+            <KycProcessVisual />
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );

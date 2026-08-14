@@ -7,8 +7,8 @@
 //    grid for Products/Developers/Company/Legal — was a single grid with the
 //    brand block as a "5th column", which meant every section (including
 //    each link group) stacked one-per-row on mobile: a lot of scrolling for
-//    not much information per screen. Social icons moved up under the brand
-//    block (single location, not duplicated in the bottom bar).
+//    not much information per screen. Social icons live in the bottom bar,
+//    left of the copyright/status line (single location, not duplicated).
 //  - Theme-reactive: was permanently dark regardless of the site's light/
 //    dark toggle; every colour below now has a light-mode default plus a
 //    dark: override.
@@ -141,22 +141,6 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Social icons — single location (was duplicated in the
-                bottom bar before), right under contact info. */}
-            <div className="flex items-center gap-5 pt-1">
-              {socials.map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="text-slate-500 hover:text-[#3ca2fa] transition-colors dark:text-slate-400"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Link columns — 2-up sub-grid on mobile, below the brand block.
@@ -191,24 +175,43 @@ export function Footer() {
 
         <hr className="border-t border-slate-200 mt-4 mb-8 dark:border-blue-500/10" />
 
-        {/* Footer bottom — copyright/status only now that social icons live
-            under the brand block, so this no longer needs a two-item
-            justify-between row. */}
-        <div className="flex flex-col items-center justify-center gap-4 text-sm text-slate-500 dark:text-slate-400 sm:flex-row text-xs">
-          <p className="text-center">
-            &copy; {new Date().getFullYear()} Xobriq Technologies Limited.{" "}
-            <span className="text-teal-600 dark:text-teal-400 font-semibold tracking-wide">Data. AI. Clarity.</span>
-          </p>
-          <span className="hidden sm:inline text-slate-300 dark:text-slate-700">|</span>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>All systems operational</span>
+        {/* Footer bottom — social icons (left) and copyright/status (right)
+            on one full-width row. Socials used to be nested inside the
+            narrow Brand column, which was too tight for the copyright line
+            to share without wrapping onto several lines — this row isn't
+            confined to that column's width, so both sit on one line. */}
+        <div className="flex flex-col items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400 lg:flex-row text-xs">
+          <div className="flex items-center gap-5">
+            {socials.map(({ Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="text-slate-500 hover:text-[#3ca2fa] transition-colors dark:text-slate-400"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
+
+          <div className="flex flex-col items-center gap-4 sm:flex-row">
+            <p className="text-center">
+              &copy; {new Date().getFullYear()} Xobriq Technologies Limited.{" "}
+              <span className="text-teal-600 dark:text-teal-400 font-semibold tracking-wide">Data. AI. Clarity.</span>
+            </p>
+            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">|</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>All systems operational</span>
+              </div>
+              <span className="text-slate-300 dark:text-slate-700">|</span>
+              <span>
+                Made in Nairobi <span className="text-[10px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-slate-500">ke</span>
+              </span>
             </div>
-            <span className="text-slate-300 dark:text-slate-700">|</span>
-            <span>
-              Made in Nairobi <span className="text-[10px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-slate-500">ke</span>
-            </span>
           </div>
         </div>
 
