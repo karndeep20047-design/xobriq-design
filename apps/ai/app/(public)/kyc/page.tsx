@@ -57,7 +57,10 @@ function KycHero() {
                 />
               </svg>
             </span>{" "}
-            in Seconds
+            in{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
+              Seconds
+            </span>
           </motion.h1>
 
           <motion.p
