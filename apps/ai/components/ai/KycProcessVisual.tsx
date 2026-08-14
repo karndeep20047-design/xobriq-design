@@ -57,25 +57,6 @@ const PHASE_DURATION_MS: Record<Phase, number> = {
   hold: 2000,
 };
 
-function TabletMockup({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative mx-auto w-full max-w-xl z-10">
-      {/* Outer Tablet Frame Bezel */}
-      <div className="relative border-[8px] border-slate-800/90 bg-zinc-900 rounded-3xl p-3 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] shadow-emerald-500/5">
-        {/* Front camera lens */}
-        <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-950 border border-slate-700/50" />
-
-        {/* Inner Screen Display Surface */}
-        <div className="bg-transparent rounded-2xl border border-slate-800/80 p-5 sm:p-7 relative overflow-hidden min-h-[340px] flex items-center justify-center">
-          {/* Dynamic glass glow layer */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/[0.01] via-transparent to-teal-500/[0.01] pointer-events-none" />
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function KycProcessVisual() {
   const reduceMotion = useReducedMotion();
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -98,37 +79,21 @@ export function KycProcessVisual() {
   const showPhone = phase === "phoneIn" || phase === "align" || phase === "capture";
 
   return (
-    <div className="relative mx-auto w-full max-w-xl z-10 flex items-center justify-center min-h-[380px]">
+    <div className="relative min-h-[360px] flex items-center justify-center w-full">
       {reduceMotion ? (
-        <TabletMockup>
+        <div className="w-full">
           <StaticResult />
-        </TabletMockup>
+        </div>
       ) : (
         <AnimatePresence mode="wait">
           {showPhone ? (
-            <motion.div
-              key={`phone-${round}`}
-              className="flex justify-center w-full py-4"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.4 }}
-            >
+            <motion.div key={`phone-${round}`} className="flex justify-center w-full py-4">
               <PhoneMockup phase={phase} />
             </motion.div>
           ) : (
-            <motion.div
-              key={`scan-${round}`}
-              className="w-full"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.4 }}
-            >
-              <TabletMockup>
-                <ScanResult />
-              </TabletMockup>
-            </motion.div>
+            <div className="w-full">
+              <ScanResult key={`scan-${round}`} />
+            </div>
           )}
         </AnimatePresence>
       )}
@@ -228,7 +193,7 @@ function PhoneMockup({ phase }: { phase: Phase }) {
         {/* Titanium rail + bezel. No fill for the screen itself — the card
             sits directly against the section's own backdrop showing through. */}
         <rect x="8" y="4" width="184" height="392" rx="34" fill={`url(#${clipId}-rail)`} />
-        <rect x="12" y="8" width="176" height="384" rx="30" fill="transparent" stroke={DEVICE.bezel} strokeWidth="3.5" />
+        <rect x="12" y="8" width="176" height="384" rx="30" fill={DEVICE.bezel} />
         <rect x="17" y="13" width="166" height="374" rx="26" fill="none" />
 
         {/* The ID card: drawn fallback first, the specimen image layered over
@@ -347,9 +312,9 @@ function ScanResult() {
     >
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-slate-800/50 bg-transparent p-4">
-            <div className="grid h-full w-14 shrink-0 place-items-center rounded-lg border border-slate-800/40 bg-transparent sm:w-16">
-              <User className="h-6 w-6 text-enterprise-fg-subtle" />
+          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22]/80 dark:bg-[#070E22]/90 p-4 shadow-xl backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center">
+              <User className="h-6 w-6 text-emerald-500/80" />
             </div>
             <div className="flex flex-1 flex-col justify-between py-0.5">
               {FIELDS.map((f, i) => (
@@ -398,7 +363,7 @@ function ScanResult() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.35, delay: FIELD_DELAYS[i], ease: "easeOut" }}
-                className="flex items-center gap-3 rounded-lg border border-slate-800/50 bg-transparent px-3 py-2"
+                className="flex items-center gap-3 rounded-lg border border-enterprise-border bg-enterprise-bg-lower px-3 py-2"
               >
                 <Icon className="h-4 w-4 shrink-0 text-xgreen-500" />
                 <span className="text-xs font-medium text-enterprise-fg-muted">{f.label}</span>
@@ -413,7 +378,7 @@ function ScanResult() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: VERIFIED_DELAY, ease: "easeOut" }}
-        className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-transparent px-4 py-3"
+        className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-xgreen-500/10 px-4 py-3"
       >
         <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-xgreen-500">
           <CheckCircle2 className="h-4 w-4 text-white" />
@@ -434,9 +399,9 @@ function StaticResult() {
     <div>
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-slate-800/50 bg-transparent p-4">
-            <div className="grid h-full w-14 shrink-0 place-items-center rounded-lg border border-slate-800/40 bg-transparent sm:w-16">
-              <User className="h-6 w-6 text-enterprise-fg-subtle" />
+          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22]/80 dark:bg-[#070E22]/90 p-4 shadow-xl backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center">
+              <User className="h-6 w-6 text-emerald-500/80" />
             </div>
             <div className="flex flex-1 flex-col justify-between py-0.5">
               {FIELDS.map((f) => (
@@ -453,7 +418,7 @@ function StaticResult() {
           {FIELDS.map((f) => {
             const Icon = f.Icon;
             return (
-              <div key={f.label} className="flex items-center gap-3 rounded-lg border border-slate-800/50 bg-transparent px-3 py-2">
+              <div key={f.label} className="flex items-center gap-3 rounded-lg border border-enterprise-border bg-enterprise-bg-lower px-3 py-2">
                 <Icon className="h-4 w-4 shrink-0 text-xgreen-500" />
                 <span className="text-xs font-medium text-enterprise-fg-muted">{f.label}</span>
                 <CheckCircle2 className="ml-auto h-3.5 w-3.5 shrink-0 text-xgreen-500" />
@@ -462,7 +427,7 @@ function StaticResult() {
           })}
         </div>
       </div>
-      <div className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-transparent px-4 py-3">
+      <div className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-xgreen-500/10 px-4 py-3">
         <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-xgreen-500">
           <CheckCircle2 className="h-4 w-4 text-white" />
         </div>
