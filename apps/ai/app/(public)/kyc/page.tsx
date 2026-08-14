@@ -206,6 +206,81 @@ const VERIFICATION_TYPES: VerificationType[] = [
   { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients.", accent: "orange" },
 ];
 
+function MiniCardVisual({ accent }: { accent: string }) {
+  if (accent === "blue") {
+    return (
+      <div className="mt-5 h-20 w-full rounded-xl bg-blue-950/[0.04] dark:bg-slate-950/40 border border-blue-500/10 flex items-center justify-center relative overflow-hidden">
+        <div className="w-16 h-10 rounded border border-blue-500/30 bg-blue-500/5 relative flex items-center justify-center">
+          <UserCheck className="h-5 w-5 text-blue-500/50" />
+          <motion.div
+            className="absolute inset-x-0 h-[2px] bg-blue-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+            animate={{ top: ["10%", "90%", "10%"] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+        </div>
+      </div>
+    );
+  }
+  if (accent === "red") {
+    return (
+      <div className="mt-5 h-20 w-full rounded-xl bg-red-950/[0.04] dark:bg-slate-950/40 border border-red-500/10 flex items-center justify-center relative overflow-hidden">
+        <div className="relative w-12 h-12 flex items-center justify-center">
+          <ScanFace className="h-6 w-6 text-red-500/60 relative z-10" />
+          <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-2 p-1.5">
+            {[...Array(9)].map((_, i) => (
+              <motion.span
+                key={i}
+                className="h-1 w-1 rounded-full bg-red-400"
+                animate={{ scale: [1, 1.8, 1], opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (accent === "teal") {
+    return (
+      <div className="mt-5 h-20 w-full rounded-xl bg-teal-950/[0.04] dark:bg-slate-950/40 border border-teal-500/10 flex items-center justify-center relative overflow-hidden">
+        <div className="relative flex items-center justify-center w-12 h-12">
+          <Phone className="h-5 w-5 text-teal-500/60 z-10" />
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full border border-teal-400/40"
+              style={{ width: "20px", height: "20px" }}
+              animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.6, ease: "easeOut" }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (accent === "orange") {
+    return (
+      <div className="mt-5 h-20 w-full rounded-xl bg-orange-950/[0.04] dark:bg-slate-950/40 border border-orange-500/10 flex items-center justify-center relative overflow-hidden">
+        <div className="relative flex items-center justify-between w-24 h-12 px-2">
+          <div className="w-3.5 h-3.5 rounded-full bg-orange-950/20 border border-orange-500/40 flex items-center justify-center">
+            <span className="h-1 w-1 rounded-full bg-orange-400" />
+          </div>
+          <div className="absolute left-4 right-4 h-[1px] bg-gradient-to-r from-orange-500/20 via-orange-500/80 to-orange-500/20 overflow-hidden">
+            <motion.div
+              className="h-full w-4 bg-orange-400/60 shadow-[0_0_6px_#f97316]"
+              animate={{ left: ["-20%", "120%"] }}
+              style={{ position: "absolute" }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+          <Building2 className="h-5 w-5 text-orange-500/60 z-10" />
+        </div>
+      </div>
+    );
+  }
+  return null;
+}
+
 function VerificationTypes() {
   return (
     <section className="px-5 py-20 sm:px-6 lg:py-24">
@@ -247,6 +322,7 @@ function VerificationTypes() {
                 </div>
                 <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
+                <MiniCardVisual accent={v.accent} />
               </motion.div>
             );
           })}
