@@ -108,8 +108,9 @@ function DashboardBody() {
         <StatCard label="Fraud Alerts" value={2} tone="red" />
       </div>
 
-      <div className="relative mt-6 min-h-[76px] overflow-hidden rounded-2xl border border-enterprise-border bg-enterprise-bg-lower p-5">
-        <AnimatePresence mode="wait">
+      <div className="relative mt-6 h-[96px] sm:h-[76px] overflow-hidden rounded-2xl border border-enterprise-border bg-enterprise-bg-lower px-5 flex items-center">
+        <div className="w-full">
+          <AnimatePresence mode="wait">
           {phase === "submitting" ? (
             <motion.div key="submitting" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="flex items-center gap-3">
               <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-enterprise-primary/10">
@@ -145,6 +146,7 @@ function DashboardBody() {
         </AnimatePresence>
       </div>
     </div>
+  </div>
   );
 }
 
