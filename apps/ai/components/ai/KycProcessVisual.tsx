@@ -312,25 +312,25 @@ function ScanResult() {
     >
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22]/80 dark:bg-[#070E22]/90 p-4 shadow-xl backdrop-blur-md">
+          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] p-4 shadow-xl">
             <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center">
               <User className="h-6 w-6 text-emerald-500/80" />
             </div>
             <div className="flex flex-1 flex-col justify-between py-0.5">
               {FIELDS.map((f, i) => (
                 <div key={f.label} className="relative">
-                  <p className="label-caps-thin text-enterprise-fg-subtle/70">{f.label}</p>
+                  <p className="label-caps-thin text-slate-400/80">{f.label}</p>
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.2, delay: FIELD_DELAYS[i] }}
-                    className="text-sm font-semibold tabular-nums text-enterprise-fg"
+                    className="text-sm font-semibold tabular-nums text-white"
                   >
                     {f.value}
                   </motion.p>
                   <motion.span
                     aria-hidden
-                    className="pointer-events-none absolute -inset-x-1.5 -inset-y-0.5 rounded-md border border-xgreen-500"
+                    className="pointer-events-none absolute -inset-x-1.5 -inset-y-0.5 rounded-md border border-emerald-500"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0, 0.9, 0] }}
                     transition={{ duration: 0.5, delay: FIELD_DELAYS[i], times: [0, 0.2, 1] }}
@@ -354,7 +354,7 @@ function ScanResult() {
         </div>
 
         <div className="space-y-2.5">
-          <p className="label-caps-thin text-enterprise-fg-subtle">Extracted &amp; matched</p>
+          <p className="label-caps-thin text-slate-400">Extracted &amp; matched</p>
           {FIELDS.map((f, i) => {
             const Icon = f.Icon;
             return (
@@ -363,11 +363,11 @@ function ScanResult() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.35, delay: FIELD_DELAYS[i], ease: "easeOut" }}
-                className="flex items-center gap-3 rounded-lg border border-enterprise-border bg-enterprise-bg-lower px-3 py-2"
+                className="flex items-center gap-3 rounded-lg border border-emerald-500/20 bg-[#050E22] px-3 py-2"
               >
-                <Icon className="h-4 w-4 shrink-0 text-xgreen-500" />
-                <span className="text-xs font-medium text-enterprise-fg-muted">{f.label}</span>
-                <CheckCircle2 className="ml-auto h-3.5 w-3.5 shrink-0 text-xgreen-500" />
+                <Icon className="h-4 w-4 shrink-0 text-emerald-500" />
+                <span className="text-xs font-medium text-slate-200">{f.label}</span>
+                <CheckCircle2 className="ml-auto h-3.5 w-3.5 shrink-0 text-emerald-500" />
               </motion.div>
             );
           })}
@@ -378,14 +378,14 @@ function ScanResult() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: VERIFIED_DELAY, ease: "easeOut" }}
-        className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-xgreen-500/10 px-4 py-3"
+        className="relative mt-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3"
       >
-        <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-xgreen-500">
+        <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-emerald-500">
           <CheckCircle2 className="h-4 w-4 text-white" />
         </div>
         <div>
-          <p className="text-sm font-semibold text-xgreen-500">Verified against IPRS</p>
-          <p className="text-xs text-enterprise-fg-muted">National ID &middot; approved in 1.8s</p>
+          <p className="text-sm font-semibold text-emerald-500">Verified against IPRS</p>
+          <p className="text-xs text-slate-300">National ID &middot; approved in 1.8s</p>
         </div>
       </motion.div>
     </motion.div>
@@ -399,41 +399,41 @@ function StaticResult() {
     <div>
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22]/80 dark:bg-[#070E22]/90 p-4 shadow-xl backdrop-blur-md">
+          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] p-4 shadow-xl">
             <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center">
               <User className="h-6 w-6 text-emerald-500/80" />
             </div>
             <div className="flex flex-1 flex-col justify-between py-0.5">
               {FIELDS.map((f) => (
                 <div key={f.label}>
-                  <p className="label-caps-thin text-enterprise-fg-subtle/70">{f.label}</p>
-                  <p className="text-sm font-semibold tabular-nums text-enterprise-fg">{f.value}</p>
+                  <p className="label-caps-thin text-slate-400/80">{f.label}</p>
+                  <p className="text-sm font-semibold tabular-nums text-white">{f.value}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
         <div className="space-y-2.5">
-          <p className="label-caps-thin text-enterprise-fg-subtle">Extracted &amp; matched</p>
+          <p className="label-caps-thin text-slate-400">Extracted &amp; matched</p>
           {FIELDS.map((f) => {
             const Icon = f.Icon;
             return (
-              <div key={f.label} className="flex items-center gap-3 rounded-lg border border-enterprise-border bg-enterprise-bg-lower px-3 py-2">
-                <Icon className="h-4 w-4 shrink-0 text-xgreen-500" />
-                <span className="text-xs font-medium text-enterprise-fg-muted">{f.label}</span>
-                <CheckCircle2 className="ml-auto h-3.5 w-3.5 shrink-0 text-xgreen-500" />
+              <div key={f.label} className="flex items-center gap-3 rounded-lg border border-emerald-500/20 bg-[#050E22] px-3 py-2">
+                <Icon className="h-4 w-4 shrink-0 text-emerald-500" />
+                <span className="text-xs font-medium text-slate-200">{f.label}</span>
+                <CheckCircle2 className="ml-auto h-3.5 w-3.5 shrink-0 text-emerald-500" />
               </div>
             );
           })}
         </div>
       </div>
-      <div className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-xgreen-500/10 px-4 py-3">
-        <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-xgreen-500">
+      <div className="relative mt-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3">
+        <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-emerald-500">
           <CheckCircle2 className="h-4 w-4 text-white" />
         </div>
         <div>
-          <p className="text-sm font-semibold text-xgreen-500">Verified against IPRS</p>
-          <p className="text-xs text-enterprise-fg-muted">National ID &middot; approved in 1.8s</p>
+          <p className="text-sm font-semibold text-emerald-500">Verified against IPRS</p>
+          <p className="text-xs text-slate-300">National ID &middot; approved in 1.8s</p>
         </div>
       </div>
     </div>
