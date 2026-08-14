@@ -193,7 +193,7 @@ export function Footer() {
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <p className="text-center">
               &copy; {new Date().getFullYear()} Xobriq Technologies Limited.{" "}
-              <span className="text-teal-600 dark:text-teal-400 font-semibold tracking-wide">Data. AI. Clarity.</span>
+              <span className="text-teal-600 dark:text-teal-400 font-semibold tracking-wide italic">intelligence at scale</span>
             </p>
             <span className="hidden sm:inline text-slate-300 dark:text-slate-700">|</span>
             <div className="flex items-center gap-4">
