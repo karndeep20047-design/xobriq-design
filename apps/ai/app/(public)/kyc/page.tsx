@@ -31,13 +31,21 @@ function KycHero() {
         
         {/* Left Column: Text Content with darker tone overlay */}
         <div className="flex flex-col justify-center px-6 py-12 lg:py-20 lg:pr-16 lg:pl-8 lg:border-r lg:border-blue-500/10 bg-[#030918]/60 text-center lg:text-left z-10">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-emerald-500 font-mono text-xs font-semibold uppercase tracking-widest"
+          >
+            Xobriq KYC
+          </motion.p>
+
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-0 text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] text-white"
+            className="mt-2 text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] text-white"
           >
-            Xobriq KYC:{" "}
             <span className="relative inline-block whitespace-nowrap">
               Identity Verified
               <svg
