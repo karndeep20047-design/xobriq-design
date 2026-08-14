@@ -34,9 +34,9 @@ import {
 type Field = { label: string; value: string; Icon: LucideIcon };
 
 const FIELDS: Field[] = [
-  { label: "Full Name", value: "JOHN K. MWANGI", Icon: User },
-  { label: "ID Number", value: "29184023", Icon: CreditCard },
-  { label: "Date of Birth", value: "14 Apr 1990", Icon: CalendarDays },
+  { label: "Full Name", value: "MUSA OTIENO JUMA", Icon: User },
+  { label: "ID Number", value: "45678910", Icon: CreditCard },
+  { label: "Date of Birth", value: "23.11.1978", Icon: CalendarDays },
   { label: "IPRS Match", value: "Confirmed", Icon: Database },
 ];
 
