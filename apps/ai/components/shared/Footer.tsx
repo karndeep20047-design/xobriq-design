@@ -240,7 +240,7 @@ export function Footer() {
             down from the top of the footer to match the reference layout
             (columns -> divider -> social/copyright -> big wordmark last).
             Full text, uncropped. */}
-        <div className="lg:flex hidden h-[22rem] mt-4 relative z-10">
+        <div className="lg:flex hidden h-[22rem] mt-4 -mb-8 sm:-mb-14 relative z-10">
           <TextHoverEffect text="XOBRIQ" className="z-10" />
         </div>
       </div>

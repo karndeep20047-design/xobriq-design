@@ -30,13 +30,13 @@ export function CTASection({
   className,
 }: CTAProps) {
   return (
-    <section className={cn("overflow-hidden py-12 md:py-20 bg-transparent text-slate-900 dark:text-white relative z-10", className)}>
+    <section className={cn("overflow-hidden py-8 md:py-12 bg-transparent text-slate-900 dark:text-white relative z-10", className)}>
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-8 py-10 text-center sm:gap-8 md:py-16 border border-blue-500/30 dark:border-blue-500/40 rounded-xl bg-[#070E22] dark:bg-[#070E22] text-white backdrop-blur-xl shadow-2xl overflow-hidden"
+        className="relative mx-auto flex max-w-4xl flex-col items-center gap-6 px-8 py-8 text-center sm:gap-8 md:py-12 border border-blue-500/30 dark:border-blue-500/40 rounded-xl bg-[#070E22] dark:bg-[#070E22] text-white backdrop-blur-xl shadow-2xl overflow-hidden"
       >
         {/* Luminous Top Edge Highlight */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-80" />
@@ -102,7 +102,7 @@ export function CTASection({
           <Button
             variant="outline"
             size="lg"
-            className="w-full sm:w-auto rounded-lg px-8 py-6 text-base font-semibold border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-white transition-all"
+            className="w-full sm:w-auto rounded-lg px-8 py-6 text-base font-semibold border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-white hover:text-white transition-all"
             asChild
           >
             <Link href="/contact">Talk to Sales</Link>
