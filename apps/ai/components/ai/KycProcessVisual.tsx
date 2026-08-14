@@ -66,7 +66,7 @@ function TabletMockup({ children }: { children: React.ReactNode }) {
         <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-950 border border-slate-700/50" />
 
         {/* Inner Screen Display Surface */}
-        <div className="bg-[#030A1A]/95 rounded-2xl border border-slate-800/80 p-5 sm:p-7 relative overflow-hidden min-h-[340px] flex items-center justify-center">
+        <div className="bg-transparent rounded-2xl border border-slate-800/80 p-5 sm:p-7 relative overflow-hidden min-h-[340px] flex items-center justify-center">
           {/* Dynamic glass glow layer */}
           <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/[0.01] via-transparent to-teal-500/[0.01] pointer-events-none" />
           {children}
@@ -228,7 +228,7 @@ function PhoneMockup({ phase }: { phase: Phase }) {
         {/* Titanium rail + bezel. No fill for the screen itself — the card
             sits directly against the section's own backdrop showing through. */}
         <rect x="8" y="4" width="184" height="392" rx="34" fill={`url(#${clipId}-rail)`} />
-        <rect x="12" y="8" width="176" height="384" rx="30" fill={DEVICE.bezel} />
+        <rect x="12" y="8" width="176" height="384" rx="30" fill="transparent" stroke={DEVICE.bezel} strokeWidth="3.5" />
         <rect x="17" y="13" width="166" height="374" rx="26" fill="none" />
 
         {/* The ID card: drawn fallback first, the specimen image layered over
