@@ -26,11 +26,11 @@ export default function KycPage() {
 
 function KycHero() {
   return (
-    <section className="relative overflow-hidden bg-[#030712] text-white border-b border-blue-500/10">
+    <section className="relative overflow-hidden bg-[#09183a] text-white border-b border-blue-500/10">
       <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 min-h-[600px] lg:min-h-[685px]">
         
-        {/* Left Column: Text Content with high-contrast slate-navy background */}
-        <div className="flex flex-col justify-center px-6 py-12 lg:py-20 lg:pr-16 lg:pl-12 lg:border-r lg:border-blue-500/10 bg-[#060D20] text-center lg:text-left z-10">
+        {/* Left Column: Text Content with darker tone overlay */}
+        <div className="flex flex-col justify-center px-6 py-12 lg:py-20 lg:pr-16 lg:pl-8 lg:border-r lg:border-blue-500/10 bg-[#050F26]/70 text-center lg:text-left z-10">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}

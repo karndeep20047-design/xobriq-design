@@ -117,7 +117,7 @@ export function Footer() {
               alt="Xobriq Logo"
               width={2484}
               height={809}
-              className="h-11 w-auto dark:brightness-110"
+              className="h-11 w-auto object-contain dark:brightness-110"
             />
             <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               East Africa&apos;s enterprise AI cybersecurity company. Five integrated pillars: Agentic AI, Guard, Cloud, Consult and Cyber, built on sovereign DGX H200 infrastructure in Nairobi.
