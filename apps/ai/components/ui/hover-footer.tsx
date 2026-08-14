@@ -21,18 +21,21 @@ export const TextHoverEffect = ({
       className={cn("select-none uppercase", className)}
     >
       {/* Animated drawing text, coloured to match the physical office
-          sign/logo (white wordmark, blue "I", gold "Q") rather than the
+          sign/logo (wordmark / blue "I" / gold "Q") rather than the
           previous rainbow gradient stroke — per-letter colour via tspans,
           since a single gradient can't target individual characters.
           Split assumes "XOBRIQ" specifically (chars 0-3 / 4 / 5); this
           component is only ever used for that one word.
-          Fixed colours regardless of theme (not dark:-varied) — the footer
-          itself now handles the light-mode difference by using a lighter
-          background tone rather than this text changing colour.
+          "XOBR" is grey in light mode / white in dark mode — set via a
+          static Tailwind class with a dark: variant, animating only
+          fillOpacity (a plain number) rather than the fill colour itself,
+          since framer can't interpolate between two different colour
+          *values* keyed to a media query the way CSS can. "I" and "Q" stay
+          fixed across both themes.
           Outline draws in first (0-3s), then each letter's fill fades in
-          to match its own stroke colour (delayed until the draw finishes) —
-          not filled from the start, so the outline animation actually
-          reads as an outline before the letters solidify. */}
+          (delayed until the draw finishes) — not filled from the start, so
+          the outline animation actually reads as an outline before the
+          letters solidify. */}
       <motion.text
         x="50%"
         y="50%"
@@ -52,9 +55,9 @@ export const TextHoverEffect = ({
         }}
       >
         <motion.tspan
-          stroke="#ffffff"
-          initial={{ fill: "rgba(255,255,255,0)" }}
-          animate={{ fill: "rgba(255,255,255,0.88)" }}
+          className="fill-slate-400 stroke-slate-400 dark:fill-white dark:stroke-white"
+          initial={{ fillOpacity: 0 }}
+          animate={{ fillOpacity: 0.88 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(0, 4)}
