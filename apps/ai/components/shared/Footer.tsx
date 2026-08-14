@@ -20,7 +20,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { FaGithub, FaXTwitter, FaLinkedinIn, FaYoutube, FaFacebookF, FaInstagram } from "react-icons/fa6";
-import { FooterBackgroundGradient, TextHoverEffect } from "@/components/ui/hover-footer";
+import { TextHoverEffect } from "@/components/ui/hover-footer";
+import { HeroBackgroundSnippet } from "@/components/ui/tailwind-css-background-snippet";
 
 const productLinks = [
   { href: "/guard", label: "Xobriq Guard" },
@@ -97,7 +98,14 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative h-fit overflow-hidden bg-gradient-to-b from-[#D8E8FF] to-[#9CC2F0] z-10 dark:bg-[#050E22]">
+    <footer className="relative h-fit overflow-hidden z-10">
+      {/* Same background treatment as HeroParticleScan (radial aurora +
+          spotlight glows, themed for both light/dark) instead of the
+          footer's own separate colour choices — the two sections bookend
+          the page, so sharing this makes that intentional rather than the
+          footer looking like a visually unrelated block glued on. */}
+      <HeroBackgroundSnippet />
+
       <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
         <div className="grid grid-cols-1 gap-12 pb-8 lg:grid-cols-5 lg:gap-8">
           {/* Brand block — full width above the link columns on mobile;
@@ -209,10 +217,6 @@ export function Footer() {
         <div className="hidden lg:flex h-[22rem] mt-4 -mb-8 sm:-mb-14 relative z-10">
           <TextHoverEffect text="XOBRIQ" className="z-10" />
         </div>
-      </div>
-
-      <div className="hidden dark:block">
-        <FooterBackgroundGradient />
       </div>
     </footer>
   );

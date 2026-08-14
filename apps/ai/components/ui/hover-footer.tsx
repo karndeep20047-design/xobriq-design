@@ -79,15 +79,3 @@ export const TextHoverEffect = ({
     </svg>
   );
 };
-
-export const FooterBackgroundGradient = () => {
-  return (
-    <div
-      className="absolute inset-0 z-0 pointer-events-none"
-      style={{
-        background:
-          "radial-gradient(125% 125% at 50% 10%, #070E2266 50%, #3ca2fa22 100%)",
-      }}
-    />
-  );
-};
