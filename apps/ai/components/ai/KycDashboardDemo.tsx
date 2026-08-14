@@ -31,7 +31,7 @@ export function KycDashboardDemo() {
   }, []);
 
   return (
-    <div className="glass-panel glow-hover relative overflow-hidden rounded-3xl">
+    <div className="glass-panel glow-hover relative overflow-hidden rounded-3xl shadow-[0_24px_60px_-15px_rgba(59,130,246,0.12)] dark:shadow-[0_24px_60px_-15px_rgba(0,0,0,0.5)]">
       <div className="flex items-center gap-2 border-b border-enterprise-border bg-enterprise-bg-lower px-4 py-2.5">
         <div className="flex gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-enterprise-fg-subtle/40" />
@@ -157,21 +157,24 @@ function StatCard({
   value: number;
   tone: "primary" | "green" | "amber" | "red";
 }) {
-  const toneClass =
-    tone === "green" ? "text-xgreen-500" :
-    tone === "amber" ? "text-enterprise-accent" :
-    tone === "red" ? "text-xred-500" :
-    "text-enterprise-primary";
+  const toneStyles = {
+    primary: "border-t-2 border-t-blue-500 bg-blue-50/20 dark:bg-blue-950/10 text-blue-600 dark:text-blue-400 border-x border-b border-enterprise-border/50",
+    green: "border-t-2 border-t-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/10 text-emerald-600 dark:text-emerald-400 border-x border-b border-enterprise-border/50",
+    amber: "border-t-2 border-t-amber-500 bg-amber-50/20 dark:bg-amber-950/10 text-amber-600 dark:text-amber-400 border-x border-b border-enterprise-border/50",
+    red: "border-t-2 border-t-red-500 bg-red-50/20 dark:bg-red-950/10 text-red-600 dark:text-red-400 border-x border-b border-enterprise-border/50",
+  };
+
+  const styleClass = toneStyles[tone];
 
   return (
-    <div className="rounded-xl border border-enterprise-border bg-enterprise-bg-lower p-4">
-      <p className="label-caps-thin text-enterprise-fg-subtle">{label}</p>
+    <div className={`rounded-xl p-4 transition-all duration-300 hover:scale-[1.03] ${styleClass}`}>
+      <p className="label-caps-thin text-slate-500 dark:text-slate-400 font-semibold">{label}</p>
       <motion.p
         key={value}
         initial={{ scale: 1.15, opacity: 0.6 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.35 }}
-        className={"mt-1 text-2xl font-bold " + toneClass}
+        className="mt-1 text-2xl font-bold font-sans"
       >
         {value}
       </motion.p>
