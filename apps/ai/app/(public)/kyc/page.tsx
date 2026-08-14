@@ -501,7 +501,7 @@ function DeveloperAPI() {
 function KycCTA() {
   return (
     <section className="px-5 py-20 sm:px-6 lg:py-24">
-      <div className="mx-auto max-w-5xl rounded-[2rem] border border-slate-200/60 dark:border-slate-800/40 bg-gradient-to-br from-slate-50/80 to-slate-100/40 dark:from-slate-900/60 dark:to-slate-950/60 p-8 sm:p-12 shadow-[0_24px_50px_-15px_rgba(59,130,246,0.08)] dark:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.4)] backdrop-blur-md grid md:grid-cols-12 gap-8 items-center">
+      <div className="mx-auto max-w-5xl rounded-[2rem] border border-blue-600/30 dark:border-blue-500/30 bg-gradient-to-br from-slate-50/80 to-slate-100/40 dark:from-slate-900/60 dark:to-slate-950/60 p-8 sm:p-12 shadow-[0_24px_50px_-15px_rgba(59,130,246,0.08)] dark:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.4)] backdrop-blur-md grid md:grid-cols-12 gap-8 items-center">
         
         {/* Left Column: Text & CTAs */}
         <div className="md:col-span-7 text-center md:text-left">
