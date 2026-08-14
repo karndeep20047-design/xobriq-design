@@ -1,9 +1,9 @@
 // ============================================================================
-//  Xobriq.ai — Public Footer
+//  Xobriq.ai — Public Footer (Hover Effect Layout)
 //  ---------------------------------------------------------------------------
-//  - Premium multi-column layout matched precisely to specifications
-//  - Fully styled with structured columns: Products, Developers, Company, Legal
-//  - Integrates contact details, social media icons, and dynamic status banner
+//  - Card-like floating footer container with rounded corners and gradient backdrop
+//  - SVG text hover effect showcasing "XOBRIQ" dynamically on cursor proximity
+//  - Structured 5-column grid mapping Products, Developers, Company, Legal, and Brand
 // ============================================================================
 
 "use client";
@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
 import { FaGithub, FaXTwitter, FaLinkedinIn, FaYoutube, FaFacebookF, FaInstagram } from "react-icons/fa6";
+import { FooterBackgroundGradient, TextHoverEffect } from "@/components/ui/hover-footer";
 
 const productLinks = [
   { href: "/guard", label: "Xobriq Guard" },
@@ -81,147 +82,164 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative w-full bg-[#050E22] border-t border-blue-500/20 text-white transition-colors duration-150">
-      <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
-        
-        {/* Top Grid Area */}
-        <div className="grid gap-12 lg:grid-cols-12 pb-12 border-b border-blue-500/10">
+    <footer className="bg-[#050E22]/40 border border-blue-500/20 relative h-fit rounded-3xl overflow-hidden m-4 sm:m-8 z-10 backdrop-blur-xl">
+      <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-8 lg:gap-12 pb-12">
           
           {/* Brand Column */}
-          <div className="lg:col-span-4 flex flex-col justify-between space-y-6">
-            <div>
-              <div className="flex flex-col items-start">
-                <Image
-                  src="/xobriq-logo-horizontal.png"
-                  alt="Xobriq Logo"
-                  width={140}
-                  height={36}
-                  className="h-9 w-auto brightness-110"
-                />
-                <p className="text-[9px] uppercase tracking-[0.25em] text-[#EAB308] font-bold mt-1 pl-1">
-                  Intelligence at scale
-                </p>
-              </div>
-              <p className="mt-6 text-sm leading-relaxed text-slate-300 max-w-sm">
-                East Africa&apos;s enterprise AI cybersecurity company. Five integrated pillars — Agentic AI, Guard, Cloud, Consult and Cyber — built on sovereign DGX H200 infrastructure in Nairobi.
+          <div className="flex flex-col space-y-4">
+            <div className="flex flex-col items-start">
+              <Image
+                src="/xobriq-logo-horizontal.png"
+                alt="Xobriq Logo"
+                width={140}
+                height={36}
+                className="h-9 w-auto brightness-110"
+              />
+              <p className="text-[9px] uppercase tracking-[0.25em] text-[#EAB308] font-bold mt-1 pl-0.5">
+                Intelligence at scale
               </p>
             </div>
-
-            <div className="space-y-2 text-xs text-slate-300">
+            <p className="text-sm leading-relaxed text-slate-300">
+              East Africa&apos;s enterprise AI cybersecurity company. Five integrated pillars — Agentic AI, Guard, Cloud, Consult and Cyber — built on sovereign DGX H200 infrastructure in Nairobi.
+            </p>
+            
+            <div className="space-y-2 pt-2 text-xs text-slate-300">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-yellow-500 shrink-0" />
+                <MapPin className="h-4 w-4 text-[#3ca2fa] shrink-0" />
                 <span>GTC Tower, 24th Floor, Westlands, Nairobi</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-yellow-500 shrink-0" />
-                <a href="mailto:info@xobriq.com" className="hover:text-yellow-400 transition-colors">
+                <Mail className="h-4 w-4 text-[#3ca2fa] shrink-0" />
+                <a href="mailto:info@xobriq.com" className="hover:text-[#3ca2fa] transition-colors">
                   info@xobriq.com
                 </a>
               </div>
             </div>
-
-            {/* Socials Row */}
-            <div className="flex flex-wrap gap-2.5">
-              {socials.map(({ href, label, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="grid h-8 w-8 place-items-center rounded-lg border border-blue-500/20 bg-slate-950/40 text-slate-400 hover:bg-blue-950/60 hover:text-white transition-all"
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-                Products
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                {productLinks.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="text-slate-400 hover:text-white transition-colors">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div>
+            <h4 className="text-white text-lg font-semibold mb-6">
+              Products
+            </h4>
+            <ul className="space-y-3 text-sm">
+              {productLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-slate-300 hover:text-[#3ca2fa] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-                Developers
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                {developerLinks.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="text-slate-400 hover:text-white transition-colors">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div>
+            <h4 className="text-white text-lg font-semibold mb-6">
+              Developers
+            </h4>
+            <ul className="space-y-3 text-sm">
+              {developerLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-slate-300 hover:text-[#3ca2fa] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-                Company
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                {companyLinks.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="text-slate-400 hover:text-white transition-colors">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div>
+            <h4 className="text-white text-lg font-semibold mb-6">
+              Company
+            </h4>
+            <ul className="space-y-3 text-sm">
+              {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-slate-300 hover:text-[#3ca2fa] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-white">
-                Legal
-              </h4>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                {legalLinks.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="text-slate-400 hover:text-white transition-colors">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div>
+            <h4 className="text-white text-lg font-semibold mb-6">
+              Legal
+            </h4>
+            <ul className="space-y-3 text-sm">
+              {legalLinks.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-slate-300 hover:text-[#3ca2fa] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
         </div>
 
-        {/* Bottom copyright & status row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-400">
-          <p>
-            © {new Date().getFullYear()} Xobriq Technologies Limited.{" "}
-            <span className="text-teal-400 font-semibold tracking-wide">Data. AI. Clarity.</span>
-          </p>
+        <hr className="border-t border-blue-500/10 my-8" />
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>All systems operational</span>
+        {/* Footer bottom */}
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0 text-slate-400">
+          {/* Social icons */}
+          <div className="flex space-x-6">
+            {socials.map(({ Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="hover:text-[#3ca2fa] transition-colors"
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
+
+          {/* Copyright & Status */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-xs">
+            <p className="text-center md:text-left">
+              &copy; {new Date().getFullYear()} Xobriq Technologies Limited.{" "}
+              <span className="text-teal-400 font-semibold tracking-wide">Data. AI. Clarity.</span>
+            </p>
+            <span className="hidden sm:inline text-slate-700">|</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>All systems operational</span>
+              </div>
+              <span className="text-slate-700">|</span>
+              <span>
+                Made in Nairobi <span className="text-[10px] font-extrabold tracking-wider uppercase text-slate-500">ke</span>
+              </span>
             </div>
-            <span className="text-slate-800">|</span>
-            <span>
-              Made in Nairobi <span className="text-[10px] font-extrabold tracking-wider uppercase text-slate-500">ke</span>
-            </span>
           </div>
         </div>
-
       </div>
+
+      {/* Text hover effect */}
+      <div className="lg:flex hidden h-[26rem] -mt-36 -mb-24 relative z-50">
+        <TextHoverEffect text="XOBRIQ" className="z-50" />
+      </div>
+
+      <FooterBackgroundGradient />
     </footer>
   );
 }
