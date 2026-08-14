@@ -46,7 +46,27 @@ function KycHero() {
             transition={{ duration: 0.6, delay: 0.05 }}
             className="mt-4 text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] text-white"
           >
-            Xobriq KYC: <span className="underline decoration-emerald-500 decoration-3 underline-offset-8">Identity Verified</span> in Seconds
+            Xobriq KYC:{" "}
+            <span className="relative inline-block whitespace-nowrap">
+              Identity Verified
+              <svg
+                className="absolute left-0 -bottom-2 w-full h-3 text-emerald-500 overflow-visible"
+                viewBox="0 0 100 10"
+                preserveAspectRatio="none"
+              >
+                <motion.path
+                  d="M 1,5 Q 25,1 50,6 T 99,5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 1.2, delay: 0.6, ease: "easeInOut" }}
+                />
+              </svg>
+            </span>{" "}
+            in Seconds
           </motion.h1>
 
           <motion.p

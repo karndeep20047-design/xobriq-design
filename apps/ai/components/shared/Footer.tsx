@@ -216,7 +216,7 @@ export function Footer() {
 
         {/* Big "XOBRIQ" text watermark — now themed itself (see
             hover-footer.tsx), so it shows in both modes again. */}
-        <div className="hidden lg:flex h-[22rem] -mt-12 sm:-mt-16 -mb-8 sm:-mb-14 relative z-10">
+        <div className="hidden lg:flex h-[22rem] mt-4 sm:mt-2 -mb-8 sm:-mb-14 relative z-10">
           <TextHoverEffect text="XOBRIQ" className="z-10" />
         </div>
       </div>
