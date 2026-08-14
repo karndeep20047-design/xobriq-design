@@ -12,6 +12,46 @@ export const TextHoverEffect = ({
   automatic?: boolean;
   className?: string;
 }) => {
+  const textVariants = {
+    hidden: {
+      strokeDashoffset: 1000,
+      strokeDasharray: 1000,
+      strokeOpacity: 1,
+    },
+    visible: {
+      strokeDashoffset: 0,
+      strokeOpacity: 0,
+      transition: {
+        strokeDashoffset: { duration: 3, ease: "easeInOut" },
+        strokeOpacity: { delay: 3, duration: 0.8, ease: "easeOut" },
+      },
+    },
+  };
+
+  const tspan1Variants = {
+    hidden: { fillOpacity: 0 },
+    visible: {
+      fillOpacity: 0.88,
+      transition: { delay: 3, duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const tspan2Variants = {
+    hidden: { fill: "rgba(60,162,250,0)" },
+    visible: {
+      fill: "rgba(60,162,250,0.88)",
+      transition: { delay: 3, duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const tspan3Variants = {
+    hidden: { fill: "rgba(234,179,8,0)" },
+    visible: {
+      fill: "rgba(234,179,8,0.88)",
+      transition: { delay: 3, duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
     <svg
       width="100%"
@@ -20,27 +60,7 @@ export const TextHoverEffect = ({
       xmlns="http://www.w3.org/2000/svg"
       className={cn("select-none uppercase", className)}
     >
-      {/* Animated drawing text, coloured to match the physical office
-          sign/logo (wordmark / blue "I" / gold "Q") rather than the
-          previous rainbow gradient stroke — per-letter colour via tspans,
-          since a single gradient can't target individual characters.
-          Split assumes "XOBRIQ" specifically (chars 0-3 / 4 / 5); this
-          component is only ever used for that one word.
-          "XOBR" is grey in light mode / white in dark mode — set via a
-          static Tailwind class with a dark: variant, animating only
-          fillOpacity (a plain number) rather than the fill colour itself,
-          since framer can't interpolate between two different colour
-          *values* keyed to a media query the way CSS can. "I" and "Q" stay
-          fixed across both themes.
-          Outline draws in first (0-3s), then each letter's fill fades in
-          (delayed until the draw finishes) — not filled from the start, so
-          the outline animation actually reads as an outline before the
-          letters solidify.
-          whileInView, not animate — this used to fire the instant the page
-          mounted regardless of scroll position (the footer is in the DOM
-          from first paint, just below the fold), so the "draw" was always
-          long finished by the time anyone actually scrolled down to see it.
-          Now it only starts once the wordmark itself scrolls into view. */}
+      {/* Animated drawing text with variant orchestration to prevent flickering */}
       <motion.text
         x="50%"
         y="50%"
@@ -48,42 +68,26 @@ export const TextHoverEffect = ({
         dominantBaseline="middle"
         strokeWidth="0.35"
         className="font-[helvetica] text-7xl font-bold"
-        initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
-        whileInView={{
-          strokeDashoffset: 0,
-          strokeDasharray: 1000,
-        }}
+        variants={textVariants}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        // @ts-expect-error transition prop type mismatch with motion
-        transition={{
-          duration: 3,
-          ease: "easeInOut",
-        }}
       >
         <motion.tspan
           className="fill-slate-400 stroke-slate-400 dark:fill-white dark:stroke-white"
-          initial={{ fillOpacity: 0 }}
-          whileInView={{ fillOpacity: 0.88 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+          variants={tspan1Variants}
         >
           {text.slice(0, 4)}
         </motion.tspan>
         <motion.tspan
           stroke="#3ca2fa"
-          initial={{ fill: "rgba(60,162,250,0)" }}
-          whileInView={{ fill: "rgba(60,162,250,0.88)" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+          variants={tspan2Variants}
         >
           {text.slice(4, 5)}
         </motion.tspan>
         <motion.tspan
           stroke="#eab308"
-          initial={{ fill: "rgba(234,179,8,0)" }}
-          whileInView={{ fill: "rgba(234,179,8,0.88)" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+          variants={tspan3Variants}
         >
           {text.slice(5, 6)}
         </motion.tspan>

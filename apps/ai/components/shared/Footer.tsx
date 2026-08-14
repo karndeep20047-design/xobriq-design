@@ -106,7 +106,7 @@ export function Footer() {
           footer looking like a visually unrelated block glued on. */}
       <HeroBackgroundSnippet />
 
-      <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
+      <div className="max-w-7xl mx-auto px-8 pt-8 pb-2 sm:px-14 sm:pt-14 sm:pb-4 z-40 relative">
         <div className="grid grid-cols-1 gap-12 pb-2 lg:grid-cols-5 lg:gap-8">
           {/* Brand block — full width above the link columns on mobile;
               becomes the first of 5 side-by-side columns on desktop (the
@@ -211,7 +211,7 @@ export function Footer() {
 
         {/* Big "XOBRIQ" text watermark — now themed itself (see
             hover-footer.tsx), so it shows in both modes again. */}
-        <div className="hidden lg:flex h-[22rem] mt-4 sm:mt-2 -mb-8 sm:-mb-14 relative z-10">
+        <div className="hidden lg:flex h-[22rem] mt-4 sm:mt-2 -mb-16 sm:-mb-24 relative z-10">
           <TextHoverEffect text="XOBRIQ" className="z-10" />
         </div>
       </div>
