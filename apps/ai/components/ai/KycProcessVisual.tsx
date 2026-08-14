@@ -312,31 +312,41 @@ function ScanResult() {
     >
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] p-4 shadow-xl">
-            <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center">
-              <User className="h-6 w-6 text-emerald-500/80" />
+          <div className="relative flex flex-col h-full overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] shadow-xl">
+            {/* National ID Header Strip */}
+            <div className="flex items-center justify-between bg-emerald-950/40 border-b border-emerald-500/10 px-3 py-1.5 text-[8px] font-bold tracking-widest text-emerald-400 font-sans uppercase">
+              <span>National Identity Card</span>
+              <span className="text-[6px] text-amber-500">KE</span>
             </div>
-            <div className="flex flex-1 flex-col justify-between py-0.5">
-              {FIELDS.map((f, i) => (
-                <div key={f.label} className="relative">
-                  <p className="label-caps-thin text-slate-400/80">{f.label}</p>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.2, delay: FIELD_DELAYS[i] }}
-                    className="text-sm font-semibold tabular-nums text-white"
-                  >
-                    {f.value}
-                  </motion.p>
-                  <motion.span
-                    aria-hidden
-                    className="pointer-events-none absolute -inset-x-1.5 -inset-y-0.5 rounded-md border border-emerald-500"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 0.9, 0] }}
-                    transition={{ duration: 0.5, delay: FIELD_DELAYS[i], times: [0, 0.2, 1] }}
-                  />
-                </div>
-              ))}
+
+            {/* Card Content Row */}
+            <div className="flex gap-4 p-4 flex-1">
+              <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center relative overflow-hidden">
+                <User className="h-6 w-6 text-emerald-500/80" />
+                <div className="absolute bottom-0 w-full bg-emerald-950/60 py-0.5 border-t border-emerald-500/10 text-[6px] text-center text-emerald-400 font-bold tracking-wide">HOLDER</div>
+              </div>
+              <div className="flex flex-1 flex-col justify-between py-0.5">
+                {FIELDS.map((f, i) => (
+                  <div key={f.label} className="relative">
+                    <p className="text-[8px] uppercase tracking-wider text-slate-400/80">{f.label}</p>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2, delay: FIELD_DELAYS[i] }}
+                      className="text-xs font-semibold tabular-nums text-white leading-none mt-0.5"
+                    >
+                      {f.value}
+                    </motion.p>
+                    <motion.span
+                      aria-hidden
+                      className="pointer-events-none absolute -inset-x-1.5 -inset-y-0.5 rounded-md border border-emerald-500"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: [0, 0.9, 0] }}
+                      transition={{ duration: 0.5, delay: FIELD_DELAYS[i], times: [0, 0.2, 1] }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -354,7 +364,7 @@ function ScanResult() {
         </div>
 
         <div className="space-y-2.5">
-          <p className="label-caps-thin text-slate-400">Extracted &amp; matched</p>
+          <p className="label-caps-thin text-slate-400 text-center font-bold tracking-wider">Extracted &amp; matched</p>
           {FIELDS.map((f, i) => {
             const Icon = f.Icon;
             return (
@@ -399,22 +409,32 @@ function StaticResult() {
     <div>
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] p-4 shadow-xl">
-            <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center">
-              <User className="h-6 w-6 text-emerald-500/80" />
+          <div className="flex flex-col h-full overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] shadow-xl">
+            {/* National ID Header Strip */}
+            <div className="flex items-center justify-between bg-emerald-950/40 border-b border-emerald-500/10 px-3 py-1.5 text-[8px] font-bold tracking-widest text-emerald-400 font-sans uppercase">
+              <span>National Identity Card</span>
+              <span className="text-[6px] text-amber-500">KE</span>
             </div>
-            <div className="flex flex-1 flex-col justify-between py-0.5">
-              {FIELDS.map((f) => (
-                <div key={f.label}>
-                  <p className="label-caps-thin text-slate-400/80">{f.label}</p>
-                  <p className="text-sm font-semibold tabular-nums text-white">{f.value}</p>
-                </div>
-              ))}
+
+            {/* Card Content Row */}
+            <div className="flex gap-4 p-4 flex-1">
+              <div className="flex flex-col items-center justify-center w-14 sm:w-16 h-20 shrink-0 rounded-lg border border-emerald-500/20 bg-[#050E22] self-center relative overflow-hidden">
+                <User className="h-6 w-6 text-emerald-500/80" />
+                <div className="absolute bottom-0 w-full bg-emerald-950/60 py-0.5 border-t border-emerald-500/10 text-[6px] text-center text-emerald-400 font-bold tracking-wide">HOLDER</div>
+              </div>
+              <div className="flex flex-1 flex-col justify-between py-0.5">
+                {FIELDS.map((f) => (
+                  <div key={f.label}>
+                    <p className="text-[8px] uppercase tracking-wider text-slate-400/80">{f.label}</p>
+                    <p className="text-xs font-semibold tabular-nums text-white leading-none mt-0.5">{f.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
         <div className="space-y-2.5">
-          <p className="label-caps-thin text-slate-400">Extracted &amp; matched</p>
+          <p className="label-caps-thin text-slate-400 text-center font-bold tracking-wider">Extracted &amp; matched</p>
           {FIELDS.map((f) => {
             const Icon = f.Icon;
             return (

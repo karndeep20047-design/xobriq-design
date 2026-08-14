@@ -178,9 +178,8 @@ export function Footer() {
             narrow Brand column, which was too tight for the copyright line
             to share without wrapping onto several lines — this row isn't
             confined to that column's width, so both sit on one line.
-            Pulled up closer to the grid above (-mt-4), and the separator
-            moved from above this row to below it. */}
-        <div className="-mt-4 flex flex-col items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400 lg:flex-row text-xs">
+            No separator either side of it any more. */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400 lg:flex-row text-xs">
           <div className="flex items-center gap-5">
             {socials.map(({ Icon, label, href }) => (
               <a
@@ -214,8 +213,6 @@ export function Footer() {
             </div>
           </div>
         </div>
-
-        <hr className="border-t border-slate-200 mt-8 mb-4 dark:border-blue-500/10" />
 
         {/* Big "XOBRIQ" text watermark — now themed itself (see
             hover-footer.tsx), so it shows in both modes again. */}
