@@ -545,15 +545,17 @@ function TrustAndRisk() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="glass-panel rounded-2xl p-8"
+            className="glass-panel rounded-2xl p-8 flex flex-col justify-between"
           >
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-xgreen-500">
-              <Database className="h-5 w-5 text-white" />
+            <div>
+              <div className="grid h-10 w-10 place-items-center rounded-lg bg-xgreen-500">
+                <Database className="h-5 w-5 text-white" />
+              </div>
+              <h3 className="mt-5 text-xl font-semibold">IPRS-Backed Verification</h3>
+              <p className="mt-3 text-sm text-enterprise-fg-muted">
+                National ID lookups query Kenya&apos;s Integrated Population Registration System directly. A live match, not a document-only OCR guess.
+              </p>
             </div>
-            <h3 className="mt-5 text-xl font-semibold">IPRS-Backed Verification</h3>
-            <p className="mt-3 text-sm text-enterprise-fg-muted">
-              National ID lookups query Kenya&apos;s Integrated Population Registration System directly. A live match, not a document-only OCR guess.
-            </p>
             <RegistryMatchVisualizer />
           </motion.div>
           <motion.div
@@ -561,15 +563,17 @@ function TrustAndRisk() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-panel rounded-2xl p-8"
+            className="glass-panel rounded-2xl p-8 flex flex-col justify-between"
           >
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-enterprise-primary">
-              <Gauge className="h-5 w-5 text-white" />
+            <div>
+              <div className="grid h-10 w-10 place-items-center rounded-lg bg-enterprise-primary">
+                <Gauge className="h-5 w-5 text-white" />
+              </div>
+              <h3 className="mt-5 text-xl font-semibold">Fraud & Risk Signals</h3>
+              <p className="mt-3 text-sm text-enterprise-fg-muted">
+                Every verification is scored against Xobriq Guard&apos;s fraud-signal model, so a matched identity still surfaces a risk score you can act on.
+              </p>
             </div>
-            <h3 className="mt-5 text-xl font-semibold">Fraud & Risk Signals</h3>
-            <p className="mt-3 text-sm text-enterprise-fg-muted">
-              Every verification is scored against Xobriq Guard&apos;s fraud-signal model, so a matched identity still surfaces a risk score you can act on.
-            </p>
             <RiskScoreVisualizer />
           </motion.div>
         </div>
