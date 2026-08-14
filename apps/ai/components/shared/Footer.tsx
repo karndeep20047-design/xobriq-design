@@ -82,9 +82,9 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#050E22]/40 border border-blue-500/20 relative h-fit rounded-3xl overflow-hidden m-4 sm:m-8 z-10 backdrop-blur-xl">
+    <footer className="bg-[#050E22] border border-blue-500/20 relative h-fit rounded-3xl overflow-hidden m-4 sm:m-8 z-10">
       <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-8 lg:gap-12 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-8 lg:gap-12 pb-8">
           
           {/* Brand Column */}
           <div className="flex flex-col space-y-4">
@@ -193,6 +193,11 @@ export function Footer() {
 
         </div>
 
+        {/* Text Hover Effect (Watermark) rendered before the divider to avoid overlapping layout */}
+        <div className="lg:flex hidden h-[22rem] -mt-16 -mb-8 relative z-50">
+          <TextHoverEffect text="XOBRIQ" className="z-50" />
+        </div>
+
         <hr className="border-t border-blue-500/10 my-8" />
 
         {/* Footer bottom */}
@@ -232,11 +237,6 @@ export function Footer() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Text hover effect */}
-      <div className="lg:flex hidden h-[26rem] -mt-36 -mb-24 relative z-50">
-        <TextHoverEffect text="XOBRIQ" className="z-50" />
       </div>
 
       <FooterBackgroundGradient />
