@@ -275,11 +275,15 @@ function MiniCardVisual({ accent }: { accent: string }) {
 
 function VerificationTypes() {
   return (
-    <section className="px-5 py-20 sm:px-6 lg:py-24">
+    <section className="px-5 py-20 sm:px-6 lg:py-24 relative overflow-hidden z-10 bg-gradient-to-b from-[#F2F6FC] to-[#FCFDFF] dark:from-[#050B18] dark:to-[#081024]">
+      {/* Soothing mesh and radial glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03] dark:opacity-[0.06] pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/[0.03] via-transparent to-transparent pointer-events-none -z-10" />
+
       <div className="container-medium">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">One API, Every Verification Type</h2>
-          <p className="mx-auto mt-3 max-w-lg text-enterprise-fg-muted">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-slate-900 dark:text-white">One API, Every Verification Type</h2>
+          <p className="mx-auto mt-3 max-w-lg text-slate-600 dark:text-slate-300">
             Deepfake, identity, phone and business checks. One API, zero extra vendors.
           </p>
         </div>
@@ -287,7 +291,7 @@ function VerificationTypes() {
         {/* Tier 1 — the four checks Xobriq KYC runs, each carrying its own
             accent so they read as distinct categories rather than four
             identical green cards. */}
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VERIFICATION_TYPES.map((v, i) => {
             const a = ACCENTS[v.accent];
             return (
@@ -298,7 +302,7 @@ function VerificationTypes() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
                 className={
-                  "group relative overflow-hidden rounded-2xl border border-enterprise-border bg-enterprise-surface p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 " +
+                  "group relative overflow-hidden rounded-3xl border border-slate-200/60 dark:border-slate-800/40 bg-gradient-to-br from-white/95 to-white/70 dark:from-slate-900/80 dark:to-slate-950/80 p-7 shadow-[0_16px_36px_-12px_rgba(59,130,246,0.06)] dark:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg " +
                   a.ring
                 }
               >
@@ -312,8 +316,8 @@ function VerificationTypes() {
                 <div className="h-10 flex items-center justify-start transition-transform duration-300 group-hover:scale-105">
                   <MiniCardVisual accent={v.accent} />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
+                <h3 className="mt-5 text-xl font-semibold text-slate-900 dark:text-white">{v.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{v.body}</p>
               </motion.div>
             );
           })}
@@ -330,9 +334,9 @@ function VerificationTypes() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.24 }}
-          className="mt-5 rounded-2xl border border-enterprise-border bg-enterprise-surface p-7 shadow-sm sm:p-8"
+          className="mt-8 rounded-3xl border border-slate-200/60 dark:border-slate-800/40 bg-gradient-to-br from-white/70 to-white/40 dark:from-slate-900/50 dark:to-slate-950/50 p-6 sm:p-8 shadow-sm backdrop-blur-md"
         >
-          <p className="label-caps text-enterprise-fg-subtle">Identity verification covers</p>
+          <p className="label-caps text-slate-500 dark:text-slate-400 font-semibold">Identity verification covers</p>
           <DocumentTypeChips />
         </motion.div>
       </div>
@@ -376,12 +380,12 @@ function DocumentTypeChips() {
             key={key}
             title={d.label}
             className={
-              "group flex items-center gap-3 rounded-xl border border-enterprise-border bg-enterprise-bg-low p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.05] hover:shadow-[0_14px_30px_-16px_rgba(26,125,60,0.45)] " +
-              (isActive ? "-translate-y-0.5 border-xgreen-500/35 bg-xgreen-500/[0.05] shadow-[0_14px_30px_-16px_rgba(26,125,60,0.45)]" : "")
+              "group flex items-center gap-3 rounded-xl border border-slate-200/50 dark:border-slate-800/30 bg-white/70 dark:bg-slate-900/40 p-3.5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-xgreen-500/35 hover:bg-xgreen-500/[0.04] hover:shadow-[0_14px_30px_-16px_rgba(26,125,60,0.45)] " +
+              (isActive ? "-translate-y-0.5 border-xgreen-500/35 bg-xgreen-500/[0.04] shadow-[0_14px_30px_-16px_rgba(26,125,60,0.45)]" : "")
             }
           >
             <DocIcon className="h-5 w-5 shrink-0 text-xgreen-500" />
-            <span className="text-sm font-semibold leading-tight text-enterprise-fg">{d.shortLabel}</span>
+            <span className="text-sm font-semibold leading-tight text-slate-800 dark:text-slate-200">{d.shortLabel}</span>
           </div>
         );
       })}
