@@ -530,15 +530,19 @@ function KycCTA() {
         {/* Right Column: Interactive Orbital Shield Illustration */}
         <div className="md:col-span-5 hidden md:flex items-center justify-center relative overflow-hidden h-48 lg:h-56">
           <div className="relative w-40 h-40 flex items-center justify-center">
-            {/* Rotating dashed outer ring */}
+            {/* Solid outer track border */}
+            <div className="absolute inset-0 rounded-full border border-emerald-500/15" />
+            {/* Rotating dashed outer ring with higher opacity */}
             <motion.div
-              className="absolute inset-0 rounded-full border border-dashed border-emerald-500/20"
+              className="absolute inset-0 rounded-full border border-dashed border-emerald-500/50"
               animate={{ rotate: 360 }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             />
-            {/* Counter-rotating dashed inner ring */}
+            {/* Solid inner track border */}
+            <div className="absolute w-28 h-28 rounded-full border border-blue-500/15" />
+            {/* Counter-rotating dashed inner ring with higher opacity */}
             <motion.div
-              className="absolute w-28 h-28 rounded-full border border-dashed border-blue-500/25"
+              className="absolute w-28 h-28 rounded-full border border-dashed border-blue-500/50"
               animate={{ rotate: -360 }}
               transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
             />
