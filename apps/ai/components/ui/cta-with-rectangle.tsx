@@ -36,7 +36,7 @@ export function CTASection({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mx-auto flex max-w-container flex-col items-center gap-6 px-8 py-14 text-center sm:gap-8 md:py-24 border border-blue-500/30 dark:border-blue-500/40 rounded-xl bg-[#070E22] dark:bg-[#070E22] text-white backdrop-blur-xl shadow-2xl overflow-hidden"
+        className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-8 py-10 text-center sm:gap-8 md:py-16 border border-blue-500/30 dark:border-blue-500/40 rounded-xl bg-[#070E22] dark:bg-[#070E22] text-white backdrop-blur-xl shadow-2xl overflow-hidden"
       >
         {/* Luminous Top Edge Highlight */}
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-80" />

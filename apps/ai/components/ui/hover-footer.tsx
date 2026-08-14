@@ -20,32 +20,23 @@ export const TextHoverEffect = ({
       xmlns="http://www.w3.org/2000/svg"
       className={cn("select-none uppercase", className)}
     >
-      <defs>
-        <linearGradient
-          id="textGradient"
-          gradientUnits="userSpaceOnUse"
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="0%"
-        >
-          <stop offset="0%" stopColor="#eab308" />
-          <stop offset="25%" stopColor="#ef4444" />
-          <stop offset="50%" stopColor="#80eeb4" />
-          <stop offset="75%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#8b5cf6" />
-        </linearGradient>
-      </defs>
-
-      {/* Animated drawing text using the colorful gradient stroke */}
+      {/* Animated drawing text, coloured to match the physical office
+          sign/logo (white wordmark, blue "I", gold "Q") rather than the
+          previous rainbow gradient stroke — per-letter colour via tspans,
+          since a single gradient can't target individual characters.
+          Split assumes "XOBRIQ" specifically (chars 0-3 / 4 / 5); this
+          component is only ever used for that one word.
+          Outline draws in first (0-3s), then each letter's fill fades in
+          to match its own stroke colour (delayed until the draw finishes) —
+          not filled from the start, so the outline animation actually
+          reads as an outline before the letters solidify. */}
       <motion.text
         x="50%"
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        stroke="url(#textGradient)"
         strokeWidth="0.35"
-        className="fill-transparent font-[helvetica] text-7xl font-bold"
+        className="font-[helvetica] text-7xl font-bold"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -57,7 +48,30 @@ export const TextHoverEffect = ({
           ease: "easeInOut",
         }}
       >
-        {text}
+        <motion.tspan
+          stroke="#ffffff"
+          initial={{ fill: "rgba(255,255,255,0)" }}
+          animate={{ fill: "rgba(255,255,255,1)" }}
+          transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+        >
+          {text.slice(0, 4)}
+        </motion.tspan>
+        <motion.tspan
+          stroke="#3ca2fa"
+          initial={{ fill: "rgba(60,162,250,0)" }}
+          animate={{ fill: "rgba(60,162,250,1)" }}
+          transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+        >
+          {text.slice(4, 5)}
+        </motion.tspan>
+        <motion.tspan
+          stroke="#eab308"
+          initial={{ fill: "rgba(234,179,8,0)" }}
+          animate={{ fill: "rgba(234,179,8,1)" }}
+          transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+        >
+          {text.slice(5, 6)}
+        </motion.tspan>
       </motion.text>
     </svg>
   );

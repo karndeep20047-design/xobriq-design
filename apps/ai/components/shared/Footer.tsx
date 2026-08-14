@@ -82,15 +82,10 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#050E22] border border-blue-500/20 relative h-fit rounded-3xl overflow-hidden m-4 sm:m-8 z-10">
-      {/* Text watermark rendered at the very top, above the logo and columns to save space */}
-      <div className="lg:flex hidden h-[22rem] -mt-16 -mb-28 relative z-55">
-        <TextHoverEffect text="XOBRIQ" className="z-50" />
-      </div>
-
+    <footer className="bg-[#050E22] relative h-fit overflow-hidden z-10">
       <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 md:gap-8 lg:gap-12 pb-8">
-          
+
           {/* Brand Column */}
           <div className="flex flex-col space-y-4">
             <div className="flex flex-col items-start">
@@ -238,6 +233,15 @@ export function Footer() {
               </span>
             </div>
           </div>
+        </div>
+
+        {/* Big "XOBRIQ" text watermark, closing the footer out at the very
+            bottom below the columns and the social/copyright row — moved
+            down from the top of the footer to match the reference layout
+            (columns -> divider -> social/copyright -> big wordmark last).
+            Full text, uncropped. */}
+        <div className="lg:flex hidden h-[22rem] mt-4 relative z-10">
+          <TextHoverEffect text="XOBRIQ" className="z-10" />
         </div>
       </div>
 
