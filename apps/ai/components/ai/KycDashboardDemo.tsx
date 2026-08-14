@@ -48,7 +48,7 @@ export function KycDashboardDemo() {
         </span>
       </div>
 
-      <div className="relative min-h-[280px] p-6 sm:p-8">
+      <div className="relative min-h-[280px] p-4 sm:p-8">
         <AnimatePresence mode="wait">
           {!loggedIn ? (
             <motion.div
@@ -99,9 +99,9 @@ function DashboardBody() {
       <p className="text-sm text-enterprise-fg-muted">
         Karibu, Demo <span aria-hidden>👋</span>
       </p>
-      <h3 className="mt-1 text-xl font-semibold">Here&apos;s what&apos;s happening with your verifications.</h3>
+      <h3 className="mt-1 text-base sm:text-xl font-semibold">Here&apos;s what&apos;s happening with your verifications.</h3>
 
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4">
         <StatCard label="Total" value={totals.total} tone="primary" />
         <StatCard label="Approved" value={totals.approved} tone="green" />
         <StatCard label="Pending" value={1} tone="amber" />
@@ -138,7 +138,7 @@ function DashboardBody() {
                 <CheckCircle2 className="h-4 w-4 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium text-xgreen-500">IPRS match confirmed &mdash; Approved</p>
+                <p className="text-sm font-medium text-xgreen-500">IPRS match confirmed: Approved</p>
                 <p className="text-xs text-enterprise-fg-muted">National ID &middot; {currentId}</p>
               </div>
             </motion.div>
@@ -167,14 +167,14 @@ function StatCard({
   const styleClass = toneStyles[tone];
 
   return (
-    <div className={`rounded-xl p-4 transition-all duration-300 hover:scale-[1.03] ${styleClass}`}>
-      <p className="label-caps-thin text-slate-500 dark:text-slate-400 font-semibold">{label}</p>
+    <div className={`rounded-xl p-3 sm:p-4 transition-all duration-300 hover:scale-[1.03] ${styleClass}`}>
+      <p className="label-caps-thin text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold">{label}</p>
       <motion.p
         key={value}
         initial={{ scale: 1.15, opacity: 0.6 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.35 }}
-        className="mt-1 text-2xl font-bold font-sans"
+        className="mt-1 text-xl sm:text-2xl font-bold font-sans"
       >
         {value}
       </motion.p>

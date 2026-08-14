@@ -141,7 +141,7 @@ function LiveDemo() {
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-slate-900 dark:text-white">See It In Action</h2>
           <p className="mx-auto mt-3 max-w-2xl text-enterprise-fg-muted">
-            A live look at the Xobriq KYC dashboard — sign in, submit a verification, and watch it get matched against IPRS in real time.
+            A live look at the Xobriq KYC dashboard. Sign in, submit a verification, and watch it get matched against IPRS in real time.
           </p>
         </div>
         <motion.div
