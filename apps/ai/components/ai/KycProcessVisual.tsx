@@ -57,6 +57,25 @@ const PHASE_DURATION_MS: Record<Phase, number> = {
   hold: 2000,
 };
 
+function TabletMockup({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative mx-auto w-full max-w-xl z-10">
+      {/* Outer Tablet Frame Bezel */}
+      <div className="relative border-[8px] border-slate-800/90 bg-zinc-900 rounded-3xl p-3 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] shadow-emerald-500/5">
+        {/* Front camera lens */}
+        <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-slate-950 border border-slate-700/50" />
+
+        {/* Inner Screen Display Surface */}
+        <div className="bg-[#030A1A]/95 rounded-2xl border border-slate-800/80 p-5 sm:p-7 relative overflow-hidden min-h-[340px] flex items-center justify-center">
+          {/* Dynamic glass glow layer */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/[0.01] via-transparent to-teal-500/[0.01] pointer-events-none" />
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function KycProcessVisual() {
   const reduceMotion = useReducedMotion();
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -79,43 +98,40 @@ export function KycProcessVisual() {
   const showPhone = phase === "phoneIn" || phase === "align" || phase === "capture";
 
   return (
-    <div className="relative mx-auto w-full max-w-xl z-10">
-      {/* Outer Monitor Frame Bezel */}
-      <div className="relative border-[6px] border-slate-800/90 bg-zinc-900 rounded-2xl p-2.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] shadow-emerald-500/5">
-        {/* Status indicators notch */}
-        <div className="absolute top-1 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-50">
-          <span className="w-1.5 h-1.5 rounded-full bg-slate-800" />
-          <span className="w-1 h-1 rounded-full bg-emerald-500/80 animate-pulse" />
-        </div>
-
-        {/* Inner Screen Display Surface */}
-        <div className="bg-[#030A1A]/95 rounded-lg border border-slate-800/80 p-5 sm:p-7 relative overflow-hidden min-h-[380px] flex items-center justify-center">
-          {/* Dynamic glass glow layer */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/[0.01] via-transparent to-teal-500/[0.01] pointer-events-none" />
-
-          {reduceMotion ? (
-            <div className="w-full">
-              <StaticResult />
-            </div>
+    <div className="relative mx-auto w-full max-w-xl z-10 flex items-center justify-center min-h-[380px]">
+      {reduceMotion ? (
+        <TabletMockup>
+          <StaticResult />
+        </TabletMockup>
+      ) : (
+        <AnimatePresence mode="wait">
+          {showPhone ? (
+            <motion.div
+              key={`phone-${round}`}
+              className="flex justify-center w-full py-4"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.4 }}
+            >
+              <PhoneMockup phase={phase} />
+            </motion.div>
           ) : (
-            <AnimatePresence mode="wait">
-              {showPhone ? (
-                <motion.div key={`phone-${round}`} className="flex justify-center w-full py-4">
-                  <PhoneMockup phase={phase} />
-                </motion.div>
-              ) : (
-                <div className="w-full">
-                  <ScanResult key={`scan-${round}`} />
-                </div>
-              )}
-            </AnimatePresence>
+            <motion.div
+              key={`scan-${round}`}
+              className="w-full"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.4 }}
+            >
+              <TabletMockup>
+                <ScanResult />
+              </TabletMockup>
+            </motion.div>
           )}
-        </div>
-      </div>
-
-      {/* Monitor Desktop Stand */}
-      <div className="relative w-24 h-5 bg-gradient-to-b from-slate-800 to-slate-900 mx-auto -mt-0.5 rounded-b-md border-t border-slate-700/50 z-0 hidden sm:block" />
-      <div className="relative w-40 h-2 bg-zinc-950 mx-auto rounded-t-md z-0 hidden sm:block shadow-xl" />
+        </AnimatePresence>
+      )}
     </div>
   );
 }
