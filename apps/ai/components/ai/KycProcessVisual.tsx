@@ -28,7 +28,6 @@ import {
   CalendarDays,
   Database,
   CheckCircle2,
-  ScanLine,
   type LucideIcon,
 } from "lucide-react";
 
@@ -80,35 +79,11 @@ export function KycProcessVisual() {
   const showPhone = phase === "phoneIn" || phase === "align" || phase === "capture";
 
   return (
-    <div className="glass-panel glow-hover relative overflow-hidden rounded-3xl p-5 sm:p-7">
-      <div className="tech-grid-light pointer-events-none absolute inset-0 opacity-30" />
-
-      <div className="relative flex items-center gap-2 pb-5">
-        <span className="grid h-7 w-7 place-items-center rounded-lg bg-xgreen-500/10">
-          <ScanLine className="h-4 w-4 text-xgreen-500" />
-        </span>
-        <p className="text-sm font-semibold text-enterprise-fg">Live document scan</p>
-        <span className="ml-auto inline-flex items-center gap-1.5 text-[10px] font-semibold text-xgreen-500">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-xgreen-500/70" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-xgreen-500" />
-          </span>
-          DEMO
-        </span>
-      </div>
-
+    <div className="relative">
       {reduceMotion ? (
         <StaticResult />
       ) : (
         <div className="relative min-h-[360px]">
-          {/* mode="wait": popLayout was tried here to close the ~0.5s blank
-              gap between the shutter firing and the scan card entering, but
-              without a `layout` prop on these children it didn't cleanly
-              pop the exiting element out of flow — the outgoing and
-              incoming content stacked in normal flow instead, growing the
-              whole card taller every loop. "wait" is simple and correct:
-              the small blank gap is a better trade than a compounding
-              layout bug. */}
           <AnimatePresence mode="wait">
             {showPhone ? (
               <motion.div key={`phone-${round}`} className="flex justify-center py-4">
@@ -120,10 +95,6 @@ export function KycProcessVisual() {
           </AnimatePresence>
         </div>
       )}
-
-      <p className="relative mt-4 text-center text-[11px] text-enterprise-fg-subtle/70">
-        Sample document for illustration &mdash; not real applicant data.
-      </p>
     </div>
   );
 }

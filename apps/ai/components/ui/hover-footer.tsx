@@ -21,15 +21,21 @@ export const TextHoverEffect = ({
       className={cn("select-none uppercase", className)}
     >
       {/* Animated drawing text, coloured to match the physical office
-          sign/logo (white wordmark, blue "I", gold "Q") rather than the
+          sign/logo (wordmark / blue "I" / gold "Q") rather than the
           previous rainbow gradient stroke — per-letter colour via tspans,
           since a single gradient can't target individual characters.
           Split assumes "XOBRIQ" specifically (chars 0-3 / 4 / 5); this
           component is only ever used for that one word.
+          Colour itself is a static Tailwind class with a dark: variant
+          (slate in light mode, white in dark — white text on this
+          section's white light-mode background was invisible), so only
+          fillOpacity/strokeDasharray need animating; framer can't smoothly
+          interpolate between two different colour *values* keyed to a
+          media query the way CSS can.
           Outline draws in first (0-3s), then each letter's fill fades in
-          to match its own stroke colour (delayed until the draw finishes) —
-          not filled from the start, so the outline animation actually
-          reads as an outline before the letters solidify. */}
+          (delayed until the draw finishes) — not filled from the start, so
+          the outline animation actually reads as an outline before the
+          letters solidify. */}
       <motion.text
         x="50%"
         y="50%"
@@ -49,25 +55,25 @@ export const TextHoverEffect = ({
         }}
       >
         <motion.tspan
-          stroke="#ffffff"
-          initial={{ fill: "rgba(255,255,255,0)" }}
-          animate={{ fill: "rgba(255,255,255,1)" }}
+          className="fill-slate-800 stroke-slate-800 dark:fill-white dark:stroke-white"
+          initial={{ fillOpacity: 0 }}
+          animate={{ fillOpacity: 0.88 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(0, 4)}
         </motion.tspan>
         <motion.tspan
-          stroke="#3ca2fa"
-          initial={{ fill: "rgba(60,162,250,0)" }}
-          animate={{ fill: "rgba(60,162,250,1)" }}
+          className="fill-[#3ca2fa] stroke-[#3ca2fa]"
+          initial={{ fillOpacity: 0 }}
+          animate={{ fillOpacity: 0.88 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(4, 5)}
         </motion.tspan>
         <motion.tspan
-          stroke="#eab308"
-          initial={{ fill: "rgba(234,179,8,0)" }}
-          animate={{ fill: "rgba(234,179,8,1)" }}
+          className="fill-[#9a6d00] stroke-[#9a6d00] dark:fill-[#eab308] dark:stroke-[#eab308]"
+          initial={{ fillOpacity: 0 }}
+          animate={{ fillOpacity: 0.88 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(5, 6)}
