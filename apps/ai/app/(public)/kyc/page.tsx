@@ -139,10 +139,7 @@ function LiveDemo() {
 
       <div className="container-medium">
         <div className="text-center">
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-blue-600 dark:text-sky-400 sm:text-sm">
-            Live Simulation
-          </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-slate-900 dark:text-white">See It In Action</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-slate-900 dark:text-white">See It In Action</h2>
           <p className="mx-auto mt-3 max-w-2xl text-enterprise-fg-muted">
             A live look at the Xobriq KYC dashboard — sign in, submit a verification, and watch it get matched against IPRS in real time.
           </p>
