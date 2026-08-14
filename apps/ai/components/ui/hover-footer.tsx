@@ -16,39 +16,62 @@ export const TextHoverEffect = ({
     hidden: {
       strokeDashoffset: 1000,
       strokeDasharray: 1000,
-      strokeOpacity: 1,
+      strokeWidth: 0.35,
     },
     visible: {
       strokeDashoffset: 0,
-      strokeOpacity: 0,
+      strokeWidth: 0,
       transition: {
         strokeDashoffset: { duration: 3, ease: "easeInOut" },
-        strokeOpacity: { delay: 3, duration: 0.8, ease: "easeOut" },
+        strokeWidth: { delay: 3, duration: 0.8, ease: "easeOut" },
       },
     },
   };
 
   const tspan1Variants = {
-    hidden: { fillOpacity: 0 },
+    hidden: {
+      fillOpacity: 0,
+      stroke: "currentColor",
+    },
     visible: {
       fillOpacity: 0.88,
-      transition: { delay: 3, duration: 0.8, ease: "easeOut" },
+      stroke: "rgba(0, 0, 0, 0)",
+      transition: {
+        fillOpacity: { delay: 3, duration: 0.8, ease: "easeOut" },
+        stroke: { delay: 3, duration: 0.8, ease: "easeOut" },
+      },
     },
   };
 
   const tspan2Variants = {
-    hidden: { fill: "rgba(60,162,250,0)" },
+    hidden: {
+      fillOpacity: 0,
+      fill: "#3ca2fa",
+      stroke: "#3ca2fa",
+    },
     visible: {
-      fill: "rgba(60,162,250,0.88)",
-      transition: { delay: 3, duration: 0.8, ease: "easeOut" },
+      fillOpacity: 0.88,
+      stroke: "rgba(0, 0, 0, 0)",
+      transition: {
+        fillOpacity: { delay: 3, duration: 0.8, ease: "easeOut" },
+        stroke: { delay: 3, duration: 0.8, ease: "easeOut" },
+      },
     },
   };
 
   const tspan3Variants = {
-    hidden: { fill: "rgba(234,179,8,0)" },
+    hidden: {
+      fillOpacity: 0,
+      fill: "#eab308",
+      stroke: "#eab308",
+    },
     visible: {
-      fill: "rgba(234,179,8,0.88)",
-      transition: { delay: 3, duration: 0.8, ease: "easeOut" },
+      fillOpacity: 0.88,
+      stroke: "rgba(0, 0, 0, 0)",
+      transition: {
+        fillOpacity: { delay: 3, duration: 0.8, ease: "easeOut" },
+        stroke: { delay: 3, duration: 0.8, ease: "easeOut" },
+      },
     },
   };
 
@@ -66,27 +89,24 @@ export const TextHoverEffect = ({
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        strokeWidth="0.35"
-        className="font-[helvetica] text-7xl font-bold"
+        className="font-[helvetica] text-7xl font-bold text-slate-400 dark:text-white"
         variants={textVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
         <motion.tspan
-          className="fill-slate-400 stroke-slate-400 dark:fill-white dark:stroke-white"
+          className="fill-slate-400 dark:fill-white"
           variants={tspan1Variants}
         >
           {text.slice(0, 4)}
         </motion.tspan>
         <motion.tspan
-          stroke="#3ca2fa"
           variants={tspan2Variants}
         >
           {text.slice(4, 5)}
         </motion.tspan>
         <motion.tspan
-          stroke="#eab308"
           variants={tspan3Variants}
         >
           {text.slice(5, 6)}
