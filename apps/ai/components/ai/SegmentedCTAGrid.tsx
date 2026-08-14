@@ -278,7 +278,7 @@ export function SegmentedCTAGrid() {
         </div>
 
         {/* Dynamic Showcase Deck (Main Hero Interactive Card) */}
-        <div className="mt-8 sm:mt-10 min-h-[690px] sm:min-h-[580px] lg:min-h-[480px] relative w-full">
+        <div className="mt-8 sm:mt-10 h-[750px] sm:h-[600px] lg:h-[460px] relative w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -286,7 +286,7 @@ export function SegmentedCTAGrid() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden rounded-3xl border border-blue-200/90 dark:border-blue-900/50 bg-white/90 dark:bg-[#0B1224]/90 shadow-xl dark:shadow-2xl backdrop-blur-md grid lg:grid-cols-12 gap-0 min-h-[690px] sm:min-h-[580px] lg:min-h-[480px] w-full"
+              className="overflow-hidden rounded-3xl border border-blue-200/90 dark:border-blue-900/50 bg-white/90 dark:bg-[#0B1224]/90 shadow-xl dark:shadow-2xl backdrop-blur-md grid lg:grid-cols-12 gap-0 h-full w-full"
             >
               {/* Left Column: Context & Action */}
               <div className="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-blue-100 dark:border-blue-900/40">
