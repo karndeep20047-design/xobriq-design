@@ -88,13 +88,13 @@ function KycHero() {
           >
             <Link
               href="/register"
-              className="w-full sm:w-auto text-center rounded-lg bg-emerald-600 hover:bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.02]"
+              className="w-full sm:w-auto text-center rounded-lg bg-emerald-600 hover:bg-emerald-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
               Get API Access
             </Link>
             <Link
               href="/docs"
-              className="w-full sm:w-auto text-center rounded-lg border border-slate-700 bg-slate-900/60 hover:bg-slate-800 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:text-white"
+              className="w-full sm:w-auto text-center rounded-lg border border-slate-700/80 bg-slate-950/40 hover:bg-slate-900/60 px-8 py-3.5 text-sm font-semibold text-slate-200 hover:text-white hover:border-slate-600 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               Documentation
             </Link>
