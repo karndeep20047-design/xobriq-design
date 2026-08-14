@@ -206,14 +206,14 @@ const VERIFICATION_TYPES: VerificationType[] = [
   { Icon: Building2, title: "Business (KYB)", body: "Company registration, directors, and beneficial-ownership checks for onboarding corporate clients.", accent: "orange" },
 ];
 
-function AnimatedCardIcon({ accent }: { accent: string }) {
+function MiniCardVisual({ accent }: { accent: string }) {
   if (accent === "blue") {
     return (
-      <div className="relative w-12 h-12 flex items-center justify-start overflow-visible">
-        <UserCheck className="h-7 w-7 text-blue-500/80 relative z-10" />
+      <div className="w-14 h-9 rounded border border-blue-500/20 bg-blue-500/5 relative flex items-center justify-center shrink-0">
+        <UserCheck className="h-4.5 w-4.5 text-blue-500/60" />
         <motion.div
-          className="absolute left-0 w-7 h-[1.5px] bg-blue-400 shadow-[0_0_6px_rgba(56,189,248,0.8)] z-20"
-          animate={{ top: ["25%", "75%", "25%"] }}
+          className="absolute inset-x-0 h-[1.5px] bg-blue-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]"
+          animate={{ top: ["10%", "90%", "10%"] }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         />
       </div>
@@ -221,13 +221,13 @@ function AnimatedCardIcon({ accent }: { accent: string }) {
   }
   if (accent === "red") {
     return (
-      <div className="relative w-12 h-12 flex items-center justify-start overflow-visible">
-        <ScanFace className="h-7 w-7 text-red-500/80 relative z-10" />
-        <div className="absolute top-1 left-0 w-7 h-7 grid grid-cols-3 grid-rows-3 gap-0.5 p-0.5 pointer-events-none">
+      <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
+        <ScanFace className="h-5.5 w-5.5 text-red-500/60 relative z-10" />
+        <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-1.5 p-1">
           {[...Array(9)].map((_, i) => (
             <motion.span
               key={i}
-              className="h-0.5 w-0.5 rounded-full bg-red-400/80"
+              className="h-0.75 w-0.75 rounded-full bg-red-400"
               animate={{ scale: [1, 1.8, 1], opacity: [0.3, 1, 0.3] }}
               transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
             />
@@ -238,15 +238,15 @@ function AnimatedCardIcon({ accent }: { accent: string }) {
   }
   if (accent === "teal") {
     return (
-      <div className="relative w-12 h-12 flex items-center justify-start overflow-visible">
-        <Phone className="h-7 w-7 text-teal-500/80 relative z-10" />
-        {[...Array(2)].map((_, i) => (
+      <div className="relative flex items-center justify-center w-10 h-10 shrink-0">
+        <Phone className="h-5 w-5 text-teal-500/60 z-10" />
+        {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute left-0 top-1 rounded-full border border-teal-400/30"
-            style={{ width: "28px", height: "28px" }}
-            animate={{ scale: [1, 1.6], opacity: [0.8, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.9, ease: "easeOut" }}
+            className="absolute rounded-full border border-teal-400/40"
+            style={{ width: "16px", height: "16px" }}
+            animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.6, ease: "easeOut" }}
           />
         ))}
       </div>
@@ -254,13 +254,19 @@ function AnimatedCardIcon({ accent }: { accent: string }) {
   }
   if (accent === "orange") {
     return (
-      <div className="relative w-12 h-12 flex items-center justify-start overflow-visible">
-        <Building2 className="h-7 w-7 text-orange-500/80 relative z-10" />
-        <motion.div
-          className="absolute left-6 top-1.5 h-1.5 w-1.5 rounded-full bg-orange-400 shadow-[0_0_6px_#f97316]"
-          animate={{ scale: [1, 1.6, 1], opacity: [0.4, 1, 0.4] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-        />
+      <div className="relative flex items-center justify-between w-20 h-10 px-1 shrink-0">
+        <div className="w-3 h-3 rounded-full bg-orange-950/20 border border-orange-500/40 flex items-center justify-center">
+          <span className="h-0.75 w-0.75 rounded-full bg-orange-400" />
+        </div>
+        <div className="absolute left-3.5 right-3.5 h-[1px] bg-gradient-to-r from-orange-500/20 via-orange-500/80 to-orange-500/20 overflow-hidden">
+          <motion.div
+            className="h-full w-3 bg-orange-400/60 shadow-[0_0_6px_#f97316]"
+            animate={{ left: ["-20%", "120%"] }}
+            style={{ position: "absolute" }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+        <Building2 className="h-5 w-5 text-orange-500/60 z-10" />
       </div>
     );
   }
@@ -303,8 +309,8 @@ function VerificationTypes() {
                     a.line
                   }
                 />
-                <div className="transition-transform duration-300 group-hover:scale-105">
-                  <AnimatedCardIcon accent={v.accent} />
+                <div className="h-10 flex items-center justify-start transition-transform duration-300 group-hover:scale-105">
+                  <MiniCardVisual accent={v.accent} />
                 </div>
                 <h3 className="mt-5 text-xl font-semibold">{v.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-enterprise-fg-muted">{v.body}</p>
