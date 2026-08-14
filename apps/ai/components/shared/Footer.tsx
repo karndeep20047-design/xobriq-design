@@ -107,11 +107,11 @@ export function Footer() {
       <HeroBackgroundSnippet />
 
       <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
-        <div className="grid grid-cols-1 gap-12 pb-8 lg:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-1 gap-12 pb-2 lg:grid-cols-5 lg:gap-8">
           {/* Brand block — full width above the link columns on mobile;
               becomes the first of 5 side-by-side columns on desktop (the
               original layout), via the grid this whole block sits in. */}
-          <div className="flex max-w-md flex-col space-y-4">
+          <div className="flex max-w-md flex-col space-y-4 lg:self-start">
             <div className="flex flex-col items-start">
               <Image
                 src="/xobriq-logo-horizontal.png"
@@ -189,7 +189,7 @@ export function Footer() {
           </div>
         </div>
 
-        <hr className="border-t border-slate-200 my-8 dark:border-blue-500/10" />
+        <hr className="border-t border-slate-200 mt-4 mb-8 dark:border-blue-500/10" />
 
         {/* Footer bottom — copyright/status only now that social icons live
             under the brand block, so this no longer needs a two-item

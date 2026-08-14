@@ -347,8 +347,8 @@ function ScanResult() {
     >
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-enterprise-border bg-enterprise-bg-lower p-4">
-            <div className="grid h-full w-14 shrink-0 place-items-center rounded-lg border border-enterprise-border bg-enterprise-bg-low sm:w-16">
+          <div className="relative flex h-full gap-4 overflow-hidden rounded-xl border border-slate-800/50 bg-transparent p-4">
+            <div className="grid h-full w-14 shrink-0 place-items-center rounded-lg border border-slate-800/40 bg-transparent sm:w-16">
               <User className="h-6 w-6 text-enterprise-fg-subtle" />
             </div>
             <div className="flex flex-1 flex-col justify-between py-0.5">
@@ -398,7 +398,7 @@ function ScanResult() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.35, delay: FIELD_DELAYS[i], ease: "easeOut" }}
-                className="flex items-center gap-3 rounded-lg border border-enterprise-border bg-enterprise-bg-lower px-3 py-2"
+                className="flex items-center gap-3 rounded-lg border border-slate-800/50 bg-transparent px-3 py-2"
               >
                 <Icon className="h-4 w-4 shrink-0 text-xgreen-500" />
                 <span className="text-xs font-medium text-enterprise-fg-muted">{f.label}</span>
@@ -413,7 +413,7 @@ function ScanResult() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: VERIFIED_DELAY, ease: "easeOut" }}
-        className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-xgreen-500/10 px-4 py-3"
+        className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-transparent px-4 py-3"
       >
         <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-xgreen-500">
           <CheckCircle2 className="h-4 w-4 text-white" />
@@ -434,8 +434,8 @@ function StaticResult() {
     <div>
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
-          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-enterprise-border bg-enterprise-bg-lower p-4">
-            <div className="grid h-full w-14 shrink-0 place-items-center rounded-lg border border-enterprise-border bg-enterprise-bg-low sm:w-16">
+          <div className="flex h-full gap-4 overflow-hidden rounded-xl border border-slate-800/50 bg-transparent p-4">
+            <div className="grid h-full w-14 shrink-0 place-items-center rounded-lg border border-slate-800/40 bg-transparent sm:w-16">
               <User className="h-6 w-6 text-enterprise-fg-subtle" />
             </div>
             <div className="flex flex-1 flex-col justify-between py-0.5">
@@ -453,7 +453,7 @@ function StaticResult() {
           {FIELDS.map((f) => {
             const Icon = f.Icon;
             return (
-              <div key={f.label} className="flex items-center gap-3 rounded-lg border border-enterprise-border bg-enterprise-bg-lower px-3 py-2">
+              <div key={f.label} className="flex items-center gap-3 rounded-lg border border-slate-800/50 bg-transparent px-3 py-2">
                 <Icon className="h-4 w-4 shrink-0 text-xgreen-500" />
                 <span className="text-xs font-medium text-enterprise-fg-muted">{f.label}</span>
                 <CheckCircle2 className="ml-auto h-3.5 w-3.5 shrink-0 text-xgreen-500" />
@@ -462,7 +462,7 @@ function StaticResult() {
           })}
         </div>
       </div>
-      <div className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-xgreen-500/10 px-4 py-3">
+      <div className="relative mt-6 flex items-center gap-3 rounded-xl border border-xgreen-500/30 bg-transparent px-4 py-3">
         <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-xgreen-500">
           <CheckCircle2 className="h-4 w-4 text-white" />
         </div>
