@@ -311,6 +311,11 @@ function ScanResult() {
       style={{ transformOrigin: "top center" }}
     >
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
+        {/* Centered header spanning across both columns */}
+        <div className="col-span-full text-center pb-1">
+          <p className="label-caps-thin text-slate-400 font-bold tracking-widest uppercase">Extracted &amp; matched</p>
+        </div>
+
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
           <div className="relative flex flex-col h-full overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] shadow-xl">
             {/* National ID Header Strip */}
@@ -364,7 +369,6 @@ function ScanResult() {
         </div>
 
         <div className="space-y-2.5">
-          <p className="label-caps-thin text-slate-400 text-center font-bold tracking-wider">Extracted &amp; matched</p>
           {FIELDS.map((f, i) => {
             const Icon = f.Icon;
             return (
@@ -408,6 +412,11 @@ function StaticResult() {
   return (
     <div>
       <div className="grid gap-6 sm:grid-cols-[1.15fr_1fr] sm:items-center">
+        {/* Centered header spanning across both columns */}
+        <div className="col-span-full text-center pb-1">
+          <p className="label-caps-thin text-slate-400 font-bold tracking-widest uppercase">Extracted &amp; matched</p>
+        </div>
+
         <div className="relative mx-auto aspect-[8/5] w-full max-w-sm">
           <div className="flex flex-col h-full overflow-hidden rounded-xl border border-emerald-500/20 bg-[#070E22] shadow-xl">
             {/* National ID Header Strip */}
@@ -434,7 +443,6 @@ function StaticResult() {
           </div>
         </div>
         <div className="space-y-2.5">
-          <p className="label-caps-thin text-slate-400 text-center font-bold tracking-wider">Extracted &amp; matched</p>
           {FIELDS.map((f) => {
             const Icon = f.Icon;
             return (
