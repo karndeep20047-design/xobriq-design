@@ -501,16 +501,59 @@ function DeveloperAPI() {
 function KycCTA() {
   return (
     <section className="px-5 py-20 sm:px-6 lg:py-24">
-      <div className="mx-auto max-w-4xl rounded-3xl border border-enterprise-primary/30 bg-gradient-to-br from-enterprise-primary/12 via-enterprise-bg-low to-enterprise-accent/10 p-10 text-center sm:p-14">
-        <ShieldCheck className="mx-auto h-10 w-10 text-xgreen-500" />
-        <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Verify Identities in Under 2 Seconds.</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-enterprise-fg-muted">
-          Get sandbox API keys today and go live once your integration is ready — no waiting on a sales call to start building.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link href="/register" className="glow-hover inline-flex items-center gap-2 rounded-lg bg-enterprise-primary px-7 py-3 text-sm font-semibold text-enterprise-on-primary hover:bg-enterprise-primary-hover">Request Access</Link>
-          <Link href="/contact" className="inline-flex items-center gap-2 rounded-lg border border-enterprise-border bg-enterprise-bg-low px-7 py-3 text-sm font-semibold hover:border-enterprise-border-strong">Talk to Sales</Link>
+      <div className="mx-auto max-w-5xl rounded-[2rem] border border-slate-200/60 dark:border-slate-800/40 bg-gradient-to-br from-slate-50/80 to-slate-100/40 dark:from-slate-900/60 dark:to-slate-950/60 p-8 sm:p-12 shadow-[0_24px_50px_-15px_rgba(59,130,246,0.08)] dark:shadow-[0_24px_50px_-15px_rgba(0,0,0,0.4)] backdrop-blur-md grid md:grid-cols-12 gap-8 items-center">
+        
+        {/* Left Column: Text & CTAs */}
+        <div className="md:col-span-7 text-center md:text-left">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-slate-900 dark:text-white leading-[1.15]">
+            Verify Identities in Under 2 Seconds.
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Get sandbox API keys today and go live once your integration is ready. No waiting on a sales call to start building.
+          </p>
+          <div className="mt-8 flex flex-col items-center md:items-start justify-center md:justify-start gap-4 sm:flex-row w-full sm:w-auto">
+            <Link
+              href="/register"
+              className="w-full sm:w-auto text-center rounded-xl bg-blue-600 hover:bg-blue-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              Request Access
+            </Link>
+            <Link
+              href="/contact"
+              className="w-full sm:w-auto text-center rounded-xl border border-slate-200 bg-white/40 hover:bg-white text-slate-800 dark:border-slate-700 dark:bg-slate-900/40 dark:hover:bg-slate-800 dark:text-slate-200 px-8 py-3.5 text-sm font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all"
+            >
+              Talk to Sales
+            </Link>
+          </div>
         </div>
+
+        {/* Right Column: Interactive Orbital Shield Illustration */}
+        <div className="md:col-span-5 hidden md:flex items-center justify-center relative overflow-hidden h-48 lg:h-56">
+          <div className="relative w-40 h-40 flex items-center justify-center">
+            {/* Rotating dashed outer ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full border border-dashed border-emerald-500/20"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Counter-rotating dashed inner ring */}
+            <motion.div
+              className="absolute w-28 h-28 rounded-full border border-dashed border-blue-500/25"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Pulsing colored gradient shield core */}
+            <div className="relative grid place-items-center w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 shadow-xl dark:shadow-2xl">
+              <ShieldCheck className="h-10 w-10 text-emerald-500" />
+              <motion.div
+                className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-md pointer-events-none -z-10"
+                animate={{ opacity: [0.3, 0.7, 0.3], scale: [0.95, 1.05, 0.95] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );
