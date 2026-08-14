@@ -97,7 +97,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="relative h-fit overflow-hidden bg-[#D8E8FF] z-10 dark:bg-[#050E22]">
+    <footer className="relative h-fit overflow-hidden bg-gradient-to-b from-[#D8E8FF] to-[#9CC2F0] z-10 dark:bg-[#050E22]">
       <div className="max-w-7xl mx-auto p-8 sm:p-14 z-40 relative">
         <div className="grid grid-cols-1 gap-12 pb-8 lg:grid-cols-5 lg:gap-8">
           {/* Brand block — full width above the link columns on mobile;

@@ -26,25 +26,34 @@ export default function KycPage() {
 
 function KycHero() {
   return (
-    <section className="relative overflow-hidden px-5 py-24 sm:px-6 lg:py-32 bg-[#020811]">
-      {/* Dot grid pattern */}
+    <section className="relative overflow-hidden px-5 py-24 sm:px-6 lg:py-32 bg-slate-50 dark:bg-[#020811] text-slate-900 dark:text-white transition-colors duration-300">
+      {/* Creative tech grid background pattern */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-20"
+        className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-20 transition-opacity"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+          backgroundImage: `
+            linear-gradient(to right, rgba(99,102,241,0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(99,102,241,0.06) 1px, transparent 1px)
+          `,
           backgroundSize: "28px 28px",
+          maskImage: "radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)",
         }}
       />
 
+      {/* Decorative scanner lines running diagonally behind the layout */}
+      <div className="pointer-events-none absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-xgreen-500/20 dark:via-xgreen-500/30 to-transparent rotate-12" />
+      <div className="pointer-events-none absolute top-0 right-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-cyan-500/20 dark:via-cyan-500/30 to-transparent -rotate-12" />
+
       {/* Green glow orb — top left */}
-      <div className="pointer-events-none absolute -top-32 -left-20 h-[500px] w-[500px] rounded-full bg-xgreen-500/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -top-32 -left-20 h-[500px] w-[500px] rounded-full bg-xgreen-500/10 dark:bg-xgreen-500/15 blur-[100px] sm:blur-[120px]" />
       {/* Cyan glow orb — top right */}
-      <div className="pointer-events-none absolute -top-24 right-0 h-[400px] w-[600px] rounded-full bg-cyan-500/10 blur-[140px]" />
-      {/* Subtle centre wash */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#020811] to-transparent" />
+      <div className="pointer-events-none absolute -top-24 right-0 h-[400px] w-[600px] rounded-full bg-cyan-500/8 dark:bg-cyan-500/10 blur-[120px] sm:blur-[140px]" />
+      {/* Subtle bottom fade */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-slate-50 dark:from-[#020811] to-transparent" />
 
       {/* Luminous top border accent */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-xgreen-500/60 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-xgreen-500/40 dark:via-xgreen-500/60 to-transparent" />
 
       <div className="container-medium relative grid items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-12">
         <div className="text-center lg:text-left">
@@ -52,7 +61,7 @@ function KycHero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="label-caps-thin inline-flex items-center gap-2 text-xgreen-500"
+            className="label-caps-thin inline-flex items-center gap-2 text-xgreen-500 font-bold"
           >
             <span className="status-dot" />
             OCR + Live Registry Match
@@ -62,7 +71,7 @@ function KycHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl"
           >
             Xobriq KYC: <span className="brand-gradient">Identity Verified in Seconds</span>
           </motion.h1>
@@ -71,7 +80,7 @@ function KycHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg lg:mx-0"
+            className="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg lg:mx-0"
           >
             AI-powered identity verification backed by IPRS, Kenya&apos;s national identity registry. National ID, KRA PIN, phone, and business (KYB) checks, matched against a live government record, not a guess.
           </motion.p>
@@ -85,7 +94,7 @@ function KycHero() {
             <Link href="/register" className="glow-hover inline-flex items-center gap-2 rounded-lg bg-xgreen-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-xgreen-500/90">
               <IdCard className="h-4 w-4" /> Get API Access
             </Link>
-            <Link href="/docs" className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">
+            <Link href="/docs" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 dark:border-white/10 bg-white/40 dark:bg-white/5 px-6 py-3 text-sm font-semibold text-slate-900 dark:text-white hover:bg-slate-100/80 dark:hover:bg-white/10 transition">
               <FileText className="h-4 w-4" /> Documentation
             </Link>
           </motion.div>
@@ -94,7 +103,7 @@ function KycHero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.28 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-400 lg:justify-start"
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-500 dark:text-slate-400 lg:justify-start"
           >
             <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Live IPRS registry match</span>
             <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Under 2s decisions</span>
