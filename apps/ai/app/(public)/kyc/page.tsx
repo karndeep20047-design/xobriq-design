@@ -275,10 +275,10 @@ function MiniCardVisual({ accent }: { accent: string }) {
 
 function VerificationTypes() {
   return (
-    <section className="px-5 py-20 sm:px-6 lg:py-24 relative overflow-hidden z-10 bg-gradient-to-b from-[#F2F6FC] to-[#FCFDFF] dark:from-[#050B18] dark:to-[#081024]">
-      {/* Soothing mesh and radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03] dark:opacity-[0.06] pointer-events-none -z-10" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/[0.03] via-transparent to-transparent pointer-events-none -z-10" />
+    <section className="px-5 py-20 sm:px-6 lg:py-24 relative overflow-hidden z-10 bg-white dark:bg-[#070E22] border-y border-slate-100 dark:border-slate-800/30">
+      {/* Soothing Abstract Floating Gradient Blobs */}
+      <div className="absolute top-12 left-10 w-72 h-72 rounded-full bg-blue-400/10 dark:bg-blue-500/5 blur-[80px] pointer-events-none -z-10" />
+      <div className="absolute bottom-12 right-10 w-80 h-80 rounded-full bg-emerald-400/10 dark:bg-emerald-500/5 blur-[90px] pointer-events-none -z-10" />
 
       <div className="container-medium">
         <div className="text-center">
@@ -294,6 +294,14 @@ function VerificationTypes() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {VERIFICATION_TYPES.map((v, i) => {
             const a = ACCENTS[v.accent];
+            const borderColors = {
+              blue: "border-blue-500/10 hover:border-blue-500/30 bg-blue-500/[0.02] dark:bg-blue-950/10",
+              red: "border-red-500/10 hover:border-red-500/30 bg-red-500/[0.02] dark:bg-red-950/10",
+              teal: "border-teal-500/10 hover:border-teal-500/30 bg-teal-500/[0.02] dark:bg-teal-950/10",
+              orange: "border-orange-500/10 hover:border-orange-500/30 bg-orange-500/[0.02] dark:bg-orange-950/10",
+            };
+            const cardColorClass = borderColors[v.accent];
+
             return (
               <motion.div
                 key={v.title}
@@ -302,7 +310,7 @@ function VerificationTypes() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
                 className={
-                  "group relative overflow-hidden rounded-3xl border border-slate-200/60 dark:border-slate-800/40 bg-gradient-to-br from-white/95 to-white/70 dark:from-slate-900/80 dark:to-slate-950/80 p-7 shadow-[0_16px_36px_-12px_rgba(59,130,246,0.06)] dark:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lg " +
+                  `group relative overflow-hidden rounded-3xl border ${cardColorClass} p-7 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-md ` +
                   a.ring
                 }
               >
@@ -334,7 +342,7 @@ function VerificationTypes() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.24 }}
-          className="mt-8 rounded-3xl border border-slate-200/60 dark:border-slate-800/40 bg-gradient-to-br from-white/70 to-white/40 dark:from-slate-900/50 dark:to-slate-950/50 p-6 sm:p-8 shadow-sm backdrop-blur-md"
+          className="mt-8 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 bg-slate-50/40 dark:bg-slate-900/40 p-6 sm:p-8 shadow-sm backdrop-blur-md"
         >
           <p className="label-caps text-slate-500 dark:text-slate-400 font-semibold">Identity verification covers</p>
           <DocumentTypeChips />
