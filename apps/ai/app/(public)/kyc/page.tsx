@@ -26,67 +26,66 @@ export default function KycPage() {
 
 function KycHero() {
   return (
-    <section className="relative overflow-hidden px-5 py-24 sm:px-6 lg:py-32">
-      {/* Warm ambient background — amber/gold glow instead of the cool blue on the landing page */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-amber-950/20 via-transparent to-orange-950/10" />
-      <div className="pointer-events-none absolute left-1/4 top-0 h-[520px] w-[700px] -translate-x-1/2 rounded-full bg-amber-500/8 blur-[160px]" />
-      <div className="pointer-events-none absolute right-0 top-1/3 h-[400px] w-[500px] rounded-full bg-orange-500/6 blur-[120px]" />
-      {/* Subtle warm grid */}
-      <div className="pointer-events-none absolute inset-0 opacity-20" style={{ backgroundImage: "linear-gradient(rgba(251,191,36,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(251,191,36,0.05) 1px, transparent 1px)", backgroundSize: "48px 48px" }} />
+    <section className="relative overflow-hidden px-5 py-24 sm:px-6 lg:py-32 bg-[#020811]">
+      {/* Dot grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
-      <div className="container-medium relative grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-12 xl:gap-20">
-        {/* Left: Copy */}
+      {/* Green glow orb — top left */}
+      <div className="pointer-events-none absolute -top-32 -left-20 h-[500px] w-[500px] rounded-full bg-xgreen-500/15 blur-[120px]" />
+      {/* Cyan glow orb — top right */}
+      <div className="pointer-events-none absolute -top-24 right-0 h-[400px] w-[600px] rounded-full bg-cyan-500/10 blur-[140px]" />
+      {/* Subtle centre wash */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-[#020811] to-transparent" />
+
+      {/* Luminous top border accent */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-xgreen-500/60 to-transparent" />
+
+      <div className="container-medium relative grid items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-12">
         <div className="text-center lg:text-left">
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-amber-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-400"
+            className="label-caps-thin inline-flex items-center gap-2 text-xgreen-500"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400/70" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-400" />
-            </span>
+            <span className="status-dot" />
             OCR + Live Registry Match
-          </motion.div>
+          </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.07 }}
-            className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl"
           >
-            Identity Verified{" "}
-            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent">
-              in Seconds
-            </span>
+            Xobriq KYC: <span className="brand-gradient">Identity Verified in Seconds</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.13 }}
-            className="mx-auto mt-6 max-w-xl text-base leading-7 text-enterprise-fg-muted sm:text-lg lg:mx-0"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mx-auto mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg lg:mx-0"
           >
-            AI-powered identity verification backed by IPRS, Kenya&apos;s national identity registry. National ID, KRA PIN, phone, and business (KYB) checks — matched against a live government record, not a guess.
+            AI-powered identity verification backed by IPRS, Kenya&apos;s national identity registry. National ID, KRA PIN, phone, and business (KYB) checks, matched against a live government record, not a guess.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.22 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
           >
-            <Link
-              href="/register"
-              className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-amber-500/30 transition hover:bg-amber-400 hover:scale-[1.02]"
-            >
+            <Link href="/register" className="glow-hover inline-flex items-center gap-2 rounded-lg bg-xgreen-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-xgreen-500/90">
               <IdCard className="h-4 w-4" /> Get API Access
             </Link>
-            <Link
-              href="/docs"
-              className="inline-flex items-center gap-2 rounded-lg border border-enterprise-border bg-enterprise-bg-low px-6 py-3 text-sm font-semibold hover:border-amber-500/40 transition"
-            >
+            <Link href="/docs" className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition">
               <FileText className="h-4 w-4" /> Documentation
             </Link>
           </motion.div>
@@ -94,24 +93,21 @@ function KycHero() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-enterprise-fg-subtle lg:justify-start"
+            transition={{ duration: 0.6, delay: 0.28 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-slate-400 lg:justify-start"
           >
-            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-amber-500" /> Live IPRS registry match</span>
-            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-amber-500" /> Under 2s decisions</span>
-            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-amber-500" /> Sandbox in minutes</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Live IPRS registry match</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Under 2s decisions</span>
+            <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-xgreen-500" /> Sandbox in minutes</span>
           </motion.div>
         </div>
 
-        {/* Right: Phone animation, no wrapper box */}
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.35 }}
-          className="mx-auto w-full max-w-md text-left lg:max-w-none"
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mx-auto w-full max-w-md lg:max-w-none"
         >
-          {/* Warm ambient glow behind phone */}
-          <div className="pointer-events-none absolute inset-0 rounded-3xl bg-amber-500/5 blur-3xl" />
           <KycProcessVisual />
         </motion.div>
       </div>

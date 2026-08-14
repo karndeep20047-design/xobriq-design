@@ -84,6 +84,14 @@ export function KycProcessVisual() {
         <StaticResult />
       ) : (
         <div className="relative min-h-[360px]">
+          {/* mode="wait": popLayout was tried here to close the ~0.5s blank
+              gap between the shutter firing and the scan card entering, but
+              without a `layout` prop on these children it didn't cleanly
+              pop the exiting element out of flow — the outgoing and
+              incoming content stacked in normal flow instead, growing the
+              whole card taller every loop. "wait" is simple and correct:
+              the small blank gap is a better trade than a compounding
+              layout bug. */}
           <AnimatePresence mode="wait">
             {showPhone ? (
               <motion.div key={`phone-${round}`} className="flex justify-center py-4">
