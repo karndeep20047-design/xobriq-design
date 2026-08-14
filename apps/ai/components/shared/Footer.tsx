@@ -112,18 +112,13 @@ export function Footer() {
               becomes the first of 5 side-by-side columns on desktop (the
               original layout), via the grid this whole block sits in. */}
           <div className="flex max-w-md flex-col space-y-4 lg:self-start">
-            <div className="flex flex-col items-start">
-              <Image
-                src="/xobriq-logo-horizontal.png"
-                alt="Xobriq Logo"
-                width={140}
-                height={36}
-                className="h-11 w-auto dark:brightness-110"
-              />
-              <p className="text-[9px] uppercase tracking-[0.25em] text-[#9a6d00] dark:text-[#EAB308] font-bold mt-1 pl-0.5">
-                Intelligence at scale
-              </p>
-            </div>
+            <Image
+              src="/xobriq-logo-horizontal.png"
+              alt="Xobriq Logo"
+              width={2484}
+              height={809}
+              className="h-11 w-auto dark:brightness-110"
+            />
             <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
               East Africa&apos;s enterprise AI cybersecurity company. Five integrated pillars: Agentic AI, Guard, Cloud, Consult and Cyber, built on sovereign DGX H200 infrastructure in Nairobi.
             </p>
