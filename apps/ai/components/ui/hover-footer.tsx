@@ -35,7 +35,12 @@ export const TextHoverEffect = ({
           Outline draws in first (0-3s), then each letter's fill fades in
           (delayed until the draw finishes) — not filled from the start, so
           the outline animation actually reads as an outline before the
-          letters solidify. */}
+          letters solidify.
+          whileInView, not animate — this used to fire the instant the page
+          mounted regardless of scroll position (the footer is in the DOM
+          from first paint, just below the fold), so the "draw" was always
+          long finished by the time anyone actually scrolled down to see it.
+          Now it only starts once the wordmark itself scrolls into view. */}
       <motion.text
         x="50%"
         y="50%"
@@ -44,10 +49,11 @@ export const TextHoverEffect = ({
         strokeWidth="0.35"
         className="font-[helvetica] text-7xl font-bold"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
-        animate={{
+        whileInView={{
           strokeDashoffset: 0,
           strokeDasharray: 1000,
         }}
+        viewport={{ once: true, amount: 0.3 }}
         // @ts-expect-error transition prop type mismatch with motion
         transition={{
           duration: 3,
@@ -57,7 +63,8 @@ export const TextHoverEffect = ({
         <motion.tspan
           className="fill-slate-400 stroke-slate-400 dark:fill-white dark:stroke-white"
           initial={{ fillOpacity: 0 }}
-          animate={{ fillOpacity: 0.88 }}
+          whileInView={{ fillOpacity: 0.88 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(0, 4)}
@@ -65,7 +72,8 @@ export const TextHoverEffect = ({
         <motion.tspan
           stroke="#3ca2fa"
           initial={{ fill: "rgba(60,162,250,0)" }}
-          animate={{ fill: "rgba(60,162,250,0.88)" }}
+          whileInView={{ fill: "rgba(60,162,250,0.88)" }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(4, 5)}
@@ -73,7 +81,8 @@ export const TextHoverEffect = ({
         <motion.tspan
           stroke="#eab308"
           initial={{ fill: "rgba(234,179,8,0)" }}
-          animate={{ fill: "rgba(234,179,8,0.88)" }}
+          whileInView={{ fill: "rgba(234,179,8,0.88)" }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
         >
           {text.slice(5, 6)}

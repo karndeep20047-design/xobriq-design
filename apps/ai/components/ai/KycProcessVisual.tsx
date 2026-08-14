@@ -79,7 +79,7 @@ export function KycProcessVisual() {
   const showPhone = phase === "phoneIn" || phase === "align" || phase === "capture";
 
   return (
-    <div className="relative min-h-[360px] flex items-center justify-center w-full">
+    <div className="relative w-full h-[640px] sm:h-[480px] lg:h-[400px] flex items-center justify-center overflow-hidden">
       {reduceMotion ? (
         <div className="w-full">
           <StaticResult />
@@ -161,7 +161,7 @@ function PhoneMockup({ phase }: { phase: Phase }) {
     >
       <svg
         viewBox="0 0 200 400"
-        className="h-[260px] w-auto sm:h-[300px]"
+        className="h-[320px] w-auto sm:h-[380px]"
         role="img"
         aria-label="Phone camera framing a sample ID card inside alignment brackets"
       >
